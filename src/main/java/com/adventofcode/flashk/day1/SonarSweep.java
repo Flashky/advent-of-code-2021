@@ -12,28 +12,7 @@ public class SonarSweep {
 	 * @return
 	 */
 	public int solve(List<Integer> depthMeasurements) {
-		
-		if(depthMeasurements.size() < 2) {
-			return 0;
-		}
-		
-		int depthIncrements = 0;
-		
-		Integer previousMeasurement = depthMeasurements.get(0);
-		
-		for(int i = 1; i < depthMeasurements.size(); i++) {
-			
-			Integer currentMeasurement = depthMeasurements.get(i);
-			
-			if(currentMeasurement > previousMeasurement) {
-				depthIncrements++;
-			}
-			
-			previousMeasurement = currentMeasurement;
-		}
-		
-		return depthIncrements;
-		
+		return solve(depthMeasurements, 1);
 	}
 	
 	/**
