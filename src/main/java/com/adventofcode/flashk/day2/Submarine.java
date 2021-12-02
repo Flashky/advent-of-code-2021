@@ -6,11 +6,10 @@ import java.util.regex.Pattern;
 
 public class Submarine {
 
-	private MovementStrategy movementStrategy;
-	
 	private final static String COMMAND_PATTERN = "(forward|down|up) ([0-9]*)";
-	private Pattern pattern = Pattern.compile(COMMAND_PATTERN);
+	private final static Pattern PATTERN = Pattern.compile(COMMAND_PATTERN);
 	
+	private MovementStrategy movementStrategy;
 	
 	public Submarine(MovementStrategy movementStrategy) {
 		this.movementStrategy = movementStrategy;
@@ -20,7 +19,7 @@ public class Submarine {
 	
 		for(String movement : movements) {
 			
-			Matcher matcher = pattern.matcher(movement);
+			Matcher matcher = PATTERN.matcher(movement);
 			matcher.find();
 
 			String action = matcher.group(1);
