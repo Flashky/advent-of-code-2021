@@ -30,7 +30,6 @@ public class SubmarineMoveTest {
 		SubmarineMove submarineMove = new SubmarineMove();
 		
 		int result = submarineMove.solve(input);
-		//System.out.println(result);
 		assertEquals(1728414, result);
 		
 	}
