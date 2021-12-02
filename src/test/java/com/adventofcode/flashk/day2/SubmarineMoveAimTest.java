@@ -41,7 +41,6 @@ public class SubmarineMoveAimTest {
 		assertEquals(1765720035, result);
 		assertEquals((Integer) 2199, submarineMove.getHorizontalPosition());
 		assertEquals((Integer) 802965, submarineMove.getDepth());
-		assertEquals((Integer) 786, submarineMove.getAim());
 		
 	}
 
@@ -58,7 +57,6 @@ public class SubmarineMoveAimTest {
 		assertEquals(900, result);
 		assertEquals((Integer) 15, submarineMove.getHorizontalPosition());
 		assertEquals((Integer) 60, submarineMove.getDepth());
-		assertEquals((Integer) 10, submarineMove.getAim());
 		
 	}
 

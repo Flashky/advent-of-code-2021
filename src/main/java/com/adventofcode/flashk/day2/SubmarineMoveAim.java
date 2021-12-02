@@ -4,11 +4,6 @@ public class SubmarineMoveAim extends AbstractSubmarineMove {
 
 	private Integer aim = 0;
 
-	protected void forward(Integer value) {
-		this.horizontalPosition += value;
-		this.depth += aim * value;
-	}
-
 	protected void up(Integer value) {
 		this.aim -= value;
 	}
@@ -17,7 +12,9 @@ public class SubmarineMoveAim extends AbstractSubmarineMove {
 		 this.aim += value;
 	}
 	
-	public Integer getAim() {
-		return aim;
+	protected void forward(Integer value) {
+		this.horizontalPosition += value;
+		this.depth += aim * value;
 	}
+
 }
