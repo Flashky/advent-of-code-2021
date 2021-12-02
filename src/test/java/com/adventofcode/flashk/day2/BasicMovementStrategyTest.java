@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
-public class SubmarineMoveAimTest {
+public class BasicMovementStrategyTest {
 
 	private final static String INPUT_FOLDER = "day2/";
 
@@ -24,23 +24,13 @@ public class SubmarineMoveAimTest {
 	@Test
 	public void testSolve() {
 		
-		
-		Long startTime = System.currentTimeMillis();
-		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE);
 		
-		SubmarineMoveAim submarineMove = new SubmarineMoveAim();
-		
-		int result = submarineMove.solve(input);
-		
-		Long endTime= System.currentTimeMillis();
-		Long ellapsedTime = endTime - startTime;
-		
-		System.out.println("Elapsed time: " + ellapsedTime + "ms.");
-		assertEquals(1765720035, result);
-		assertEquals((Integer) 2199, submarineMove.getHorizontalPosition());
-		assertEquals((Integer) 802965, submarineMove.getDepth());
+		Submarine submarine = new Submarine(new BasicMovementStrategy());
+		int result = submarine.solve(input);
+
+		assertEquals(1728414, result);
 		
 	}
 
@@ -50,16 +40,15 @@ public class SubmarineMoveAimTest {
 		// Read input file
 		List<String> input = readFile(INPUT_FILE_SAMPLE);
 		
-		SubmarineMoveAim submarineMove = new SubmarineMoveAim();
+		Submarine submarine = new Submarine(new BasicMovementStrategy());
+		int result = submarine.solve(input);
 		
-		int result = submarineMove.solve(input);
-		
-		assertEquals(900, result);
-		assertEquals((Integer) 15, submarineMove.getHorizontalPosition());
-		assertEquals((Integer) 60, submarineMove.getDepth());
+		assertEquals(150, result);
+		assertEquals((Integer) 15, submarine.getMovementStrategy().getHorizontalPosition());
+		assertEquals((Integer) 10, submarine.getMovementStrategy().getDepth());
 		
 	}
-
+	
 	/**
 	 * @return
 	 * @throws URISyntaxException
@@ -89,5 +78,4 @@ public class SubmarineMoveAimTest {
 		
 		return input;
 	}
-	
 }
