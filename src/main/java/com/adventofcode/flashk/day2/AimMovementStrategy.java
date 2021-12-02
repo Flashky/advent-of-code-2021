@@ -1,17 +1,20 @@
 package com.adventofcode.flashk.day2;
 
-public class SubmarineMove extends AbstractSubmarineMove {
+public class AimMovementStrategy extends MovementStrategy {
+
+	private Integer aim = 0;
 
 	protected void up(Integer value) {
-		this.depth -= value;
+		this.aim -= value;
 	}
 
 	protected void down(Integer value) {
-		this.depth += value;
-	}
-
-	protected void forward(Integer value) {
-		this.horizontalPosition += value;
+		 this.aim += value;
 	}
 	
+	protected void forward(Integer value) {
+		this.horizontalPosition += value;
+		this.depth += aim * value;
+	}
+
 }
