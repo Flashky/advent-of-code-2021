@@ -21,7 +21,7 @@ public class Timer {
 		Long elapsedTime = stopTime - startTime;
 		running = false;		
 		
-		System.out.println("Elapsed time: " + elapsedTime + "ms.");
+		System.out.println(elapsedTime + "ms");
 		
 	}
 }
