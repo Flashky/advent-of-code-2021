@@ -12,7 +12,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import com.adventofcode.flashk.common.Timer;
 
 public class BinaryDiagnosticTest {
 
@@ -20,8 +24,23 @@ public class BinaryDiagnosticTest {
 	private final static String INPUT_FILE = "data.input";
 	private final static String INPUT_FILE_SAMPLE = "sample.input";
 	
+	private Timer timer = new Timer();
+	
+	@Before
+	public void before() {
+		timer.start();
+	}
+	
+	@After
+	public void after() {
+		timer.stop();
+		System.out.println();
+	}
+	
 	@Test
 	public void testSolvePowerConsumption() throws URISyntaxException, IOException {
+		
+		System.out.println("Day 3 - Part 1 input timing");
 		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE);
@@ -29,12 +48,15 @@ public class BinaryDiagnosticTest {
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
 		int result = binaryDiagnostic.solvePowerConsumption(input);
+		
 		//System.out.println(result);
 		assertEquals(2967914, result);
 	}
 	
 	@Test
 	public void testSolvePowerConsumptionSample() throws URISyntaxException, IOException {
+		
+		System.out.println("Day 3 - Part 1 sample timing");
 		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE_SAMPLE);
@@ -49,17 +71,22 @@ public class BinaryDiagnosticTest {
 	@Test
 	public void testSolveLifeSupportRatingSample() throws URISyntaxException, IOException {
 		
+		System.out.println("Day 3 - Part 2 sample timing");
+		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE_SAMPLE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
 		int result = binaryDiagnostic.solveLifeSupportRating(input);
+		
 		assertEquals(230, result);
 	}
 	
 	@Test
 	public void testSolveLifeSupportRating() throws URISyntaxException, IOException {
+		
+		System.out.println("Day 3 - Part 2 input timing");
 		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE);
