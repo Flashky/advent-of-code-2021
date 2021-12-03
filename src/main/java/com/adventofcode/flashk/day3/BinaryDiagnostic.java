@@ -6,24 +6,24 @@ import java.util.stream.Collectors;
 
 public class BinaryDiagnostic {
 	
-	private int[] gammaCount;
-	private int[] epsilonCount;
+	private final static char BIT_ZERO = '0';
+	private final static char BIT_ONE = '1';
 	
 	public int solvePowerConsumption(List<String> binaryInputs) {
 
-		calculateGammaEpsilon(binaryInputs);
+		GammaEpsilon gammaEpsilon = new GammaEpsilon(binaryInputs);
 
 		StringBuilder gammaBinaryBuilder = new StringBuilder();
 		StringBuilder epsilonBinaryBuilder = new StringBuilder();
 		
-		for(int i = 0; i < gammaCount.length; i++) {
+		for(int i = 0; i < gammaEpsilon.getGammaCount().length; i++) {
 			
-			if(gammaCount[i] > epsilonCount[i]) {
-				gammaBinaryBuilder.append("1");
-				epsilonBinaryBuilder.append("0");
+			if(gammaEpsilon.isGammaDominant(i)) {
+				gammaBinaryBuilder.append(BIT_ONE);
+				epsilonBinaryBuilder.append(BIT_ZERO);
 			} else {
-				gammaBinaryBuilder.append("0");
-				epsilonBinaryBuilder.append("1");
+				gammaBinaryBuilder.append(BIT_ZERO);
+				epsilonBinaryBuilder.append(BIT_ONE);
 			}
 		}
 		
@@ -36,60 +36,41 @@ public class BinaryDiagnostic {
 	public int solveLifeSupportRating(List<String> binaryInputs) {
 		
 		List<String> oxygenGeneratorRatingInputs = new ArrayList<>(binaryInputs);
-		
-		for(int i = 0; i < binaryInputs.get(0).length(); i++) {
-			
-			calculateGammaEpsilon(oxygenGeneratorRatingInputs);
-			final int pos = i;
-			
-			if(gammaCount[i] >= epsilonCount[i]) {
-				oxygenGeneratorRatingInputs = oxygenGeneratorRatingInputs.stream().filter(reading -> reading.charAt(pos) == '1').collect(Collectors.toList());
-			} else {
-				oxygenGeneratorRatingInputs = oxygenGeneratorRatingInputs.stream().filter(reading -> reading.charAt(pos) == '0').collect(Collectors.toList());
-			}
-		}
-		
-		
-		
 		List<String> co2RatingInputs = new ArrayList<>(binaryInputs);
 		
 		for(int i = 0; i < binaryInputs.get(0).length(); i++) {
 			
-			calculateGammaEpsilon(co2RatingInputs);
 			final int pos = i;
 			
+			// Oxygen calculation
+			
+			GammaEpsilon gammaEpsilon = new GammaEpsilon(oxygenGeneratorRatingInputs);
+			
+			if(gammaEpsilon.isGammaDominant(i)) {
+				oxygenGeneratorRatingInputs = oxygenGeneratorRatingInputs.stream().filter(reading -> reading.charAt(pos) == BIT_ONE).collect(Collectors.toList());
+			} else {
+				oxygenGeneratorRatingInputs = oxygenGeneratorRatingInputs.stream().filter(reading -> reading.charAt(pos) == BIT_ZERO).collect(Collectors.toList());
+			}
+			
+			// CO2 calculation
+
+			gammaEpsilon = new GammaEpsilon(co2RatingInputs);
+			
 			if((co2RatingInputs.size() > 1)) {
-				if(gammaCount[i] >= epsilonCount[i]) {
-					co2RatingInputs = co2RatingInputs.stream().filter(reading -> reading.charAt(pos) == '0').collect(Collectors.toList());
+				if(gammaEpsilon.isGammaDominant(i)) {
+					co2RatingInputs = co2RatingInputs.stream().filter(reading -> reading.charAt(pos) == BIT_ZERO).collect(Collectors.toList());
 				} else {
-					co2RatingInputs = co2RatingInputs.stream().filter(reading -> reading.charAt(pos) == '1').collect(Collectors.toList());
+					co2RatingInputs = co2RatingInputs.stream().filter(reading -> reading.charAt(pos) == BIT_ONE).collect(Collectors.toList());
 				}
 			}
+			
 		}
 		
+		// Calculate ratings
 		int oxygenGeneratorRating = Integer.parseInt(oxygenGeneratorRatingInputs.get(0),2);
 		int co2Rating = Integer.parseInt(co2RatingInputs.get(0),2);
 		
 		return oxygenGeneratorRating * co2Rating;
 	}
-	
-	private void calculateGammaEpsilon(List<String> binaryInputs) {
-		
-		gammaCount = new int[binaryInputs.get(0).length()];
-		epsilonCount = new int[binaryInputs.get(0).length()];
-		
-		for(String binaryInput : binaryInputs) {
-			
-			char[] bits = binaryInput.toCharArray();
 
-			for(int i = 0; i < bits.length; i++) {
-				if(bits[i] == '1') {
-					gammaCount[i]++;
-				} else {
-					epsilonCount[i]++;
-				}
-			}
-		}
-		
-	}
 }
