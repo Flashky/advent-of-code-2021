@@ -14,17 +14,27 @@ import java.util.stream.Stream;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.adventofcode.flashk.common.Timer;
 
-public class BinaryDiagnosticTest {
+public class Day3Test {
 
 	private final static String INPUT_FOLDER = "day3/";
 	private final static String INPUT_FILE = "data.input";
 	private final static String INPUT_FILE_SAMPLE = "sample.input";
 	
 	private Timer timer = new Timer();
+	
+	@BeforeClass
+	public static void beforeClass() {
+		System.out.println();
+		System.out.println("========= Day 03 ==========");
+		System.out.println("---------------------------");
+		System.out.println("# | Input  | Elapsed time");
+		System.out.println("---------------------------");
+	}
 	
 	@Before
 	public void before() {
@@ -34,29 +44,12 @@ public class BinaryDiagnosticTest {
 	@After
 	public void after() {
 		timer.stop();
-		System.out.println();
 	}
 	
 	@Test
-	public void testSolvePowerConsumption() throws URISyntaxException, IOException {
+	public void testDay3Part1SolveA() throws URISyntaxException, IOException {
 		
-		System.out.println("Day 3 - Part 1 input timing");
-		
-		// Read input file
-		List<String> input = readFile(INPUT_FILE);
-		
-		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
-		
-		int result = binaryDiagnostic.solvePowerConsumption(input);
-		
-		//System.out.println(result);
-		assertEquals(2967914, result);
-	}
-	
-	@Test
-	public void testSolvePowerConsumptionSample() throws URISyntaxException, IOException {
-		
-		System.out.println("Day 3 - Part 1 sample timing");
+		System.out.print("1 | sample | ");
 		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE_SAMPLE);
@@ -69,9 +62,27 @@ public class BinaryDiagnosticTest {
 	}
 	
 	@Test
-	public void testSolveLifeSupportRatingSample() throws URISyntaxException, IOException {
+	public void testDay3Part1SolveB() throws URISyntaxException, IOException {
 		
-		System.out.println("Day 3 - Part 2 sample timing");
+		System.out.print("1 | input  | ");
+		
+		// Read input file
+		List<String> input = readFile(INPUT_FILE);
+		
+		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
+		
+		int result = binaryDiagnostic.solvePowerConsumption(input);
+		
+		//System.out.println(result);
+		assertEquals(2967914, result);
+	}
+	
+
+	
+	@Test
+	public void testDay3Part2SolveA() throws URISyntaxException, IOException {
+		
+		System.out.print("2 | sample | ");
 		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE_SAMPLE);
@@ -84,9 +95,9 @@ public class BinaryDiagnosticTest {
 	}
 	
 	@Test
-	public void testSolveLifeSupportRating() throws URISyntaxException, IOException {
+	public void testDay3Part2SolveB() throws URISyntaxException, IOException {
 		
-		System.out.println("Day 3 - Part 2 input timing");
+		System.out.print("2 | input  | ");
 		
 		// Read input file
 		List<String> input = readFile(INPUT_FILE);
