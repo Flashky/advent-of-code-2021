@@ -1,4 +1,4 @@
-package com.adventofcode.flashk.common;
+package com.adventofcode.flashk.day5;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -13,15 +13,14 @@ import java.util.stream.Stream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.adventofcode.flashk.day4.Bingo;
+import com.adventofcode.flashk.common.Timer;
+import com.adventofcode.flashk.common.Util;
 
-@Ignore // REMOVE TO EXECUTE
-public class DayXTestTemplate {
+public class Day5Test {
 
-	private final static String INPUT_FOLDER = "dayX";
+	private final static String INPUT_FOLDER = "day5/";
 	private final static String INPUT_FILE = "data.input";
 	private final static String INPUT_FILE_SAMPLE = "sample.input";
 	
@@ -30,7 +29,7 @@ public class DayXTestTemplate {
 	@BeforeClass
 	public static void beforeClass() {
 		System.out.println();
-		System.out.println("========= Day XX ==========");
+		System.out.println("========= Day 05 ==========");
 		System.out.println("---------------------------");
 		System.out.println("# | Input  | Elapsed time");
 		System.out.println("---------------------------");
@@ -47,7 +46,7 @@ public class DayXTestTemplate {
 	}
 	
 	@Test
-	public void testDayXPart1SolveA() throws URISyntaxException, IOException {
+	public void testDay5Part1SolveA() throws URISyntaxException, IOException {
 		
 		System.out.print("1 | sample | ");
 		
@@ -57,7 +56,7 @@ public class DayXTestTemplate {
 	}
 	
 	@Test
-	public void testDayXPart1SolveB() throws URISyntaxException, IOException {
+	public void testDay5Part1SolveB() throws URISyntaxException, IOException {
 		
 		System.out.print("1 | input  | ");
 		
@@ -66,10 +65,8 @@ public class DayXTestTemplate {
 		
 	}
 	
-
-	
 	@Test
-	public void testDayXPart2SolveA() throws URISyntaxException, IOException {
+	public void testDay5Part2SolveA() throws URISyntaxException, IOException {
 		
 		System.out.print("2 | sample | ");
 		
@@ -79,7 +76,7 @@ public class DayXTestTemplate {
 	}
 	
 	@Test
-	public void testDayXPart2SolveB() throws URISyntaxException, IOException {
+	public void testDay5Part2SolveB() throws URISyntaxException, IOException {
 		
 		System.out.print("2 | input  | ");
 		
@@ -87,5 +84,5 @@ public class DayXTestTemplate {
 		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
 		
 	}
-
+	
 }
