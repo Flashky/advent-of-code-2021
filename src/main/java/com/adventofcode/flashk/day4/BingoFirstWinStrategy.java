@@ -10,7 +10,7 @@ public class BingoFirstWinStrategy implements BingoStrategy {
 		for(Integer number : numbers) {
 			for(Board board : boards) {
 				if(board.checkNumber(number)) {
-					return board.calculateValue(number);
+					return board.getScore();
 				}
 			}
 		}

@@ -7,8 +7,8 @@ public class Board {
 
 	private Cell[][] cells = new Cell[5][5];
 	private Integer unselectedValue = 0;
-	private Integer lastNumber = -1;
-	private Boolean isFinished = false;
+	private Boolean isSolved = false;
+	private Integer score = 0;
 	
 	public Board(List<String> inputs) {
 		
@@ -33,10 +33,16 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Checks the number presence in the board.
+	 * <p>If the number exists, verifies if the bingo board has been solved.</p>
+	 * @param number the number too check
+	 * @return true if the board has been solved. false otherwise.
+	 */
 	public boolean checkNumber(Integer number) {
 		
 		boolean found = false;
-		boolean isBingo = false;
+
 		int i = 0;
 		int j = 0;
 		
@@ -47,32 +53,37 @@ public class Board {
 				if(currentCell.getNumber().equals(number)) {
 					found = true;
 					currentCell.setIsSelected(true);
-					isBingo = isBingo(i, j);
-					lastNumber = number;
-					unselectedValue -= number;
-					
-				} else {
-					j++;
+					checkSolution(i, j, number);
 				}
+				
+				j++;
 			}
 			
 			i++;
 			j = 0;
 		}
 
-		return isBingo;
-	}
-	
-	public boolean isFinished() {
-		return isFinished;
-	}
-	
-	private boolean isBingo(int i, int j) {
-	
-		isFinished = checkRow(i) || checkCol(j);
-		return isFinished;
+		return isSolved;
 	}
 
+	private void checkSolution(int i, int j, Integer number) {
+		
+		unselectedValue -= number;
+		isSolved = checkRow(i) || checkCol(j);
+		
+		if(isSolved) {
+			score = number * unselectedValue;
+		}
+	}
+	
+	public boolean isSolved() {
+		return isSolved;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
 	private boolean checkRow(int i) {
 		return Arrays.stream(cells[i]).filter(Cell::getIsSelected).count() == 5;
 	}
@@ -89,7 +100,5 @@ public class Board {
 		return isBingo;
 	}
 
-	public int calculateValue(Integer number) {
-		return lastNumber * unselectedValue;
-	}
+
 }

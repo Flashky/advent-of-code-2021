@@ -11,10 +11,10 @@ public class BingoLastWinStrategy implements BingoStrategy {
 		
 		for(Integer number : numbers) {
 			for(Board board : boards) {
-				if(!board.isFinished() && board.checkNumber(number)) {
+				if(!board.isSolved() && board.checkNumber(number)) {
 					finishedBoards++;
 					if(finishedBoards == boards.size()) {
-						return board.calculateValue(number);
+						return board.getScore();
 					}
 				}
 			}
