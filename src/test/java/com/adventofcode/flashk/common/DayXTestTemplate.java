@@ -1,49 +1,29 @@
 package com.adventofcode.flashk.common;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import com.adventofcode.flashk.day4.Bingo;
-
-@Ignore // REMOVE TO EXECUTE
-public class DayXTestTemplate {
+@Disabled // TODO REMOVE TO EXECUTE
+public class DayXTestTemplate extends TimedTest {
 
 	private final static String INPUT_FOLDER = "dayX";
 	private final static String INPUT_FILE = "data.input";
 	private final static String INPUT_FILE_SAMPLE = "sample.input";
-	
-	private Timer timer = new Timer();
-	
-	@BeforeClass
-	public static void beforeClass() {
+
+	@BeforeAll
+	public static void beforeAll() {
 		System.out.println();
 		System.out.println("========= Day XX ==========");
 		System.out.println("---------------------------");
 		System.out.println("# | Input  | Elapsed time");
 		System.out.println("---------------------------");
-	}
-	
-	@Before
-	public void before() {
-		timer.start();
-	}
-	
-	@After
-	public void after() {
-		timer.stop();
 	}
 	
 	@Test
