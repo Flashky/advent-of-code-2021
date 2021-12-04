@@ -1,5 +1,6 @@
 package com.adventofcode.flashk.day4;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Board {
@@ -73,15 +74,7 @@ public class Board {
 	}
 
 	private boolean checkRow(int i) {
-		
-		boolean isBingo = true;
-		int j = 0;
-		
-		while((j < 5) && (isBingo)){
-			isBingo = cells[i][j++].getIsSelected();
-		}
-		
-		return isBingo;
+		return Arrays.stream(cells[i]).filter(Cell::getIsSelected).count() == 5;
 	}
 	
 	private boolean checkCol(int j) {
