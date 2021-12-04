@@ -34,8 +34,6 @@ public class Board {
 
 	public boolean checkNumber(Integer number) {
 		
-		//System.out.println();
-		
 		boolean found = false;
 		boolean isBingo = false;
 		int i = 0;
@@ -45,7 +43,6 @@ public class Board {
 			while((!found) && (j < 5)) {
 			
 				Cell currentCell = cells[i][j];
-				//System.out.print(currentCell.getNumber() + " ");
 				if(currentCell.getNumber().equals(number)) {
 					found = true;
 					currentCell.setIsSelected(true);
@@ -57,12 +54,11 @@ public class Board {
 					j++;
 				}
 			}
-			//System.out.println();
 			
 			i++;
 			j = 0;
 		}
-		//System.out.println();
+
 		return isBingo;
 	}
 	
