@@ -104,36 +104,9 @@ public class Day4Test {
 			Path path = Paths.get(getClass().getClassLoader().getResource(INPUT_FOLDER + inputFile).toURI());
 			input = Files.lines(path).collect(Collectors.toList());			
 			
+			bingo = new Bingo(input);
 			
-			// Numbers generation
-			String[] numbersStr = input.get(0).split(",");
-			List<Integer> numbers = new ArrayList<>();
-			for(int i = 0; i < numbersStr.length; i++) {
-				numbers.add(Integer.valueOf(numbersStr[i]));
-			}
 			
-			input.remove(0);
-			
-			bingo = new Bingo(numbers);
-			
-			// Boards generation
-			
-			List<String> boardRows = new ArrayList<>();
-			
-			for(String row : input) {
-				
-				if((row != null) && (!row.isEmpty())) {
-					
-					boardRows.add(row);
-					
-					if(boardRows.size() == 5) {
-						bingo.addBoard(new Board(boardRows));
-						boardRows = new ArrayList<>();
-					}
-					
-					
-				}
-			}
 			
 		} catch (IOException e) {
 			input = new ArrayList<>();
