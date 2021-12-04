@@ -7,7 +7,6 @@ public class Bingo {
 
 	private List<Integer> numbers;
 	private List<Board> boards;
-	private int finishedBoards = 0;
 	
 	public Bingo(List<Integer> numbers) {
 		this.numbers = numbers;
@@ -18,35 +17,9 @@ public class Bingo {
 		boards.add(board);
 	}
 	
-	public int solve() {
+	public int solve(BingoStrategy strategy) {
 		
-		for(Integer number : numbers) {
-			for(Board board : boards) {
-				if(board.checkNumber(number)) {
-					return board.calculateValue(number);
-				}
-			}
-		}
+		return strategy.solve(numbers, boards);
 		
-		return 0; // There is no solution
-		
-	}
-	
-	public int solveB() {
-		
-		for(Integer number : numbers) {
-			for(Board board : boards) {
-				if(!board.isFinished()) {
-					if(board.checkNumber(number)) {
-						finishedBoards++;
-						if(finishedBoards == boards.size()) {
-							return board.calculateValue(number);
-						}
-					}
-				}
-			}
-		}
-		
-		return 0; // There is no solution
 	}
 }

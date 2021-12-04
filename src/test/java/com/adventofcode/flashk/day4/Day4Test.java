@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.adventofcode.flashk.common.Timer;
@@ -39,12 +38,12 @@ public class Day4Test {
 	
 	@Before
 	public void before() {
-		//timer.start();
+		timer.start();
 	}
 	
 	@After
 	public void after() {
-		//timer.stop();
+		timer.stop();
 	}
 	
 	@Test
@@ -55,7 +54,7 @@ public class Day4Test {
 		// Read input file
 		Bingo input = readFile(INPUT_FILE_SAMPLE);
 		
-		assertEquals(4512, input.solve());
+		assertEquals(4512, input.solve(new BingoFirstWinStrategy()));
 	}
 	
 	@Test
@@ -66,7 +65,7 @@ public class Day4Test {
 		// Read input file
 		Bingo input = readFile(INPUT_FILE);
 		
-		assertEquals(38594, input.solve());
+		assertEquals(38594, input.solve(new BingoFirstWinStrategy()));
 	}
 	
 
@@ -78,7 +77,7 @@ public class Day4Test {
 		// Read input file
 		Bingo input = readFile(INPUT_FILE_SAMPLE);
 		
-		assertEquals(1924, input.solveB());
+		assertEquals(1924, input.solve(new BingoLastWinStrategy()));
 		
 	}
 	
@@ -89,7 +88,8 @@ public class Day4Test {
 		
 		// Read input file
 		Bingo input = readFile(INPUT_FILE);
-		System.out.println(input.solveB());
+		
+		assertEquals(21184, input.solve(new BingoLastWinStrategy()));
 	}
 	
 	
