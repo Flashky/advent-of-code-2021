@@ -2,17 +2,22 @@ package com.adventofcode.flashk.day3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-import com.adventofcode.flashk.common.TimedTest;
+import com.adventofcode.flashk.common.DisplayNameConstant;
+import com.adventofcode.flashk.common.PuzzleTest;
 import com.adventofcode.flashk.common.Util;
 
-public class Day3Test extends TimedTest {
+@DisplayName("Day 03")
+@TestMethodOrder(OrderAnnotation.class)
+public class Day3Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day3";
 	private final static String INPUT_FILE = "data.input";
@@ -28,7 +33,9 @@ public class Day3Test extends TimedTest {
 	}
 	
 	@Test
-	public void testDay3Part1SolveA() throws URISyntaxException, IOException {
+	@Order(1)
+	@DisplayName(DisplayNameConstant.PART_ONE_SAMPLE)
+	public void testSolvePart1Sample() {
 		
 		System.out.print("1 | sample | ");
 		
@@ -43,7 +50,9 @@ public class Day3Test extends TimedTest {
 	}
 	
 	@Test
-	public void testDay3Part1SolveB() throws URISyntaxException, IOException {
+	@Order(2)
+	@DisplayName(DisplayNameConstant.PART_ONE_INPUT)
+	public void testSolvePart1Input() {
 		
 		System.out.print("1 | input  | ");
 		
@@ -58,10 +67,10 @@ public class Day3Test extends TimedTest {
 		assertEquals(2967914, result);
 	}
 	
-
-	
 	@Test
-	public void testDay3Part2SolveA() throws URISyntaxException, IOException {
+	@Order(3)
+	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
+	public void testSolvePart2Sample() {
 		
 		System.out.print("2 | sample | ");
 		
@@ -76,7 +85,9 @@ public class Day3Test extends TimedTest {
 	}
 	
 	@Test
-	public void testDay3Part2SolveB() throws URISyntaxException, IOException {
+	@Order(4)
+	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
+	public void testSolvePart2Input() {
 		
 		System.out.print("2 | input  | ");
 		

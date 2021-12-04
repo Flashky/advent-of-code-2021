@@ -8,10 +8,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @Disabled // TODO REMOVE TO EXECUTE
-public class DayXTestTemplate extends TimedTest {
+public class DayXTestTemplate extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "dayX";
 	private final static String INPUT_FILE = "data.input";
@@ -25,9 +27,12 @@ public class DayXTestTemplate extends TimedTest {
 		System.out.println("# | Input  | Elapsed time");
 		System.out.println("---------------------------");
 	}
+
 	
 	@Test
-	public void testDayXPart1SolveA() throws URISyntaxException, IOException {
+	@Order(1)
+	@DisplayName(DisplayNameConstant.PART_ONE_SAMPLE)
+	public void testSolvePart1Sample() {
 		
 		System.out.print("1 | sample | ");
 		
@@ -37,7 +42,9 @@ public class DayXTestTemplate extends TimedTest {
 	}
 	
 	@Test
-	public void testDayXPart1SolveB() throws URISyntaxException, IOException {
+	@Order(2)
+	@DisplayName(DisplayNameConstant.PART_ONE_INPUT)
+	public void testSolvePart1Input() {
 		
 		System.out.print("1 | input  | ");
 		
@@ -46,10 +53,10 @@ public class DayXTestTemplate extends TimedTest {
 		
 	}
 	
-
-	
 	@Test
-	public void testDayXPart2SolveA() throws URISyntaxException, IOException {
+	@Order(3)
+	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
+	public void testSolvePart2Sample() {
 		
 		System.out.print("2 | sample | ");
 		
@@ -59,7 +66,9 @@ public class DayXTestTemplate extends TimedTest {
 	}
 	
 	@Test
-	public void testDayXPart2SolveB() throws URISyntaxException, IOException {
+	@Order(4)
+	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
+	public void testSolvePart2Input() {
 		
 		System.out.print("2 | input  | ");
 		
