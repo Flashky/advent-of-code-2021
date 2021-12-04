@@ -36,9 +36,5 @@ public class Submarine {
 
 		return movementStrategy.getDepth() * movementStrategy.getHorizontalPosition();
 	}
-
-	public MovementStrategy getMovementStrategy() {
-		return movementStrategy;
-	}
 	
 }

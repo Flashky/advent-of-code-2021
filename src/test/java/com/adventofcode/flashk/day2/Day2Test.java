@@ -51,8 +51,6 @@ public class Day2Test extends PuzzleTest {
 		int result = submarine.solve(input);
 		
 		assertEquals(150, result);
-		assertEquals((Integer) 15, submarine.getMovementStrategy().getHorizontalPosition());
-		assertEquals((Integer) 10, submarine.getMovementStrategy().getDepth());
 		
 	}
 	
@@ -91,8 +89,6 @@ public class Day2Test extends PuzzleTest {
 		int result = submarine.solve(input);
 		
 		assertEquals(900, result);
-		assertEquals((Integer) 15, submarine.getMovementStrategy().getHorizontalPosition());
-		assertEquals((Integer) 60, submarine.getMovementStrategy().getDepth());
 		
 	}
 	
@@ -112,8 +108,6 @@ public class Day2Test extends PuzzleTest {
 		int result = submarine.solve(input);
 
 		assertEquals(1765720035, result);
-		assertEquals((Integer) 2199, submarine.getMovementStrategy().getHorizontalPosition());
-		assertEquals((Integer) 802965, submarine.getMovementStrategy().getDepth());
 		
 	}
 	
