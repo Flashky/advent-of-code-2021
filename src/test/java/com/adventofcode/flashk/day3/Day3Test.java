@@ -8,11 +8,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import com.adventofcode.flashk.common.DisplayNameConstant;
 import com.adventofcode.flashk.common.PuzzleTest;
+import com.adventofcode.flashk.common.TagConstant;
 import com.adventofcode.flashk.common.Util;
 
 @DisplayName("Day 03")
@@ -34,6 +36,8 @@ public class Day3Test extends PuzzleTest {
 	
 	@Test
 	@Order(1)
+	@Tag(TagConstant.PART_ONE)
+	@Tag(TagConstant.SAMPLE)
 	@DisplayName(DisplayNameConstant.PART_ONE_SAMPLE)
 	public void testSolvePart1Sample() {
 		
@@ -51,6 +55,8 @@ public class Day3Test extends PuzzleTest {
 	
 	@Test
 	@Order(2)
+	@Tag(TagConstant.PART_ONE)
+	@Tag(TagConstant.INPUT)
 	@DisplayName(DisplayNameConstant.PART_ONE_INPUT)
 	public void testSolvePart1Input() {
 		
@@ -69,6 +75,8 @@ public class Day3Test extends PuzzleTest {
 	
 	@Test
 	@Order(3)
+	@Tag(TagConstant.PART_TWO)
+	@Tag(TagConstant.SAMPLE)
 	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
 	public void testSolvePart2Sample() {
 		
@@ -86,6 +94,8 @@ public class Day3Test extends PuzzleTest {
 	
 	@Test
 	@Order(4)
+	@Tag(TagConstant.PART_TWO)
+	@Tag(TagConstant.INPUT)
 	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
 	public void testSolvePart2Input() {
 		
