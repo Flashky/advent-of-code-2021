@@ -4,13 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,10 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.adventofcode.flashk.common.Timer;
+import com.adventofcode.flashk.common.Util;
 
 public class Day3Test {
 
-	private final static String INPUT_FOLDER = "day3/";
+	private final static String INPUT_FOLDER = "day3";
 	private final static String INPUT_FILE = "data.input";
 	private final static String INPUT_FILE_SAMPLE = "sample.input";
 	
@@ -52,7 +47,7 @@ public class Day3Test {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> input = readFile(INPUT_FILE_SAMPLE);
+		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
@@ -67,7 +62,7 @@ public class Day3Test {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> input = readFile(INPUT_FILE);
+		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
@@ -85,7 +80,7 @@ public class Day3Test {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> input = readFile(INPUT_FILE_SAMPLE);
+		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
@@ -100,37 +95,12 @@ public class Day3Test {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> input = readFile(INPUT_FILE);
+		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
 		int result = binaryDiagnostic.solveLifeSupportRating(input);
 		assertEquals(7041258, result);
-	}
-	
-	private List<String> readFile(String inputFile) {
-		
-		Stream<String> lines = null;
-		List<String> input = null;
-		
-		try {
-			
-			Path path = Paths.get(getClass().getClassLoader().getResource(INPUT_FOLDER + inputFile).toURI());
-			input = Files.lines(path).collect(Collectors.toList());
-			
-		} catch (IOException e) {
-			input = new ArrayList<>();
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			input = new ArrayList<>();
-			e.printStackTrace();
-		} finally {
-			if(lines != null) {
-				lines.close();
-			}
-		}
-		
-		return input;
 	}
 
 }
