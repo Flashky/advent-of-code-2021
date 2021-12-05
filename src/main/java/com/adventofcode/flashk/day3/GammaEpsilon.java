@@ -4,9 +4,9 @@ import java.util.List;
 
 import lombok.Getter;
 
-@Getter
 public class GammaEpsilon {
 
+	@Getter
 	private int[] gammaCount;
 	private int[] epsilonCount;
 	

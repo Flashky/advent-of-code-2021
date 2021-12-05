@@ -4,14 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class Cell {
 
 	private Integer number;
+	
+	@Setter
 	private Boolean isSelected = false;
 	
 	public Cell(Integer number) {
 		
 		this.number = number;
 	}
+	
 }
