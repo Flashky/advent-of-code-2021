@@ -20,14 +20,10 @@ public final class Util {
 		List<Integer> input = null;
 		
 		try {
-			
-			Path path = Paths.get(Util.class.getClassLoader().getResource(inputFolder + "/" + inputFile).toURI());
+			Path path = Paths.get("src", "test", "resources", inputFolder, inputFile).toAbsolutePath();
 			input = Files.lines(path).map(Integer::parseInt).collect(Collectors.toList());
 			
 		} catch (IOException e) {
-			input = new ArrayList<>();
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			input = new ArrayList<>();
 			e.printStackTrace();
 		} finally {
@@ -45,14 +41,10 @@ public final class Util {
 		List<String> input = null;
 		
 		try {
-			
-			Path path = Paths.get(Util.class.getClassLoader().getResource(inputFolder + "/" + inputFile).toURI());
+			Path path = Paths.get("src", "test", "resources", inputFolder, inputFile).toAbsolutePath();
 			input = Files.lines(path).collect(Collectors.toList());
 			
 		} catch (IOException e) {
-			input = new ArrayList<>();
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			input = new ArrayList<>();
 			e.printStackTrace();
 		} finally {
