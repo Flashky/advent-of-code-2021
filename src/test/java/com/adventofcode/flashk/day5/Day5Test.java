@@ -49,7 +49,7 @@ public class Day5Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
 		
 		Vents vents = new Vents(inputs);
-		int result = vents.solvePart1();
+		int result = vents.solve(false);
 		
 		assertEquals(5, result);
 	}
@@ -67,7 +67,7 @@ public class Day5Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
 		
 		Vents vents = new Vents(inputs);
-		int result = vents.solvePart1();
+		int result = vents.solve(false);
 		
 		assertEquals(6397, result);
 		
@@ -87,7 +87,7 @@ public class Day5Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
 		
 		Vents vents = new Vents(inputs);
-		int result = vents.solvePart2();
+		int result = vents.solve(true);
 		
 		assertEquals(12, result);
 		
@@ -107,7 +107,7 @@ public class Day5Test extends PuzzleTest {
 
 		
 		Vents vents = new Vents(inputs);
-		int result = vents.solvePart2();
+		int result = vents.solve(true);
 
 		assertEquals(22335, result);
 		

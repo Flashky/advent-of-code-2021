@@ -10,18 +10,9 @@ public class Position {
 	private int x;
 	private int y;
 	
-	public void transform(Position position) {
-		this.x += position.x;
-		this.y += position.y;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
+	public void transform(Direction direction) {
+		this.x += direction.getX();
+		this.y += direction.getY();
 	}
 
 	@Override
