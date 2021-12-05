@@ -26,6 +26,6 @@ public class Position {
 		Position other = (Position) obj;
 		if (x != other.x)
 			return false;
-		return (y != other.y);
+		return (y == other.y);
 	}
 }
