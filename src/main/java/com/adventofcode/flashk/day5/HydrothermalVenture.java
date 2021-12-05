@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Vents {
+public class HydrothermalVenture {
 
 	private final static String COORDINATES_PATTERN = "([0-9]*),([0-9]*) -> ([0-9]*),([0-9]*)";
 	private final static Pattern PATTERN = Pattern.compile(COORDINATES_PATTERN);
@@ -15,7 +15,7 @@ public class Vents {
 	private List<Vent> vents = new ArrayList<>();
 	private int totalOverlapCount = 0;
 	
-	public Vents(List<String> inputs) {
+	public HydrothermalVenture(List<String> inputs) {
 		
 		int maxX = 0;
 		int maxY = 0;
@@ -86,7 +86,5 @@ public class Vents {
 			
 		} while(!traversed);
 	}
-	
-
 	
 }
