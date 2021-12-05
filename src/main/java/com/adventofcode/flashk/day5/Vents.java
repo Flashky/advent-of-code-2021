@@ -9,9 +9,11 @@ public class Vents {
 
 	private final static String COORDINATES_PATTERN = "([0-9]*)[,]([0-9]*)";
 	private final static Pattern PATTERN = Pattern.compile(COORDINATES_PATTERN);
+	private final static Integer OVERLAPPING_SATURATION = 2;
 	
-	private Integer[][] ventCount;
+	private Integer[][] overlappingMap;
 	private List<Vent> vents = new ArrayList<>();
+	private int totalOverlapCount = 0;
 	
 	public Vents(List<String> inputs) {
 		
@@ -31,125 +33,60 @@ public class Vents {
 			Integer y2 = Integer.valueOf(matcher.group(2));
 			
 			// Update max x and y to define array limits
-			if(x1 > maxX) {
-				maxX = x1;
-			}
-			
-			if(x2 > maxX) {
-				maxX = x2;
-			}
-			
-			if(y1 > maxY) {
-				maxY = y1;
-			}
-			
-			if(y2 > maxX) {
-				maxY = y2;
-			}
-			
-			// Create data about the vent
+			maxX = Math.max(x1, Math.max(x2, maxX));
+			maxY = Math.max(y1, Math.max(y2, maxY));
+
+			// Add vent data
 			Position startPos = new Position(x1,y1);
 			Position endPos = new Position(x2, y2);
 			vents.add(new Vent(startPos, endPos));
 			
 		}
 		
-		// Initialize counters
-		ventCount = new Integer[maxX+1][maxY+1];
-		for(int i = 0; i < ventCount.length; i++) {
-			for(int j = 0; j < ventCount[i].length; j++) {
-				ventCount[i][j] = 0;
+		// Initialize overlapping map
+		overlappingMap = new Integer[maxX+1][maxY+1];
+		
+		for(int i = 0; i < overlappingMap.length; i++) {
+			for(int j = 0; j < overlappingMap[i].length; j++) {
+				overlappingMap[i][j] = 0;
 			}
 		}
 	}
 	
-	
-	public int solvePart1() {
+	public int solve(boolean includeDiagonals) {
 		
-		for(Vent vent : vents) {
-			
-			// Traverse all segments and check where it is passing
-			
-			if(vent.getStartPos().getY() == vent.getEndPos().getY()) {
-				
-				// Horizontal vent
-				int y = vent.getStartPos().getY();
-				
-				if(vent.getStartPos().getX() < vent.getEndPos().getX()) {
-					
-					// Left to right
-					for(int i = vent.getStartPos().getX(); i <= vent.getEndPos().getX(); i++) {
-						ventCount[i][y]++;
-					}
-					
-				} else if(vent.getStartPos().getX() > vent.getEndPos().getX()) {
-					
-					// Right to left
-					for(int i = vent.getStartPos().getX(); i >= vent.getEndPos().getX(); i--) {
-						ventCount[i][y]++;
-					}
-				}
-			}
-			
-			if(vent.getStartPos().getX() == vent.getEndPos().getX()) {
-				
-				// Vertical vent
-				int x = vent.getStartPos().getX();
-				
-				if(vent.getStartPos().getY() < vent.getEndPos().getY()) {
-					
-					// Bottom to top
-					for(int j = vent.getStartPos().getY(); j <= vent.getEndPos().getY(); j++) { 
-						ventCount[x][j]++;
-					}
-				} else if(vent.getStartPos().getY() > vent.getEndPos().getY()) {
-					
-					// Top to bottom
-					for(int j = vent.getStartPos().getY(); j >= vent.getEndPos().getY(); j--) {
-						ventCount[x][j]++;
-					}
-				}
-			}
-			 
-			
+		totalOverlapCount = 0;
+		
+		if(includeDiagonals) {
+			vents.stream().forEach(this::calculateOverlaps);
+		} else {
+			vents.stream().filter(vent -> !vent.getDirection().isDiagonal()).forEach(this::calculateOverlaps);
 		}
 		
-		int overlapCount = 0;
-		
-		for(int i = 0; i < ventCount.length; i++) {
-			for(int j = 0; j < ventCount[i].length; j++) {
-				if((ventCount[i][j] != null) && (ventCount[i][j] >= 2)) {
-					overlapCount++;
-				}
-			}
-		}
-		return overlapCount;
+		return totalOverlapCount;
 		
 	}
 	
-	public int solvePart2() {
+	private void calculateOverlaps(Vent vent) {
 		
-		for(Vent vent : vents) {
+		boolean traversed = false;
+		Position currentPos = vent.getStartPos();
+		
+		do {
 			
-			Position currentPosition = vent.getStartPos();
-			ventCount[currentPosition.getX()][currentPosition.getY()]++;
+			Integer currentVentOverlapping = ++overlappingMap[currentPos.getX()][currentPos.getY()];
+		
+			if(currentVentOverlapping == OVERLAPPING_SATURATION) {
+				totalOverlapCount++;
+			}
 			
-			while(!currentPosition.equals(vent.getEndPos())) {
-				currentPosition.transform(vent.getDirection());
-				ventCount[currentPosition.getX()][currentPosition.getY()]++;
+			if(currentPos.equals(vent.getEndPos())) {
+				traversed = true;
+			} else {
+				currentPos.transform(vent.getDirection());
 			}
-		}
-		
-		int overlapCount = 0;
-		
-		for(int i = 0; i < ventCount.length; i++) {
-			for(int j = 0; j < ventCount[i].length; j++) {
-				if((ventCount[i][j] != null) && (ventCount[i][j] >= 2)) {
-					overlapCount++;
-				}
-			}
-		}
-		return overlapCount;
+			
+		} while(!traversed);
 	}
 	
 
