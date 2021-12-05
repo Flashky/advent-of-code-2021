@@ -7,11 +7,11 @@ import java.util.regex.Pattern;
 
 public class Vents {
 
-	private final static String COORDINATES_PATTERN = "([0-9]*)[,]([0-9]*)";
+	private final static String COORDINATES_PATTERN = "([0-9]*),([0-9]*) -> ([0-9]*),([0-9]*)";
 	private final static Pattern PATTERN = Pattern.compile(COORDINATES_PATTERN);
 	private final static Integer OVERLAPPING_SATURATION = 2;
 	
-	private Integer[][] overlappingMap;
+	private Integer[][] heatMap;
 	private List<Vent> vents = new ArrayList<>();
 	private int totalOverlapCount = 0;
 	
@@ -27,10 +27,8 @@ public class Vents {
 			
 			Integer x1 = Integer.valueOf(matcher.group(1));
 			Integer y1 = Integer.valueOf(matcher.group(2));
-			
-			matcher.find();
-			Integer x2 = Integer.valueOf(matcher.group(1));
-			Integer y2 = Integer.valueOf(matcher.group(2));
+			Integer x2 = Integer.valueOf(matcher.group(3));
+			Integer y2 = Integer.valueOf(matcher.group(4));
 			
 			// Update max x and y to define array limits
 			maxX = Math.max(x1, Math.max(x2, maxX));
@@ -44,11 +42,11 @@ public class Vents {
 		}
 		
 		// Initialize overlapping map
-		overlappingMap = new Integer[maxX+1][maxY+1];
+		heatMap = new Integer[maxX+1][maxY+1];
 		
-		for(int i = 0; i < overlappingMap.length; i++) {
-			for(int j = 0; j < overlappingMap[i].length; j++) {
-				overlappingMap[i][j] = 0;
+		for(int i = 0; i < heatMap.length; i++) {
+			for(int j = 0; j < heatMap[i].length; j++) {
+				heatMap[i][j] = 0;
 			}
 		}
 	}
@@ -74,9 +72,9 @@ public class Vents {
 		
 		do {
 			
-			Integer currentVentOverlapping = ++overlappingMap[currentPos.getX()][currentPos.getY()];
+			Integer currentHeat = ++heatMap[currentPos.getX()][currentPos.getY()];
 		
-			if(currentVentOverlapping == OVERLAPPING_SATURATION) {
+			if(currentHeat == OVERLAPPING_SATURATION) {
 				totalOverlapCount++;
 			}
 			
