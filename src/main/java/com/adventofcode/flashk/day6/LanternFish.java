@@ -3,7 +3,7 @@ package com.adventofcode.flashk.day6;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
-import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LanternFish {
@@ -14,32 +14,19 @@ public class LanternFish {
 	private Long totalFishesCount = 0L;
 	
 	public LanternFish(String inputs) {
-	
-		List<Integer> fishes = Arrays.asList(inputs.split(","))
-									.stream()
-									.map(Integer::parseInt)
-									.collect(Collectors.toList());	
+		
+		// Order and group the fishes by remaining days to birth
+		Map<Long, Long> fishes = Arrays.asList(inputs.split(","))
+				.stream()
+				.map(Integer::parseInt)
+				.sorted()
+				.collect(Collectors.groupingBy(Integer::longValue, Collectors.counting()));
 
-		Long[] fishesByDayAux = new Long[DEFAULT_MATURE_INTERNAL_TIMER+1];
-		
-		for(Integer fish : fishes) {
-			
-			totalFishesCount++;
-			
-			if(fishesByDayAux[fish] == null) {
-				fishesByDayAux[fish] = 1L;
-			} else {
-				fishesByDayAux[fish]++;
-			}
-		}
-		
-		for(int i = 0; i < fishesByDayAux.length; i++) {
-			
-			if(fishesByDayAux[i] == null) {
-				fishesByDay.add(0L);
-			} else {
-				fishesByDay.add(fishesByDayAux[i]);
-			}
+		// Add the fishes to a deque
+		for(Long i = 0L; i <= DEFAULT_MATURE_INTERNAL_TIMER; i++) {
+			Long fishCount = fishes.getOrDefault(i, 0L);
+			fishesByDay.add(fishCount);
+			totalFishesCount += fishCount;
 		}
 
 	}
