@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import com.adventofcode.flashk.common.DisplayNameConstant;
 import com.adventofcode.flashk.common.PuzzleTest;
@@ -77,13 +76,32 @@ public class Day6Test extends PuzzleTest {
 	@Order(3)
 	@Tag(TagConstant.PART_TWO)
 	@Tag(TagConstant.INPUT)
-	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
-	public void testSolvePart2Input() {
+	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
+	public void testSolvePart2Sample() {
 		
-		System.out.print("2 | input  | ");
+		System.out.print("2 | sample  | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
+		
+		LanternFish lanternFish = new LanternFish(inputs.get(0));
+		Long result = lanternFish.solve(256);
+		
+		assertEquals(1693022481538L, result);
+		
+	}
+
+	@Test
+	@Order(4)
+	@Tag(TagConstant.PART_TWO)
+	@Tag(TagConstant.INPUT)
+	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
+	public void testSolvePart2Input() {
+
+		System.out.print("2 | input  | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
 		
 		LanternFish lanternFish = new LanternFish(inputs.get(0));
 		Long result = lanternFish.solve(256);

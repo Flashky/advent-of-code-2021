@@ -1,26 +1,45 @@
 package com.adventofcode.flashk.day6;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Deque;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LanternFish {
 
 	private final static Integer DEFAULT_MATURE_INTERNAL_TIMER = 8;
-	private final static Integer BIRTH_COOLDOWN_DAYS = 7;
 	
-	private List<Fish> fishes = new ArrayList<>();
+	private Deque<Long> fishesByDay = new ArrayDeque<>();
 	private Long totalFishesCount = 0L;
 	
 	public LanternFish(String inputs) {
+	
+		List<Integer> fishes = Arrays.asList(inputs.split(","))
+									.stream()
+									.map(Integer::parseInt)
+									.collect(Collectors.toList());	
+
+		Long[] fishesByDayAux = new Long[DEFAULT_MATURE_INTERNAL_TIMER+1];
 		
-		List<String> fishesStr = Arrays.asList(inputs.split(","));
-		
-		for(String fish : fishesStr) {
-			this.fishes.add(new Fish(Integer.valueOf(fish), BIRTH_COOLDOWN_DAYS));
+		for(Integer fish : fishes) {
+			
 			totalFishesCount++;
+			
+			if(fishesByDayAux[fish] == null) {
+				fishesByDayAux[fish] = 1L;
+			} else {
+				fishesByDayAux[fish]++;
+			}
+		}
+		
+		for(int i = 0; i < fishesByDayAux.length; i++) {
+			
+			if(fishesByDayAux[i] == null) {
+				fishesByDay.add(0L);
+			} else {
+				fishesByDay.add(fishesByDayAux[i]);
+			}
 		}
 
 	}
@@ -29,17 +48,16 @@ public class LanternFish {
 		
 		for(int day = 0; day < totalDays; day++) {
 			
-			int newFishes = 0;
-			for(Fish fish : fishes) {
-				if(fish.isBirthTime()) {
-					newFishes++;
-					totalFishesCount++;
-				}
-			}
+			Long newBornFishes = fishesByDay.poll();
+			Long fishesCdMinusOne = fishesByDay.pollLast();
+			Long fishesCdMinusTwo = fishesByDay.pollLast();
 			
-			for(int i = 0; i < newFishes; i++) {
-				fishes.add(new Fish(DEFAULT_MATURE_INTERNAL_TIMER, BIRTH_COOLDOWN_DAYS));
-			}
+			fishesByDay.addLast(fishesCdMinusTwo + newBornFishes);
+			fishesByDay.addLast(fishesCdMinusOne);
+			fishesByDay.addLast(newBornFishes);
+			
+			totalFishesCount += newBornFishes;
+
 		}
 		
 		return totalFishesCount;

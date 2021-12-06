@@ -12,8 +12,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 @Disabled // TODO REMOVE TO EXECUTE
+@DisplayName("Day XX")
+@TestMethodOrder(OrderAnnotation.class)
 public class DayXTestTemplate extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "dayX";
@@ -23,7 +27,7 @@ public class DayXTestTemplate extends PuzzleTest {
 	@BeforeAll
 	public static void beforeAll() {
 		System.out.println();
-		System.out.println("========= Day XX ==========");
+		System.out.println("========= Day 06 ==========");
 		System.out.println("---------------------------");
 		System.out.println("# | Input  | Elapsed time");
 		System.out.println("---------------------------");
