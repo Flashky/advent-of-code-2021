@@ -11,7 +11,7 @@ class BingoFirstWinStrategyEdgeCasesTest {
 	@Test
 	void testEmptyNumberList() {
 		
-		BingoFirstWinStrategy strategy = new BingoFirstWinStrategy();
+		BingoStrategy strategy = new BingoFirstWinStrategy();
 		
 		int result = strategy.solve(new ArrayList<>(), new ArrayList<>(new ArrayList<>()));
 		
