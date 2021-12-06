@@ -8,6 +8,7 @@
 - [Day 3: Binary Diagnostic](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day3)
 - [Day 4: Giant Squid](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day4)
 - [Day 5: Hydrothermal Venture](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day5)
+- [Day 6: Lanternfish](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day6)
 
 ## About
 
