@@ -87,7 +87,7 @@ public class Day6Test extends PuzzleTest {
 		LanternFish lanternFish = new LanternFish(inputs.get(0));
 		Long result = lanternFish.solve(256);
 		
-		assertEquals(1693022481538L, result);
+		assertEquals(26984457539L, result);
 		
 	}
 
@@ -106,7 +106,7 @@ public class Day6Test extends PuzzleTest {
 		LanternFish lanternFish = new LanternFish(inputs.get(0));
 		Long result = lanternFish.solve(256);
 		
-		assertEquals(26984457539L, result);
+		assertEquals(1693022481538L, result);
 		
 	}
 
