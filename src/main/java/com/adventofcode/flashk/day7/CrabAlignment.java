@@ -8,19 +8,20 @@ import java.util.stream.Collectors;
 
 public class CrabAlignment {
 
-	private List<Integer> initialCrabsPosition;
+	private List<Integer> crabsPositions;
 	private int minX = Integer.MAX_VALUE;
 	private int maxX = Integer.MIN_VALUE;
 	private Map<Integer, Integer> fuelConsumptionMap = new HashMap<>();
 	
 	public CrabAlignment(String inputs) {
 		
-		initialCrabsPosition = Arrays.asList(inputs.split(","))
+		crabsPositions = Arrays.asList(inputs.split(","))
 				.stream()
-				.map(Integer::parseInt).
-				collect(Collectors.toList());
+				.map(Integer::parseInt)
+				//.sorted()
+				.collect(Collectors.toList());
 		
-		for(Integer crabPosX : initialCrabsPosition) {
+		for(Integer crabPosX : crabsPositions) {
 			minX = Math.min(minX, crabPosX);
 			maxX = Math.max(maxX, crabPosX);
 		}
@@ -28,7 +29,6 @@ public class CrabAlignment {
 	}
 	
 	public int solve() {
-		
 		return solve(0);
 	}
 	
@@ -36,41 +36,49 @@ public class CrabAlignment {
 		
 		int minFuelConsumption = Integer.MAX_VALUE;
 		
+		if(increasingFuelPerStep > 0) {
+			calculateFuelConsumptionMap(increasingFuelPerStep);
+		}
+		
 		for(int posX = minX; posX <= maxX; posX++) {
 			
-			int totalFuelConsumption = 0;
-			for(Integer crabPosX : initialCrabsPosition) {
-				totalFuelConsumption += calculateFuelConsumption(crabPosX, posX, increasingFuelPerStep);
+			// Check all positions while its fuel consumption is below current minimum fuel consumption
+			int currentFuelConsumption = 0;
+			Integer crabIndex = 0;
+			
+			while((crabIndex < crabsPositions.size()) && (currentFuelConsumption < minFuelConsumption)) {
+				
+				Integer movements = Math.abs(crabsPositions.get(crabIndex) - posX);
+				
+				if(increasingFuelPerStep == 0) {
+					currentFuelConsumption += movements;
+				} else {
+					currentFuelConsumption += fuelConsumptionMap.get(movements);
+				}
+				
+				crabIndex ++; 
 			}
 			
-			minFuelConsumption = Math.min(minFuelConsumption, totalFuelConsumption);
+			// Selection of most optimal solution
+			if(currentFuelConsumption < minFuelConsumption) {
+				minFuelConsumption = Math.min(minFuelConsumption, currentFuelConsumption);
+			}
+			
 		}
 		
 		return minFuelConsumption;
 	}
-	
-	private int calculateFuelConsumption(int crabPosX, int posX, int increasingFuelConsumption) {
+
+	private void calculateFuelConsumptionMap(final int increasingFuelPerStep) {
 		
-		if(increasingFuelConsumption ==  0) {
-			return Math.abs(crabPosX - posX);
+		int fuelConsumption = increasingFuelPerStep;
+		
+		fuelConsumptionMap.put(0, 0);
+		
+		for(int i = 1; i <= maxX; i++) {
+			fuelConsumptionMap.put(i, fuelConsumptionMap.get(i-1)+fuelConsumption);
+			fuelConsumption += increasingFuelPerStep;
 		}
-		
-		int totalFuelConsumption = 0;
-		Integer stepX = (crabPosX > posX) ? crabPosX-posX : posX-crabPosX;
-		
-		
-		if(fuelConsumptionMap.containsKey(stepX)) {
-			totalFuelConsumption += fuelConsumptionMap.get(stepX);
-		} else {
-			for(int i = 0; i < stepX; i++) {
-				Integer fuelConsumption = i+1;
-				totalFuelConsumption += fuelConsumption;
-				fuelConsumptionMap.put(fuelConsumption, totalFuelConsumption);
-			}	
-		}
-		
-		
-		
-		return totalFuelConsumption;
 	}
+
 }
