@@ -28,6 +28,9 @@ public class CrabAlignment {
 		// Obtain average and median
 		double avgPosXDouble = crabsPositions.stream().mapToInt(v -> v).average().getAsDouble();
 
+		// I'm not sure if this works because is right, or because I just got lucky with the numbers.
+		// Another solution would be to calculate two average positions (floor and ceil), 
+		 //calculate fuel for both of them and then take the minimum of them.
 		averagePosX = BigDecimal.valueOf(avgPosXDouble)
 								.setScale(1, RoundingMode.HALF_DOWN) // Remove decimals
 								.setScale(0, RoundingMode.HALF_DOWN)
