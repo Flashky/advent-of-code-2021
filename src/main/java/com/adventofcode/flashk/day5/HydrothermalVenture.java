@@ -11,7 +11,7 @@ public class HydrothermalVenture {
 	private final static Pattern PATTERN = Pattern.compile(COORDINATES_PATTERN);
 	private final static Integer OVERLAPPING_SATURATION = 2;
 	
-	private Integer[][] heatMap;
+	private int[][] heatMap;
 	private List<Vent> vents = new ArrayList<>();
 	private int totalOverlapCount = 0;
 	
@@ -42,13 +42,8 @@ public class HydrothermalVenture {
 		}
 		
 		// Initialize overlapping map
-		heatMap = new Integer[maxX+1][maxY+1];
+		heatMap = new int[maxX+1][maxY+1];
 		
-		for(int i = 0; i < heatMap.length; i++) {
-			for(int j = 0; j < heatMap[i].length; j++) {
-				heatMap[i][j] = 0;
-			}
-		}
 	}
 	
 	public int solve(boolean includeDiagonals) {
@@ -72,8 +67,8 @@ public class HydrothermalVenture {
 		
 		do {
 			
-			Integer currentHeat = ++heatMap[currentPos.getX()][currentPos.getY()];
-		
+			int currentHeat = ++heatMap[currentPos.getX()][currentPos.getY()];
+			
 			if(currentHeat == OVERLAPPING_SATURATION) {
 				totalOverlapCount++;
 			}
