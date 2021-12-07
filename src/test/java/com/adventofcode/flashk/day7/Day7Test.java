@@ -28,7 +28,7 @@ public class Day7Test extends PuzzleTest {
 	@BeforeAll
 	public static void beforeAll() {
 		System.out.println();
-		System.out.println("========= Day 07	 ==========");
+		System.out.println("========= Day 07 ==========");
 		System.out.println("---------------------------");
 		System.out.println("# | Input  | Elapsed time");
 		System.out.println("---------------------------");
