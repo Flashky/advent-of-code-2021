@@ -18,13 +18,11 @@ public class CrabAlignment {
 		crabsPositions = Arrays.asList(inputs.split(","))
 				.stream()
 				.map(Integer::parseInt)
-				//.sorted()
+				.sorted()
 				.collect(Collectors.toList());
 		
-		for(Integer crabPosX : crabsPositions) {
-			minX = Math.min(minX, crabPosX);
-			maxX = Math.max(maxX, crabPosX);
-		}
+		minX = crabsPositions.stream().mapToInt(v -> v).min().orElse(Integer.MAX_VALUE);
+		maxX = crabsPositions.stream().mapToInt(v -> v).max().orElse(Integer.MIN_VALUE);
 		
 	}
 	
@@ -40,12 +38,14 @@ public class CrabAlignment {
 			calculateFuelConsumptionMap(increasingFuelPerStep);
 		}
 		
+		// Traverse all possible positions to place the crabs at
 		for(int posX = minX; posX <= maxX; posX++) {
 			
-			// Check all positions while its fuel consumption is below current minimum fuel consumption
+			
 			int currentFuelConsumption = 0;
 			Integer crabIndex = 0;
 			
+			// Verify total crab fuel consumption only if its below of current minimum fuel consumption
 			while((crabIndex < crabsPositions.size()) && (currentFuelConsumption < minFuelConsumption)) {
 				
 				Integer movements = Math.abs(crabsPositions.get(crabIndex) - posX);
