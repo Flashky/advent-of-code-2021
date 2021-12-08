@@ -5,12 +5,12 @@ import java.util.List;
 
 public class SevenSegmentSearch {
 	
-	private List<DigitalEntry> digitalEntries = new ArrayList<>();
+	private List<Decoder> decoders = new ArrayList<>();
 	
 	public SevenSegmentSearch(List<String> inputs) {
 		
 		for(String input : inputs) {
-			digitalEntries.add(new DigitalEntry(input));
+			decoders.add(new Decoder(input));
 		}
 		
 	}
@@ -19,8 +19,8 @@ public class SevenSegmentSearch {
 		
 		int result = 0;
 		
-		for(DigitalEntry digitalEntry : digitalEntries) {
-			for(String digit : digitalEntry.getOutputDigit().getDigits()) {
+		for(Decoder decoder : decoders) {
+			for(String digit : decoder.getEncodedNumber().getDigits()) {
 				switch (digit.length()) {
 					case 2:
 					case 3:
@@ -38,16 +38,9 @@ public class SevenSegmentSearch {
 		
 		int result = 0;
 		
-		for(DigitalEntry digitalEntry : digitalEntries) {
-			StringBuilder sb = new StringBuilder();
-			for(String outputDigit : digitalEntry.getOutputDigit().getDigits()) {
-				Integer decodedDigit = digitalEntry.getInputSignal().decode(outputDigit);
-				sb.append(decodedDigit);
-			}
-			Integer decodedNumber = Integer.valueOf(sb.toString());
-			result += decodedNumber;
+		for(Decoder decoder : decoders) {
+			result += decoder.decode();
 		}
-		
 		
 		return result;
 	}
