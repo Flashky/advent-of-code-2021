@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class InputSignal {
+public class Codec {
 
 	private final static String DIGIT_PATTERN = "([a-g]*)";
 	private final static Pattern PATTERN = Pattern.compile(DIGIT_PATTERN);
@@ -19,7 +19,7 @@ public class InputSignal {
 	private Map<String, Integer> decodedNumbers = new HashMap<>();
 	private Map<Integer, String> encodedNumbers = new HashMap<>();
 	
-	public InputSignal(String input) {
+	public Codec(String input) {
 		
 		Matcher matcher = PATTERN.matcher(input);
 		

@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 
 @Getter
-public class OutputDigit {
+public class EncodedNumber {
 
 	private final static String DIGIT_PATTERN = "([a-g]*)";
 	private final static Pattern PATTERN = Pattern.compile(DIGIT_PATTERN);
 	
-	protected List<String> digits = new ArrayList<>();
+	private List<String> digits = new ArrayList<>();
 	
-	public OutputDigit(String input) {
+	public EncodedNumber(String input) {
 		
 		Matcher matcher = PATTERN.matcher(input);
 		
