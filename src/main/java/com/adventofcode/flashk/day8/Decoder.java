@@ -2,7 +2,6 @@ package com.adventofcode.flashk.day8;
 
 import lombok.Getter;
 
-@Getter
 public class Decoder {
 
 	// Codec is the input signal, the words at the left of "|".
@@ -10,6 +9,8 @@ public class Decoder {
 	// Each encoded number can only be translated by its codec as values change on every line.
 	
 	private Codec codec;
+	
+	@Getter
 	private EncodedNumber encodedNumber;
 	
 	public Decoder(String input) {
