@@ -3,6 +3,8 @@ package com.adventofcode.flashk.day8;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import lombok.Getter;
@@ -10,18 +12,25 @@ import lombok.Getter;
 @Getter
 public class OutputDigit {
 
+	private final static String DIGIT_PATTERN = "([a-g]*)";
+	private final static Pattern PATTERN = Pattern.compile(DIGIT_PATTERN);
+	
 	protected List<String> digits = new ArrayList<>();
 	
-	public void addDigit(String digit) {
+	public OutputDigit(String input) {
 		
-		String sortedDigit = Arrays.stream(digit.split("|")).sorted().collect(Collectors.joining());
-		digits.add(sortedDigit);
+		Matcher matcher = PATTERN.matcher(input);
+		
+		while(matcher.find()) {
+
+			String digit = matcher.group(1);
+			
+			if(!digit.isEmpty()) {
+				String sortedDigit = Arrays.stream(digit.split("|")).sorted().collect(Collectors.joining());
+				digits.add(sortedDigit);
+			}
+		}
 		
 	}
-	
-	
-	public boolean isComplete() {
-		return digits.size() == 4;
-	}
-	
+		
 }
