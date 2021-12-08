@@ -2,40 +2,17 @@ package com.adventofcode.flashk.day8;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SevenSegmentSearch {
-
-	private final static String DIGIT_PATTERN = "([a-g]*)";
-	private final static Pattern PATTERN = Pattern.compile(DIGIT_PATTERN);
 	
 	private List<DigitalEntry> digitalEntries = new ArrayList<>();
 	
 	public SevenSegmentSearch(List<String> inputs) {
 		
 		for(String input : inputs) {
-			String[] splittedInput = input.split("\\|");
-			
-			Matcher matcher = PATTERN.matcher(splittedInput[0]);
-			
-			InputSignal signal = new InputSignal(splittedInput[0]);
-
-			matcher = PATTERN.matcher(splittedInput[1]);
-			
-			OutputDigit outputDigit = new OutputDigit();
-			while(matcher.find()) {
-
-				String digit = matcher.group(1);
-				
-				if(outputDigit.isComplete()) {
-					digitalEntries.add(new DigitalEntry(signal, outputDigit));
-					outputDigit = new OutputDigit();
-				} else if(!digit.isEmpty()) {
-					outputDigit.addDigit(digit);
-				}
-			}
+			digitalEntries.add(new DigitalEntry(input));
 		}
+		
 	}
 	
 	public int solveA() {
