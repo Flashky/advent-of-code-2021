@@ -11,9 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import lombok.Getter;
-
-@Getter
 public class InputSignal {
 
 	private final static String DIGIT_PATTERN = "([a-g]*)";
@@ -40,6 +37,7 @@ public class InputSignal {
 				case 7: decode(signalPattern,8); break;
 				case 5: unknownFiveSegmentPatterns.add(signalPattern); break;
 				case 6: unknownSixSegmentPatterns.add(signalPattern); break;
+				default: break;
 			}
 		}
 		

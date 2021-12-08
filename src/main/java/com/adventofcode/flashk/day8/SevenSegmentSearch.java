@@ -35,11 +35,6 @@ public class SevenSegmentSearch {
 					outputDigit.addDigit(digit);
 				}
 			}
-			
-			
-			
-			
-			
 		}
 	}
 	
@@ -53,9 +48,8 @@ public class SevenSegmentSearch {
 					case 2:
 					case 3:
 					case 4:
-					case 7:
-						result++;
-						break;
+					case 7: result++; break;
+					default: break;
 				}
 			}
 		}
