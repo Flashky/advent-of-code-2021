@@ -64,18 +64,7 @@ public class SmokeBasin {
 				
 				int lowerPointValue = calculateLowerPointValue(row,col);
 				if(lowerPointValue != -1) {
-					
-					Set<Position> visitedPositions = new HashSet<>();
-					visitedPositions.add(new Position(row, col));
-					
-					int result = 1;
-					result += searchBasin(row, col+1, visitedPositions); // Search right
-					result += searchBasin(row, col-1, visitedPositions); // Search left
-					result += searchBasin(row+1, col, visitedPositions); // Search down
-					result += searchBasin(row-1, col, visitedPositions); // Search up
-					
-					basinSizes.add(result);
-					
+					basinSizes.add(searchBasin(row, col, new HashSet<>()));
 				}
 			}
 		}
@@ -91,19 +80,9 @@ public class SmokeBasin {
 	
 	private int searchBasin(int row, int col, Set<Position> visitedPositions) {
 		
-		if(col >= maxCols || col < 0) {
-			return 0;
-		}
-		
-		if(row >= maxRows || row < 0) {
-			return 0;
-		}
-		
-		if(heightMap[row][col] == 9) {
-			return 0;
-		}
-		
-		if(visitedPositions.contains(new Position(row,col))) {
+		if(isOutOfBounds(row,col)
+			|| (heightMap[row][col] == 9) 
+			|| (visitedPositions.contains(new Position(row,col)))) {
 			return 0;
 		}
 		
@@ -118,11 +97,17 @@ public class SmokeBasin {
 		return result;
 		
 	}
+	
+	private boolean isOutOfBounds(int row, int col) {
+		return (col >= maxCols || col < 0) || (row >= maxRows || row < 0);
+	}
+	
+	
 	/**
 	 * Calculates if the specified point is a lower point and its value
 	 * @param col
 	 * @param row
-	 * @return the value of the lower point. Returns <code>-1</code` if the point is not a lower value.
+	 * @return the value of the lower point. Returns <code>-1</code> if the point is not a lower point.
 	 */
 	private int calculateLowerPointValue(int row, int col) {
 		
