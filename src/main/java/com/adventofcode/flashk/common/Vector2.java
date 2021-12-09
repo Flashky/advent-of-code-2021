@@ -18,4 +18,16 @@ public class Vector2 {
 		this.x += direction.getX();
 		this.y += direction.getY();
 	}
+	
+	public void normalize() {
+		
+		double length = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+		
+		if(length != 0) {
+			double s = 1 / length;
+			x = (int) Math.round(x * s);
+			y = (int) Math.round(y * s);
+		}
+		
+	}
 }
