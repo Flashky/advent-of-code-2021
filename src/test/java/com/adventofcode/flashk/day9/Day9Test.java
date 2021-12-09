@@ -1,9 +1,10 @@
 package com.adventofcode.flashk.day9;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -16,7 +17,6 @@ import com.adventofcode.flashk.common.PuzzleTest;
 import com.adventofcode.flashk.common.TagConstant;
 import com.adventofcode.flashk.common.Util;
 
-@Disabled // TODO REMOVE TO EXECUTE
 @DisplayName("Day 09")
 @TestMethodOrder(OrderAnnotation.class)
 public class Day9Test extends PuzzleTest {
@@ -46,7 +46,11 @@ public class Day9Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
+	
+		SmokeBasin smokeBasin = new SmokeBasin(inputs);
+		int result = smokeBasin.solveA();
 		
+		assertEquals(15, result);
 	}
 	
 	@Test
@@ -61,6 +65,10 @@ public class Day9Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
 		
+		SmokeBasin smokeBasin = new SmokeBasin(inputs);
+		int result = smokeBasin.solveA();
+		
+		assertEquals(518, result);
 	}
 	
 	@Test
@@ -75,6 +83,11 @@ public class Day9Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
 		
+		SmokeBasin smokeBasin = new SmokeBasin(inputs);
+		int result = smokeBasin.solveB();
+		
+		assertEquals(1134, result);
+		
 	}
 	
 	@Test
@@ -88,6 +101,11 @@ public class Day9Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
+		
+		SmokeBasin smokeBasin = new SmokeBasin(inputs);
+		int result = smokeBasin.solveB();
+		
+		assertEquals(949905, result);
 		
 	}
 
