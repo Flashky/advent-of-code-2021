@@ -44,11 +44,13 @@ The top-left basin, size ``3``:
 
 The top-right basin, size ``9``:
 
+<pre>
 21999<b>43210</b>
 398789<b>4</b>9<b>21</b>
 985678989<b>2</b>
 8767896789
 9899965678
+</pre>
 
 The middle basin, size ``14``:
 
