@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.adventofcode.flashk.day5.Position;
+import com.adventofcode.flashk.common.Vector2;
 
 public class SmokeBasin {
 
@@ -78,16 +78,16 @@ public class SmokeBasin {
 		return result;
 	}
 	
-	private int searchBasin(int row, int col, Set<Position> visitedPositions) {
+	private int searchBasin(int row, int col, Set<Vector2> visitedPositions) {
 		
 		if(isOutOfBounds(row,col)
 			|| (heightMap[row][col] == 9) 
-			|| (visitedPositions.contains(new Position(row,col)))) {
+			|| (visitedPositions.contains(new Vector2(row,col)))) {
 			return 0;
 		}
 		
 		int result = 1;
-		visitedPositions.add(new Position(row, col));
+		visitedPositions.add(new Vector2(row, col));
 		
 		result += searchBasin(row, col+1, visitedPositions); // Search right
 		result += searchBasin(row, col-1, visitedPositions); // Search left

@@ -1,5 +1,7 @@
 package com.adventofcode.flashk.day5;
 
+import com.adventofcode.flashk.common.Vector2;
+
 import lombok.Getter;
 
 @Getter
@@ -8,7 +10,7 @@ public class Direction {
 	private int x;
 	private int y;
 	
-	public Direction(Position startPos, Position endPos) {
+	public Direction(Vector2 startPos, Vector2 endPos) {
 		
 		// Calculations to obtain an unitary vector to define the direction
 		Integer xSubstraction = endPos.getX() - startPos.getX();

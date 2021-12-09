@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import com.adventofcode.flashk.common.DisplayNameConstant;
-import com.adventofcode.flashk.common.PuzzleTest;
-import com.adventofcode.flashk.common.TagConstant;
-import com.adventofcode.flashk.common.Util;
+import com.adventofcode.flashk.common.test.utils.DisplayNameConstant;
+import com.adventofcode.flashk.common.test.utils.PuzzleTest;
+import com.adventofcode.flashk.common.test.utils.TagConstant;
+import com.adventofcode.flashk.common.test.utils.Util;
 
 @DisplayName("Day 02")
 @TestMethodOrder(OrderAnnotation.class)

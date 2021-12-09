@@ -6,7 +6,7 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 import org.junit.platform.suite.api.SuiteDisplayName;
 
-import com.adventofcode.flashk.common.TagConstant;
+import com.adventofcode.flashk.common.test.utils.TagConstant;
 
 @Suite
 @IncludeTags({ TagConstant.PART_ONE, TagConstant.PART_TWO })

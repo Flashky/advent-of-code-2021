@@ -1,4 +1,4 @@
-package com.adventofcode.flashk.common;
+package com.adventofcode.flashk.common.test.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 

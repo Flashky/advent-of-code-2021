@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.adventofcode.flashk.common.Vector2;
+
 public class HydrothermalVenture {
 
 	private final static String COORDINATES_PATTERN = "([0-9]*),([0-9]*) -> ([0-9]*),([0-9]*)";
@@ -35,8 +37,8 @@ public class HydrothermalVenture {
 			maxY = Math.max(y1, Math.max(y2, maxY));
 
 			// Add vent data
-			Position startPos = new Position(x1,y1);
-			Position endPos = new Position(x2, y2);
+			Vector2 startPos = new Vector2(x1,y1);
+			Vector2 endPos = new Vector2(x2, y2);
 			vents.add(new Vent(startPos, endPos));
 			
 		}
@@ -63,7 +65,7 @@ public class HydrothermalVenture {
 	private void calculateOverlaps(Vent vent) {
 		
 		boolean traversed = false;
-		Position currentPos = vent.getStartPos();
+		Vector2 currentPos = vent.getStartPos();
 		
 		do {
 			

@@ -1,4 +1,4 @@
-package com.adventofcode.flashk.common;
+package com.adventofcode.flashk.common.test.utils;
 
 public final class DisplayNameConstant {
 

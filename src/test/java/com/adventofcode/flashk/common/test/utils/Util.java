@@ -1,4 +1,4 @@
-package com.adventofcode.flashk.common;
+package com.adventofcode.flashk.common.test.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
