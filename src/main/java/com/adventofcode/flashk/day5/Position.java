@@ -1,10 +1,12 @@
 package com.adventofcode.flashk.day5;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Position {
 
 	private int x;
@@ -13,19 +15,5 @@ public class Position {
 	public void transform(Direction direction) {
 		this.x += direction.getX();
 		this.y += direction.getY();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Position other = (Position) obj;
-		if (x != other.x)
-			return false;
-		return (y == other.y);
 	}
 }
