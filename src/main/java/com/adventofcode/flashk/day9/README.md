@@ -76,3 +76,11 @@ The bottom-right basin, size ``9``:
 Find the three largest basins and multiply their sizes together. In the above example, this is <code>9 * 14 * 9 = <b>1134</b></code>.
 
 **What do you get if you multiply together the sizes of the three largest basins?**
+
+```diff
+@@21@@99943210
+@@3@@987894921
+9856789892
+8767896789
+9899965678
+```
