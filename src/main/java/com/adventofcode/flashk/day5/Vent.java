@@ -1,15 +1,17 @@
 package com.adventofcode.flashk.day5;
 
+import com.adventofcode.flashk.common.Vector2;
+
 import lombok.Getter;
 
 @Getter
 public class Vent {
 
-	private Position startPos;
-	private Position endPos;
+	private Vector2 startPos;
+	private Vector2 endPos;
 	private Direction direction;
 	
-	public Vent(Position startPos, Position endPos) {
+	public Vent(Vector2 startPos, Vector2 endPos) {
 		
 		this.startPos = startPos;
 		this.endPos = endPos;

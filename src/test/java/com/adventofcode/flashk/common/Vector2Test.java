@@ -1,17 +1,20 @@
-package com.adventofcode.flashk.day5;
+package com.adventofcode.flashk.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-class PositionTest {
+import com.adventofcode.flashk.common.Vector2;
+import com.adventofcode.flashk.day5.Direction;
+
+class Vector2Test {
 	
 	@Test
 	void testTransform() {
 		
-		Position startPos = new Position(2,5);
-		Position endPos = new Position(3,6);
+		Vector2 startPos = new Vector2(2,5);
+		Vector2 endPos = new Vector2(3,6);
 		
 		Direction direction = new Direction(startPos, endPos);
 		
@@ -24,7 +27,7 @@ class PositionTest {
 	
 	@Test
 	void testEquals() {
-		Position obj1 = new Position(2,5);
+		Vector2 obj1 = new Vector2(2,5);
 		
 		assertEquals(obj1, obj1);
 		assertFalse(obj1.equals(null));

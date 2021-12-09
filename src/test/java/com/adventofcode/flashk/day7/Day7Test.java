@@ -7,15 +7,16 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import com.adventofcode.flashk.common.test.utils.DisplayNameConstant;
+import com.adventofcode.flashk.common.test.utils.PuzzleTest;
+import com.adventofcode.flashk.common.test.utils.TagConstant;
+import com.adventofcode.flashk.common.test.utils.Util;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import com.adventofcode.flashk.common.DisplayNameConstant;
-import com.adventofcode.flashk.common.PuzzleTest;
-import com.adventofcode.flashk.common.TagConstant;
-import com.adventofcode.flashk.common.Util;
 
 @DisplayName("Day 07")
 @TestMethodOrder(OrderAnnotation.class)
