@@ -12,61 +12,56 @@ import com.adventofcode.flashk.common.Vector2;
 public class SmokeBasin {
 
 	private Integer[][] heightMap;
+	private List<Vector2> lowerPoints = new ArrayList<>();
+	private int lowerPointsValue = 0;
 	
 	private int maxCols;
 	private int maxRows;
-	
+
 	public SmokeBasin(List<String> inputs) {
 		
 		maxCols = inputs.get(0).length();
 		maxRows = inputs.size();
 		
+		// Initialize heat map values
 		heightMap = new Integer[maxRows][maxCols];
 		
-		int row = 0;
-		for(String input : inputs) {
-				
-			// Obtain row numbers
-			String[] numbers = input.split("|");
+		for(int row = 0; row < inputs.size(); row++) {
+			
+			String[] numbers = inputs.get(row).split("|");
 			
 			for(int col = 0; col < maxCols; col++) {
 				heightMap[row][col] = Integer.valueOf(numbers[col]);
 			}
-			
-			row++;
-		}
-	}
 
-	public int solveA() {
+		}
 		
-		int result = 0;
-		
+		// Search lower points
 		for(int row = 0; row < heightMap.length; row++) {
 			for(int col = 0; col < heightMap[row].length; col++) {
-				
-				int lowerPointValue = calculateLowerPointValue(row,col);
-				if(lowerPointValue != -1) {
-					result += lowerPointValue;
+				if(isLowerPoint(row, col)) {
+					
+					lowerPoints.add(new Vector2(row,col));					
+					
+					// Part A of the problem can be calculated now to avoid traversing the list again
+					lowerPointsValue += heightMap[row][col] + 1;
+					
 				}
 			}
 		}
 		
-		return result;
+	}
+
+	public int solveA() {
+		return lowerPointsValue;
 	}
 	
 	public int solveB() {
 		
-		
 		List<Integer> basinSizes = new ArrayList<>();
-		
-		for(int row = 0; row < heightMap.length; row++) {
-			for(int col = 0; col < heightMap[row].length; col++) {
-				
-				int lowerPointValue = calculateLowerPointValue(row,col);
-				if(lowerPointValue != -1) {
-					basinSizes.add(searchBasin(row, col, new HashSet<>()));
-				}
-			}
+
+		for(Vector2 lowerPoint : lowerPoints) { 
+			basinSizes.add(searchBasin(lowerPoint.getX(), lowerPoint.getY(), new HashSet<>()));
 		}
 		
 		List<Integer> orderedBasinSizes = basinSizes.stream().sorted(Comparator.reverseOrder()).limit(3).collect(Collectors.toList());
@@ -76,6 +71,7 @@ public class SmokeBasin {
 			result *= basinSize;
 		}
 		return result;
+		
 	}
 	
 	private int searchBasin(int row, int col, Set<Vector2> visitedPositions) {
@@ -102,14 +98,7 @@ public class SmokeBasin {
 		return (col >= maxCols || col < 0) || (row >= maxRows || row < 0);
 	}
 	
-	
-	/**
-	 * Calculates if the specified point is a lower point and its value
-	 * @param col
-	 * @param row
-	 * @return the value of the lower point. Returns <code>-1</code> if the point is not a lower point.
-	 */
-	private int calculateLowerPointValue(int row, int col) {
+	private boolean isLowerPoint(int row, int col) {
 		
 		int right = col+1;
 		int left = col-1;
@@ -117,22 +106,22 @@ public class SmokeBasin {
 		int down = row+1;
 		
 		if((right < maxCols) && (heightMap[row][col] >= heightMap[row][right])) {
-			return -1;
+			return false;
 		}	
 		
 		if((left >= 0) && (heightMap[row][col] >= heightMap[row][left])) {
-			return -1;
+			return false;
 		}	
 		
 		if((up >= 0) && (heightMap[row][col] >= heightMap[up][col])) {
-			return -1;
+			return false;
 		}	
 		
 		if((down < maxRows) && (heightMap[row][col] >= heightMap[down][col])) {
-			return -1;
+			return false;
 		}	
 		
-		return heightMap[row][col] + 1;
+		return true;
 		
 	}
 
