@@ -65,11 +65,13 @@ The middle basin, size ``14``:
 
 The bottom-right basin, size ``9``:
 
+<pre>
 2199943210
 3987894921
 9856789<b>8</b>92
 876789<b>678</b>9
 98999<b>65678</b>
+</pre>
 
 Find the three largest basins and multiply their sizes together. In the above example, this is <code>9 * 14 * 9 = <b>1134</b></code>.
 
