@@ -135,9 +135,5 @@ public class SmokeBasin {
 		return heightMap[row][col] + 1;
 		
 	}
-	
-	 
-	
-	
 
 }
