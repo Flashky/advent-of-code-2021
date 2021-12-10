@@ -1,19 +1,15 @@
 package com.adventofcode.flashk.common.test.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 @Disabled // TODO REMOVE TO EXECUTE
 @DisplayName("Day XX")

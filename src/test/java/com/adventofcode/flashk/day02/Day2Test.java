@@ -6,19 +6,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import com.adventofcode.flashk.common.test.utils.DisplayNameConstant;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.TagConstant;
 import com.adventofcode.flashk.common.test.utils.Util;
-import com.adventofcode.flashk.day02.AimMovementStrategy;
-import com.adventofcode.flashk.day02.BasicMovementStrategy;
-import com.adventofcode.flashk.day02.Submarine;
 
 @DisplayName("Day 02")
 @TestMethodOrder(OrderAnnotation.class)

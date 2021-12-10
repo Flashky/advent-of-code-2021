@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import com.adventofcode.flashk.day04.BingoFirstWinStrategy;
-import com.adventofcode.flashk.day04.BingoStrategy;
-
 class BingoFirstWinStrategyEdgeCasesTest {
 	
 	@Test
