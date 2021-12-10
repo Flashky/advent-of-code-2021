@@ -95,7 +95,7 @@ public class Day10Test extends PuzzleTest {
 	@Order(3)
 	@Tag(TagConstant.PART_TWO)
 	@Tag(TagConstant.DEBUG)
-	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
+	@DisplayName(DisplayNameConstant.PART_TWO_DEBUG + " (294)")
 	public void testSolvePart2SingleSample294() {
 		
 		System.out.print("2 | sample | ");
