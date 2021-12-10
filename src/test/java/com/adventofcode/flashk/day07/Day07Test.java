@@ -21,9 +21,9 @@ import com.adventofcode.flashk.common.test.utils.Util;
 
 @DisplayName(TestDisplayName.DAY_07)
 @TestMethodOrder(OrderAnnotation.class)
-public class Day7Test extends PuzzleTest {
+public class Day07Test extends PuzzleTest {
 
-	private final static String INPUT_FOLDER = "day7";
+	private final static String INPUT_FOLDER = "day_07";
 
 	@BeforeAll
 	public static void beforeAll() {
