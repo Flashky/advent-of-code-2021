@@ -6,31 +6,25 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import com.adventofcode.flashk.common.test.constants.TestDisplayName;
-import com.adventofcode.flashk.common.test.constants.TestTag;
-
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import com.adventofcode.flashk.common.test.constants.TestDisplayName;
+import com.adventofcode.flashk.common.test.constants.TestFilename;
+import com.adventofcode.flashk.common.test.constants.TestTag;
+
 @Disabled // TODO REMOVE TO EXECUTE
-@DisplayName("Day XX")
+@DisplayName(TestDisplayName.DAY_XX)
 @TestMethodOrder(OrderAnnotation.class)
 public class DayXTestTemplate extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "dayX";
-	private final static String INPUT_FILE = "data.input";
-	private final static String INPUT_FILE_SAMPLE = "sample.input";
 
 	@BeforeAll
 	public static void beforeAll() {
-		System.out.println();
-		System.out.println("========= Day 06 ==========");
-		System.out.println("---------------------------");
-		System.out.println("# | Input  | Elapsed time");
-		System.out.println("---------------------------");
+		Timer.printHeader(TestDisplayName.DAY_XX);
 	}
 
 	
@@ -44,7 +38,7 @@ public class DayXTestTemplate extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 	}
 	
@@ -58,7 +52,7 @@ public class DayXTestTemplate extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 	}
 	
@@ -72,7 +66,7 @@ public class DayXTestTemplate extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 	}
 	
@@ -86,7 +80,7 @@ public class DayXTestTemplate extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 	}
 
