@@ -3,7 +3,6 @@ package com.adventofcode.flashk.common.test.utils;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -15,12 +14,11 @@ import com.adventofcode.flashk.common.test.constants.TestDisplayName;
 import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 
-@Disabled // TODO REMOVE TO EXECUTE
 @DisplayName(TestDisplayName.DAY_XX)
 @TestMethodOrder(OrderAnnotation.class)
 public class DayXXTestTemplate extends PuzzleTest {
 
-	private final static String INPUT_FOLDER = "dayX";
+	private final static String INPUT_FOLDER = "day_XX";
 
 	@BeforeAll
 	public static void beforeAll() {
