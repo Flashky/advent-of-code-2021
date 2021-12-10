@@ -1,8 +1,8 @@
-package com.adventofcode.flashk.common.test.utils;
+package com.adventofcode.flashk.common.test.constants;
 
-public final class TagConstant {
+public final class TestTag {
 
-	public TagConstant() {}
+	public TestTag() {}
 	
 	public final static String INPUT = "input";
 	public final static String SAMPLE = "sample";

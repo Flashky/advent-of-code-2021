@@ -5,10 +5,10 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 import org.junit.platform.suite.api.SuiteDisplayName;
 
-import com.adventofcode.flashk.common.test.utils.TagConstant;
+import com.adventofcode.flashk.common.test.constants.TestTag;
 
 @Suite
-@IncludeTags(TagConstant.INPUT)
+@IncludeTags(TestTag.INPUT)
 @SelectPackages({"com.adventofcode.flashk"})
 @SuiteDisplayName("Test puzzle input files")
 public class SuiteTestInputFiles {
