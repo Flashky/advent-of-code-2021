@@ -45,7 +45,7 @@ public class Day10Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		SyntaxScoring syntaxScoring = new SyntaxScoring(inputs);
-		int result = syntaxScoring.solve();
+		int result = syntaxScoring.solveA();
 		
 		assertEquals(26397, result);
 	}
@@ -63,7 +63,7 @@ public class Day10Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		SyntaxScoring syntaxScoring = new SyntaxScoring(inputs);
-		int result = syntaxScoring.solve();
+		int result = syntaxScoring.solveA();
 		
 		assertEquals(394647, result);
 		
