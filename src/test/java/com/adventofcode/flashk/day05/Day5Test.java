@@ -13,9 +13,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import com.adventofcode.flashk.common.test.utils.DisplayNameConstant;
+import com.adventofcode.flashk.common.test.constants.TestDisplayName;
+import com.adventofcode.flashk.common.test.constants.TestFilename;
+import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
-import com.adventofcode.flashk.common.test.utils.TagConstant;
 import com.adventofcode.flashk.common.test.utils.Util;
 
 
@@ -24,8 +25,6 @@ import com.adventofcode.flashk.common.test.utils.Util;
 public class Day5Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day5/";
-	private final static String INPUT_FILE = "data.input";
-	private final static String INPUT_FILE_SAMPLE = "sample.input";
 	
 	@BeforeAll
 	public static void beforeClass() {
@@ -38,15 +37,15 @@ public class Day5Test extends PuzzleTest {
 	
 	@Test
 	@Order(1)
-	@Tag(TagConstant.PART_ONE)
-	@Tag(TagConstant.SAMPLE)
-	@DisplayName(DisplayNameConstant.PART_ONE_SAMPLE)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE)
 	public void testSolvePart1Sample() {
 		
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		HydrothermalVenture vents = new HydrothermalVenture(inputs);
 		int result = vents.solve(false);
@@ -56,15 +55,15 @@ public class Day5Test extends PuzzleTest {
 	
 	@Test
 	@Order(2)
-	@Tag(TagConstant.PART_ONE)
-	@Tag(TagConstant.INPUT)
-	@DisplayName(DisplayNameConstant.PART_ONE_INPUT)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.INPUT)
+	@DisplayName(TestDisplayName.PART_ONE_INPUT)
 	public void testSolvePart1Input() {
 		
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		HydrothermalVenture vents = new HydrothermalVenture(inputs);
 		int result = vents.solve(false);
@@ -76,15 +75,15 @@ public class Day5Test extends PuzzleTest {
 	
 	@Test
 	@Order(3)
-	@Tag(TagConstant.PART_TWO)
-	@Tag(TagConstant.SAMPLE)
-	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE)
 	public void testSolvePart2Sample() {
 		
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		HydrothermalVenture vents = new HydrothermalVenture(inputs);
 		int result = vents.solve(true);
@@ -95,17 +94,16 @@ public class Day5Test extends PuzzleTest {
 
 	@Test
 	@Order(4)
-	@Tag(TagConstant.PART_TWO)
-	@Tag(TagConstant.INPUT)
-	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.INPUT)
+	@DisplayName(TestDisplayName.PART_TWO_INPUT)
 	public void testSolvePart2Input() {
 		
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 
-		
 		HydrothermalVenture vents = new HydrothermalVenture(inputs);
 		int result = vents.solve(true);
 

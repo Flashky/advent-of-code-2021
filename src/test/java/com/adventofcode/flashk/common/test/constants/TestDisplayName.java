@@ -1,8 +1,8 @@
-package com.adventofcode.flashk.common.test.utils;
+package com.adventofcode.flashk.common.test.constants;
 
-public final class DisplayNameConstant {
+public final class TestDisplayName {
 
-	private DisplayNameConstant() {}
+	private TestDisplayName() {}
 	
 	public final static String PART_ONE_SAMPLE = "Part 1 - Sample data";
 	public final static String PART_ONE_INPUT = "Part 1 - Input data";

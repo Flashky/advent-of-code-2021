@@ -6,6 +6,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import com.adventofcode.flashk.common.test.constants.TestDisplayName;
+import com.adventofcode.flashk.common.test.constants.TestTag;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -32,9 +36,9 @@ public class DayXTestTemplate extends PuzzleTest {
 	
 	@Test
 	@Order(1)
-	@Tag(TagConstant.PART_ONE)
-	@Tag(TagConstant.SAMPLE)
-	@DisplayName(DisplayNameConstant.PART_ONE_SAMPLE)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE)
 	public void testSolvePart1Sample() {
 		
 		System.out.print("1 | sample | ");
@@ -46,9 +50,9 @@ public class DayXTestTemplate extends PuzzleTest {
 	
 	@Test
 	@Order(2)
-	@Tag(TagConstant.PART_ONE)
-	@Tag(TagConstant.INPUT)
-	@DisplayName(DisplayNameConstant.PART_ONE_INPUT)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.INPUT)
+	@DisplayName(TestDisplayName.PART_ONE_INPUT)
 	public void testSolvePart1Input() {
 		
 		System.out.print("1 | input  | ");
@@ -60,9 +64,9 @@ public class DayXTestTemplate extends PuzzleTest {
 	
 	@Test
 	@Order(3)
-	@Tag(TagConstant.PART_TWO)
-	@Tag(TagConstant.SAMPLE)
-	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE)
 	public void testSolvePart2Sample() {
 		
 		System.out.print("2 | sample | ");
@@ -74,9 +78,9 @@ public class DayXTestTemplate extends PuzzleTest {
 	
 	@Test
 	@Order(4)
-	@Tag(TagConstant.PART_TWO)
-	@Tag(TagConstant.INPUT)
-	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.INPUT)
+	@DisplayName(TestDisplayName.PART_TWO_INPUT)
 	public void testSolvePart2Input() {
 		
 		System.out.print("2 | input  | ");
