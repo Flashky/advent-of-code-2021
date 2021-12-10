@@ -20,9 +20,10 @@ import com.adventofcode.flashk.common.test.utils.Util;
 
 @DisplayName(TestDisplayName.DAY_08)
 @TestMethodOrder(OrderAnnotation.class)
-public class Day8Test extends PuzzleTest {
+public class Day08Test extends PuzzleTest {
 
-	private final static String INPUT_FOLDER = "day8";
+	private final static String INPUT_FOLDER = "day_08";
+	
 	private final static String INPUT_FILE_DEBUG_1625 = "debug_1625.input";
 	private final static String INPUT_FILE_DEBUG_4315 = "debug_4315.input";
 	private final static String INPUT_FILE_DEBUG_4548 = "debug_4548.input";
@@ -31,7 +32,6 @@ public class Day8Test extends PuzzleTest {
 	public static void beforeAll() {
 		Timer.printHeader(TestDisplayName.DAY_08);
 	}
-
 	
 	@Test
 	@Order(1)

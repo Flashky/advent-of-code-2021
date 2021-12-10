@@ -6,11 +6,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import com.adventofcode.flashk.common.test.constants.TestDisplayName;
 import com.adventofcode.flashk.common.test.constants.TestFilename;
@@ -20,16 +18,14 @@ import com.adventofcode.flashk.common.test.utils.Timer;
 import com.adventofcode.flashk.common.test.utils.Util;
 
 @DisplayName(TestDisplayName.DAY_09)
-@TestMethodOrder(OrderAnnotation.class)
-public class Day9Test extends PuzzleTest {
+public class Day09Test extends PuzzleTest {
 
-	private final static String INPUT_FOLDER = "day9";
+	private final static String INPUT_FOLDER = "day_09";
 
 	@BeforeAll
 	public static void beforeAll() {
 		Timer.printHeader(TestDisplayName.DAY_09);
 	}
-
 	
 	@Test
 	@Order(1)
