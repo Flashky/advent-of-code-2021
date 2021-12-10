@@ -18,7 +18,7 @@ import com.adventofcode.flashk.common.test.constants.TestTag;
 @Disabled // TODO REMOVE TO EXECUTE
 @DisplayName(TestDisplayName.DAY_XX)
 @TestMethodOrder(OrderAnnotation.class)
-public class DayXTestTemplate extends PuzzleTest {
+public class DayXXTestTemplate extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "dayX";
 
