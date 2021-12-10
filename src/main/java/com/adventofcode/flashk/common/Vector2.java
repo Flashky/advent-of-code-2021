@@ -1,6 +1,6 @@
 package com.adventofcode.flashk.common;
 
-import com.adventofcode.flashk.day5.Direction;
+import com.adventofcode.flashk.day05.Direction;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

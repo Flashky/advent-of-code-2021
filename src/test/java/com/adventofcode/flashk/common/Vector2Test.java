@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-import com.adventofcode.flashk.day5.Direction;
+import com.adventofcode.flashk.day05.Direction;
 
 class Vector2Test {
 	
