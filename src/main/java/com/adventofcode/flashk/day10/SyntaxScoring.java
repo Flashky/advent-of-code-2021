@@ -8,10 +8,10 @@ import java.util.Stack;
 
 public class SyntaxScoring {
 
+	private List<String> lines;
 	private Map<Character, Integer> syntaxErrorScores = new HashMap<>();
 	private Map<Character, Integer> incompleteErrorScores = new HashMap<>();
 	private Map<Character,Character> chunkMap = new HashMap<>();
-	private List<String> lines;
 	
 	public SyntaxScoring(List<String> inputs) {
 		
@@ -31,7 +31,6 @@ public class SyntaxScoring {
 		chunkMap.put('[',']');
 		chunkMap.put('{','}');
 		chunkMap.put('<','>');
-		
 		
 	}
 	
@@ -60,13 +59,12 @@ public class SyntaxScoring {
 			Stack<Character> openingChunks = new Stack<>();
 			Stack<Character> closingChunks = new Stack<>();
 			
-			if((syntaxCheck(line, openingChunks, closingChunks) == 0) && (closingChunks.size() != 0)) {
+			if((syntaxCheck(line, openingChunks, closingChunks) == 0) && (!closingChunks.isEmpty())) {
 
 				Long incompleteLineScore = 0L;
 				
-				while(closingChunks.size() > 0) {
-					Character character = closingChunks.pop();
-					incompleteLineScore = (incompleteLineScore * 5) + incompleteErrorScores.get(character);
+				while(!closingChunks.isEmpty()) {
+					incompleteLineScore = (incompleteLineScore * 5) + incompleteErrorScores.get(closingChunks.pop());
 				}
 				
 				incompleteLinesScores.add(incompleteLineScore);
@@ -96,16 +94,13 @@ public class SyntaxScoring {
 			if(isOpeningCharacter(character)) {
 				openingChunks.add(character);
 				closingChunks.add(chunkMap.get(character));
-			} else {
-				Character expectedClosingChar = closingChunks.pop();
-				if(expectedClosingChar.equals(character)) {						
-					// There is match between opening and closing character
-					openingChunks.pop();
-				} else {			
-					// Syntax Error. Increase score based on the wrong closing character
-					result += syntaxErrorScores.get(character);
-					foundIllegalChar = true;
-				}
+			} else if (closingChunks.pop().equals(character)){
+				// Match between opening and closing character
+				openingChunks.pop();
+			} else {			
+				// Syntax Error. Increase score based on the wrong closing character
+				result += syntaxErrorScores.get(character);
+				foundIllegalChar = true;
 			}
 		}
 		
