@@ -16,21 +16,18 @@ import com.adventofcode.flashk.common.test.constants.TestDisplayName;
 import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
+import com.adventofcode.flashk.common.test.utils.Timer;
 import com.adventofcode.flashk.common.test.utils.Util;
 
 @TestMethodOrder(OrderAnnotation.class)
-@DisplayName("Day 01")
+@DisplayName(TestDisplayName.DAY_01)
 public class Day1Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day1";
 	
 	@BeforeAll
 	public static void beforeClass() {
-		System.out.println();
-		System.out.println("========= Day 01 ==========");
-		System.out.println("---------------------------");
-		System.out.println("# | Input  | Elapsed time");
-		System.out.println("---------------------------");
+		Timer.printHeader(TestDisplayName.DAY_01);
 	}
 
 	@Test

@@ -16,10 +16,11 @@ import com.adventofcode.flashk.common.test.constants.TestDisplayName;
 import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
+import com.adventofcode.flashk.common.test.utils.Timer;
 import com.adventofcode.flashk.common.test.utils.Util;
 
 
-@DisplayName("Day 06")
+@DisplayName(TestDisplayName.DAY_06)
 @TestMethodOrder(OrderAnnotation.class)
 public class Day6Test extends PuzzleTest {
 
@@ -27,11 +28,7 @@ public class Day6Test extends PuzzleTest {
 
 	@BeforeAll
 	public static void beforeAll() {
-		System.out.println();
-		System.out.println("========= Day 06 ==========");
-		System.out.println("---------------------------");
-		System.out.println("# | Input  | Elapsed time");
-		System.out.println("---------------------------");
+		Timer.printHeader(TestDisplayName.DAY_06);
 	}
 
 	@Test

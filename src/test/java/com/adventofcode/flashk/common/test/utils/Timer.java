@@ -24,4 +24,12 @@ public class Timer {
 		System.out.println(elapsedTime + "ms");
 		
 	}
+	
+	public static void printHeader(String day) {
+		System.out.println();
+		System.out.println("========= "+ day + " ==========");
+		System.out.println("---------------------------");
+		System.out.println("# | Input  | Elapsed time");
+		System.out.println("---------------------------");
+	}
 }
