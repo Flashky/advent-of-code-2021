@@ -13,6 +13,10 @@ public class SyntaxScoring {
 	private Map<Character, Integer> incompleteErrorScores = new HashMap<>();
 	private Map<Character,Character> chunkMap = new HashMap<>();
 	
+	// Solution attributes
+	private int corruptionScore = 0;
+	private List<Long> incompleteLinesScores = new ArrayList<>();
+	
 	public SyntaxScoring(List<String> inputs) {
 		
 		this.lines = inputs;
@@ -32,45 +36,18 @@ public class SyntaxScoring {
 		chunkMap.put('{','}');
 		chunkMap.put('<','>');
 		
-	}
-	
-	public int solve() {
-		
-		int result = 0;
-		
 		for(String line : lines) {
-			
-			Stack<Character> openingChunks = new Stack<>();
-			Stack<Character> closingChunks = new Stack<>();
-			
-			result += syntaxCheck(line, openingChunks, closingChunks);
-
+			syntaxCheck(line);
 		}
 		
-		return result;
+	}
+	
+	public int solveA() {		
+		return corruptionScore;		
 	}
 	
 	public long solveB() {
-		
-		List<Long> incompleteLinesScores = new ArrayList<>();
-		
-		for(String line : lines) {
-			
-			Stack<Character> openingChunks = new Stack<>();
-			Stack<Character> closingChunks = new Stack<>();
-			
-			if((syntaxCheck(line, openingChunks, closingChunks) == 0) && (!closingChunks.isEmpty())) {
 
-				Long incompleteLineScore = 0L;
-				
-				while(!closingChunks.isEmpty()) {
-					incompleteLineScore = (incompleteLineScore * 5) + incompleteErrorScores.get(closingChunks.pop());
-				}
-				
-				incompleteLinesScores.add(incompleteLineScore);
-			}
-		}
-		
 		// Choose the middle score as the result
 		Object[] orderedScores = incompleteLinesScores.stream().sorted().toArray();
 		int middleIndex = (orderedScores.length / 2);
@@ -78,9 +55,24 @@ public class SyntaxScoring {
 		return (Long) orderedScores[middleIndex];
 	}
 	
-	private int syntaxCheck(String line, Stack<Character> openingChunks, Stack<Character> closingChunks) {
+	/**
+	 * Performs a syntax check on the input line.
+	 * <p>
+	 * If the line is corrupted:
+	 * - It will return the syntax error score.
+	 * </p>
+	 * <p>if the line is <b>NOT</b> corrupted but is missing closing brackets:
+	 * - It will return a 0
+	 * - The stack will not be empty.
+	 * </p>
+	 * 
+	 * @param line
+	 * @param closingChunks
+	 * @return
+	 */
+	private void syntaxCheck(String line) {
 		
-		int result = 0;
+		Stack<Character> closingChunks = new Stack<>();
 		
 		String[] characters = line.split("|");
 		int charIndex = 0;
@@ -92,22 +84,32 @@ public class SyntaxScoring {
 			Character character = characters[charIndex++].charAt(0);
 			
 			if(isOpeningCharacter(character)) {
-				openingChunks.add(character);
 				closingChunks.add(chunkMap.get(character));
-			} else if (closingChunks.pop().equals(character)){
-				// Match between opening and closing character
-				openingChunks.pop();
-			} else {			
-				// Syntax Error. Increase score based on the wrong closing character
-				result += syntaxErrorScores.get(character);
+			} else if (!closingChunks.pop().equals(character)){
+				
+				// Part 1 check - Corrupted characters
+				corruptionScore += syntaxErrorScores.get(character);
 				foundIllegalChar = true;
+				
 			}
 		}
 		
-		return result;
+		// Part 2 check - Missing closing brackets
+		if(!foundIllegalChar) {
+
+			Long incompleteScore = 0L;
+			
+			while(!closingChunks.isEmpty()) {
+				incompleteScore = (incompleteScore * 5) + incompleteErrorScores.get(closingChunks.pop());
+			}
+			
+			incompleteLinesScores.add(incompleteScore);
+
+		}
 	}
 
 	private boolean isOpeningCharacter(Character character) {
 		return chunkMap.containsKey(character);
 	}
+	
 }
