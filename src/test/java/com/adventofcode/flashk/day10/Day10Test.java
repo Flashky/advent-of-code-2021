@@ -75,6 +75,25 @@ public class Day10Test extends PuzzleTest {
 	@Test
 	@Order(3)
 	@Tag(TagConstant.PART_TWO)
+	@Tag(TagConstant.DEBUG)
+	@DisplayName(DisplayNameConstant.PART_TWO_DEBUG + " (294)")
+	public void testSolvePart2SingleSample294() {
+		
+		System.out.print("2 | debug  | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, "debug_294.input");
+		
+		SyntaxScoring syntaxScoring = new SyntaxScoring(inputs);
+		long result = syntaxScoring.solveB();
+		
+		assertEquals(294L, result);
+		
+	}
+	
+	@Test
+	@Order(4)
+	@Tag(TagConstant.PART_TWO)
 	@Tag(TagConstant.SAMPLE)
 	@DisplayName(DisplayNameConstant.PART_TWO_SAMPLE)
 	public void testSolvePart2Sample() {
@@ -92,26 +111,7 @@ public class Day10Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(3)
-	@Tag(TagConstant.PART_TWO)
-	@Tag(TagConstant.DEBUG)
-	@DisplayName(DisplayNameConstant.PART_TWO_DEBUG + " (294)")
-	public void testSolvePart2SingleSample294() {
-		
-		System.out.print("2 | sample | ");
-		
-		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, "debug_294.input");
-		
-		SyntaxScoring syntaxScoring = new SyntaxScoring(inputs);
-		long result = syntaxScoring.solveB();
-		
-		assertEquals(294L, result);
-		
-	}
-	
-	@Test
-	@Order(4)
+	@Order(5)
 	@Tag(TagConstant.PART_TWO)
 	@Tag(TagConstant.INPUT)
 	@DisplayName(DisplayNameConstant.PART_TWO_INPUT)
