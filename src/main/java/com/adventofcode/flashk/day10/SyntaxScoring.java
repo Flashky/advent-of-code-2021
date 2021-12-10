@@ -60,17 +60,16 @@ public class SyntaxScoring {
 			Stack<Character> openingChunks = new Stack<>();
 			Stack<Character> closingChunks = new Stack<>();
 			
-			
-			if(syntaxCheck(line, openingChunks, closingChunks) == 0) {
-				if(closingChunks.size() != 0) {
-					
-					Long incompleteLineScore = 0L;
-					while(closingChunks.size() > 0) {
-						Character character = closingChunks.pop();
-						incompleteLineScore = (incompleteLineScore * 5) + incompleteErrorScores.get(character);
-					}
-					incompleteLinesScores.add(incompleteLineScore);
+			if((syntaxCheck(line, openingChunks, closingChunks) == 0) && (closingChunks.size() != 0)) {
+
+				Long incompleteLineScore = 0L;
+				
+				while(closingChunks.size() > 0) {
+					Character character = closingChunks.pop();
+					incompleteLineScore = (incompleteLineScore * 5) + incompleteErrorScores.get(character);
 				}
+				
+				incompleteLinesScores.add(incompleteLineScore);
 			}
 		}
 		
