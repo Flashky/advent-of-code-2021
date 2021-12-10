@@ -117,11 +117,7 @@ public class SmokeBasin {
 			return false;
 		}	
 		
-		if((down < maxRows) && (heightMap[row][col] >= heightMap[down][col])) {
-			return false;
-		}	
-		
-		return true;
+		return !((down < maxRows) && (heightMap[row][col] >= heightMap[down][col]));
 		
 	}
 
