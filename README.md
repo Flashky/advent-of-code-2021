@@ -13,6 +13,7 @@
 - [Day 8: Seven Segment Search](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day8)
 - [Day 9: Smoke Basin](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day9)
 - [Day 10: Syntax Scoring](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day10)
+- [Day 11: Dumbo Octopus](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day11)
 
 ## About
 
