@@ -71,7 +71,7 @@ public class Day06Test extends PuzzleTest {
 	@Test
 	@Order(3)
 	@Tag(TestTag.PART_TWO)
-	@Tag(TestTag.INPUT)
+	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE)
 	public void testSolvePart2Sample() {
 		
