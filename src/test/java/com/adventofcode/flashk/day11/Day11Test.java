@@ -43,7 +43,6 @@ public class Day11Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		DumboOctopuses dumboOctopuses = new DumboOctopuses(inputs);
-		
 		int result = dumboOctopuses.solveA();
 		
 		assertEquals(1656, result);
