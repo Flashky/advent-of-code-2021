@@ -5,6 +5,9 @@ public class Timer {
 	private Long startTime = null;
 	private boolean running = false;
 	
+	// TODO https://www.reddit.com/r/adventofcode/comments/rdrewg/2021_my_aim_is_for_all_of_this_years_solutions_to/
+	// Just a basic fixed-width formatting. String Format for the table: $"Year {d.Year}, Day {d.DayNumber,2}, Type {d.CodeType,9} : {d.TotalMicroseconds,13:N0} μs"
+	
 	public void start() {
 		
 		this.running = true;
