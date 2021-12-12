@@ -49,10 +49,7 @@ public class PassagePathing {
 		hasVisitedSmallCaveTwice = !allowVisitSmallCaveTwice;
 		visitedSmallCaveTwice = "";
 		
-		List<String> currentPath = new ArrayList<>();
-		currentPath.add(START_CAVE);
-		
-		return findPaths(START_CAVE, currentPath, new HashSet<>());
+		return findPaths(START_CAVE, new ArrayList<>(), new HashSet<>());
 
 	}
 	
