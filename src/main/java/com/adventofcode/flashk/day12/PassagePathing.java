@@ -109,9 +109,7 @@ public class PassagePathing {
 		List<String> edges = caveAdjacency.getOrDefault(origin, new ArrayList<>());
 		edges.add(destination);
 
-		if(!caveAdjacency.containsKey(origin)) {
-			caveAdjacency.put(origin, edges);
-		}
+		caveAdjacency.putIfAbsent(origin, edges);
 		
 	}
 }
