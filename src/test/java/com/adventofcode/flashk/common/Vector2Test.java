@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import com.adventofcode.flashk.day05.Direction;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 class Vector2Test {
 	
 	@Test
@@ -25,12 +27,10 @@ class Vector2Test {
 	}
 	
 	@Test
-	void testEquals() {
-		Vector2 obj1 = new Vector2(2,5);
-		
-		assertEquals(obj1, obj1);
-		assertFalse(obj1.equals(null));
-		assertFalse(obj1.equals(""));
+	void testHashCodeAndEquals() {
+		EqualsVerifier.simple()
+			.forClass(Vector2.class)
+			.verify();
 	}
 	
 	@Test
@@ -113,4 +113,14 @@ class Vector2Test {
 		assertEquals(-1, vector.getY());
 	}
 	
+	@Test
+	void testNormalizeOrigin() {
+		
+		Vector2 vector = new Vector2(0,0);
+		vector.normalize();
+		
+		assertEquals(0,  vector.getX());
+		assertEquals(0, vector.getY());
+	}
+
 }
