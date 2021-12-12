@@ -2,8 +2,10 @@ package com.adventofcode.flashk.day12;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,10 +18,9 @@ public class PassagePathing {
 	private final static String END_CAVE = "end";
 
 	private Map<String,List<String>> caveAdjacency = new HashMap<>();
-	private Map<String,Integer> visitedSmallCaveCount = new HashMap<>();
 
-	private boolean visitedSmallCaveMax;
-	
+	private boolean hasVisitedSmallCaveTwice;
+	private String visitedSmallCaveTwice = "";
 	
 	public PassagePathing(List<String> inputs) {
 	
@@ -36,10 +37,6 @@ public class PassagePathing {
 				List<String> edges = getOrCreate(START_CAVE);
 				edges.add(destination);
 				
-				if(isSmallCave(destination)) {
-					visitedSmallCaveCount.put(destination, 0);
-				}
-				
 			} else if(START_CAVE.equals(destination)) {
 				
 				// Start nodes can only be origin nodes: flip from destination to origin
@@ -47,30 +44,17 @@ public class PassagePathing {
 				List<String> edges = getOrCreate(START_CAVE);
 				edges.add(origin);
 				
-				if(isSmallCave(origin)) {
-					visitedSmallCaveCount.put(origin, 0);
-				}
-				
 			} else if(END_CAVE.equals(origin)) {
 				
 				// End nodes can only be destination nodes: flip from origin to destination
 				List<String> edges = getOrCreate(destination);
 				edges.add(END_CAVE);
 				
-				if(isSmallCave(destination)) {
-					visitedSmallCaveCount.put(destination, 0);
-				}
-				
 			} else if (END_CAVE.equals(destination)) {
 				
 				// End nodes can only be destination nodes: flip from origin to destination
 				List<String> edges = getOrCreate(origin);
 				edges.add(END_CAVE);
-				
-				if(isSmallCave(origin)) {
-					visitedSmallCaveCount.put(origin, 0);
-				}
-				
 				
 			} else {
 				
@@ -79,17 +63,9 @@ public class PassagePathing {
 				
 				List<String> edges = getOrCreate(origin);
 				edges.add(destination);
-				
-				if(isSmallCave(destination)) {
-					visitedSmallCaveCount.put(destination, 0);
-				}
-				
+
 				edges = getOrCreate(destination);
 				edges.add(origin);
-				
-				if(isSmallCave(origin)) {
-					visitedSmallCaveCount.put(origin, 0);
-				}
 				
 			}
 			
@@ -99,32 +75,32 @@ public class PassagePathing {
 	
 	public int solveA() {
 		
-		visitedSmallCaveMax = true;
+		hasVisitedSmallCaveTwice = true;
 
 		List<String> currentPath = new ArrayList<>();
 		currentPath.add(START_CAVE);
 		
-		return findPaths(START_CAVE, currentPath);
+		return findPaths(START_CAVE, currentPath, new HashSet<>());
 
 	}
 	
 	
 	public int solveB() {
 		
-		visitedSmallCaveMax = false;
+		hasVisitedSmallCaveTwice = false;
 		
 		List<String> currentPath = new ArrayList<>();
 		currentPath.add(START_CAVE);
 		
-		return findPaths(START_CAVE, currentPath);
+		return findPaths(START_CAVE, currentPath, new HashSet<>());
 		
 	}
 	
-	private int findPaths(String currentCave, List<String> currentPath) {
+	private int findPaths(String currentCave, List<String> currentPath, Set<String> visitedSmallCaves) {
 		
 		if(END_CAVE.equals(currentCave)) {
 			return 1;
-		} else if(isSmallCave(currentCave) && visitedSmallCaveCount.get(currentCave) >= 1 && visitedSmallCaveMax) {
+		} else if(isSmallCave(currentCave) && visitedSmallCaves.contains(currentCave) && hasVisitedSmallCaveTwice) {
 			return 0; // Invalid path - Already visited small cave twice at least once
 		} else {
 		
@@ -133,30 +109,30 @@ public class PassagePathing {
 			currentPath.add(currentCave);
 			
 			if(isSmallCave(currentCave)) {
-				Integer visitedTimes = visitedSmallCaveCount.get(currentCave);
-				visitedTimes++;
-				visitedSmallCaveCount.put(currentCave, visitedTimes);
 				
-				if(visitedTimes == 2) {
-					visitedSmallCaveMax = true;
+				if(visitedSmallCaves.contains(currentCave)) {
+					hasVisitedSmallCaveTwice = true;
+					visitedSmallCaveTwice = currentCave;
+				} else {
+					visitedSmallCaves.add(currentCave);
 				}
 			}
 			
 			List<String> adjacentCaves = caveAdjacency.get(currentCave);
 			
 			for(String cave : adjacentCaves) {
-				paths += findPaths(cave, currentPath);
+				paths += findPaths(cave, currentPath, visitedSmallCaves);
 			}
 			
 			if(isSmallCave(currentCave)) {
-				Integer visitedTimes = visitedSmallCaveCount.get(currentCave);
-				visitedTimes--;
-				visitedSmallCaveCount.put(currentCave, visitedTimes);
-				
-				if(visitedTimes == 1) {
-					visitedSmallCaveMax = false;
+				if(currentCave.equals(visitedSmallCaveTwice)) {
+					hasVisitedSmallCaveTwice = false;
+					visitedSmallCaveTwice = "";
+				} else {
+					visitedSmallCaves.remove(currentCave);
 				}
 			}
+			
 			return paths;
 		}
 		
