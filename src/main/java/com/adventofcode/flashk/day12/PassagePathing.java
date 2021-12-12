@@ -103,7 +103,6 @@ public class PassagePathing {
 		
 		// Explore starting from start node
 		List<String> adjacentCaves = caveAdjacency.get(START_CAVE);
-		//paths = new ArrayList<>();
 		
 		for(String cave : adjacentCaves) {
 			
