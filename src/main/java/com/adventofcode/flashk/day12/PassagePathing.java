@@ -99,55 +99,28 @@ public class PassagePathing {
 	
 	public int solveA() {
 		
-		int result = 0;
+		visitedSmallCaveMax = true;
+
+		List<String> currentPath = new ArrayList<>();
+		currentPath.add(START_CAVE);
 		
-		// Explore starting from start node
-		List<String> adjacentCaves = caveAdjacency.get(START_CAVE);
+		return findPaths(START_CAVE, currentPath);
+
+	}
+	
+	
+	public int solveB() {
 		
-		for(String cave : adjacentCaves) {
-			
-			List<String> currentPath = new ArrayList<>();
-			currentPath.add(START_CAVE);
-			
-			result += findPaths(cave, currentPath);
-		}
+		visitedSmallCaveMax = false;
 		
-		return result;
+		List<String> currentPath = new ArrayList<>();
+		currentPath.add(START_CAVE);
+		
+		return findPaths(START_CAVE, currentPath);
+		
 	}
 	
 	private int findPaths(String currentCave, List<String> currentPath) {
-		
-		if(END_CAVE.equals(currentCave)) {
-			return 1;
-		} else if(isSmallCave(currentCave) && visitedSmallCaveCount.get(currentCave) == 1) {
-			return 0; // Invalid path - Already visited small cave
-		} else {
-		
-			int paths = 0;
-		
-			currentPath.add(currentCave);
-			
-			if(isSmallCave(currentCave)) {
-				Integer visitedTimes = visitedSmallCaveCount.get(currentCave);
-				visitedSmallCaveCount.put(currentCave, ++visitedTimes);
-			}
-			
-			List<String> adjacentCaves = caveAdjacency.get(currentCave);
-			
-			for(String cave : adjacentCaves) {
-				paths += findPaths(cave, currentPath);
-			}
-			
-			if(isSmallCave(currentCave)) {
-				Integer visitedTimes = visitedSmallCaveCount.get(currentCave);
-				visitedSmallCaveCount.put(currentCave, --visitedTimes);
-			}
-			return paths;
-		}
-		
-	}
-	
-	private int findPathsB(String currentCave, List<String> currentPath) {
 		
 		if(END_CAVE.equals(currentCave)) {
 			return 1;
@@ -172,7 +145,7 @@ public class PassagePathing {
 			List<String> adjacentCaves = caveAdjacency.get(currentCave);
 			
 			for(String cave : adjacentCaves) {
-				paths += findPathsB(cave, currentPath);
+				paths += findPaths(cave, currentPath);
 			}
 			
 			if(isSmallCave(currentCave)) {
@@ -188,25 +161,7 @@ public class PassagePathing {
 		}
 		
 	}
-	
-	public int solveB() {
-		
-		int result = 0;
-		
-		// Explore starting from start node
-		List<String> adjacentCaves = caveAdjacency.get(START_CAVE);
-		visitedSmallCaveMax = false;
-		
-		for(String cave : adjacentCaves) {
-			
-			List<String> currentPath = new ArrayList<>();
-			currentPath.add(START_CAVE);
-			
-			result += findPathsB(cave, currentPath);
-		}
-		
-		return result;
-	}
+
 	
 	private boolean isSmallCave(String cave) {
 		return cave.matches(SMALL_CAVE_PATTERN);
