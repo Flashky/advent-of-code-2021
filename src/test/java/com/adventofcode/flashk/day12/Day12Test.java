@@ -46,7 +46,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
-		assertEquals(10, passagePathing.solveA());
+		assertEquals(10, passagePathing.solve(false));
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_MEDIUM_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
-		assertEquals(19, passagePathing.solveA());
+		assertEquals(19, passagePathing.solve(false));
 		
 	}
 	
@@ -79,7 +79,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_LARGE_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
-		assertEquals(226, passagePathing.solveA());
+		assertEquals(226, passagePathing.solve(false));
 		
 	}
 	
@@ -96,7 +96,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
-		assertEquals(3761, passagePathing.solveA());
+		assertEquals(3761, passagePathing.solve(false));
 	}
 	
 	@Test
@@ -112,7 +112,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
-		assertEquals(36, passagePathing.solveB());
+		assertEquals(36, passagePathing.solve(true));
 
 	}
 	
@@ -129,7 +129,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_MEDIUM_SAMPLE);
 		
 		PassagePathing passagePathing = new PassagePathing(inputs);
-		assertEquals(103, passagePathing.solveB());
+		assertEquals(103, passagePathing.solve(true));
 
 	}
 	
@@ -147,7 +147,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_LARGE_SAMPLE);
 		
 		PassagePathing passagePathing = new PassagePathing(inputs);
-		assertEquals(3509, passagePathing.solveB());
+		assertEquals(3509, passagePathing.solve(true));
 
 	}
 	
@@ -164,7 +164,7 @@ public class Day12Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		PassagePathing passagePathing = new PassagePathing(inputs);
-		assertEquals(99138, passagePathing.solveB());
+		assertEquals(99138, passagePathing.solve(true));
 		
 	}
 
