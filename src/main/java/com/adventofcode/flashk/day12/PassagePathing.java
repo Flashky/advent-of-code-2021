@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 
 public class PassagePathing {
 
-	private final static String SMALL_CAVE_PATTERN = "^(?!start|end)[a-z]*";
+	private final static String SMALL_CAVE_PATTERN = "[a-z]*";
 	private final static String INPUT_PATTERN = "(start|end|[\\w]*)-(start|end|[\\w]*)";
-	private final static Pattern EDGE_PATTERN = Pattern.compile(INPUT_PATTERN);
+	private final static Pattern PATTERN = Pattern.compile(INPUT_PATTERN);
 	private final static String START_CAVE = "start";
 	private final static String END_CAVE = "end";
 
@@ -25,75 +25,35 @@ public class PassagePathing {
 	public PassagePathing(List<String> inputs) {
 	
 		for(String input : inputs) {
-			Matcher matcher = EDGE_PATTERN.matcher(input);
+			
+			Matcher matcher = PATTERN.matcher(input);
 			matcher.find();
 			
 			String origin = matcher.group(1);
 			String destination = matcher.group(2);
 			
-			if(START_CAVE.equals(origin)) {
-				
-				// Start nodes can only be origin nodes: flip from destination to origin
-				List<String> edges = getOrCreate(START_CAVE);
-				edges.add(destination);
-				
-			} else if(START_CAVE.equals(destination)) {
-				
-				// Start nodes can only be origin nodes: flip from destination to origin
-				
-				List<String> edges = getOrCreate(START_CAVE);
-				edges.add(origin);
-				
-			} else if(END_CAVE.equals(origin)) {
-				
-				// End nodes can only be destination nodes: flip from origin to destination
-				List<String> edges = getOrCreate(destination);
-				edges.add(END_CAVE);
-				
-			} else if (END_CAVE.equals(destination)) {
-				
-				// End nodes can only be destination nodes: flip from origin to destination
-				List<String> edges = getOrCreate(origin);
-				edges.add(END_CAVE);
-				
-			} else {
-				
-				// Any cave to any other cave different than 'start' or 'end':
-				// Add bidirectional connection
-				
-				List<String> edges = getOrCreate(origin);
-				edges.add(destination);
-
-				edges = getOrCreate(destination);
-				edges.add(origin);
-				
+			
+			if(!START_CAVE.equals(destination)) {
+				createEdge(origin, destination);
 			}
 			
+			if(!START_CAVE.equals(origin)) {
+				createEdge(destination, origin);
+			}
+		
 		}
-		
 	}
 	
-	public int solveA() {
+	public int solve(boolean allowVisitSmallCaveTwice) {
 		
-		hasVisitedSmallCaveTwice = true;
-
+		hasVisitedSmallCaveTwice = !allowVisitSmallCaveTwice;
+		visitedSmallCaveTwice = "";
+		
 		List<String> currentPath = new ArrayList<>();
 		currentPath.add(START_CAVE);
 		
 		return findPaths(START_CAVE, currentPath, new HashSet<>());
 
-	}
-	
-	
-	public int solveB() {
-		
-		hasVisitedSmallCaveTwice = false;
-		
-		List<String> currentPath = new ArrayList<>();
-		currentPath.add(START_CAVE);
-		
-		return findPaths(START_CAVE, currentPath, new HashSet<>());
-		
 	}
 	
 	private int findPaths(String currentCave, List<String> currentPath, Set<String> visitedSmallCaves) {
@@ -109,7 +69,6 @@ public class PassagePathing {
 			currentPath.add(currentCave);
 			
 			if(isSmallCave(currentCave)) {
-				
 				if(visitedSmallCaves.contains(currentCave)) {
 					hasVisitedSmallCaveTwice = true;
 					visitedSmallCaveTwice = currentCave;
@@ -143,15 +102,14 @@ public class PassagePathing {
 		return cave.matches(SMALL_CAVE_PATTERN);
 	}
 	
-	private List<String> getOrCreate(String origin) {
+	private void createEdge(String origin, String destination) {
 		
-		List<String> edges = caveAdjacency.get(origin);
-		
-		if(edges == null) {
-			edges = new ArrayList<>();
+		List<String> edges = caveAdjacency.getOrDefault(origin, new ArrayList<>());
+		edges.add(destination);
+
+		if(!caveAdjacency.containsKey(origin)) {
 			caveAdjacency.put(origin, edges);
 		}
 		
-		return edges;
 	}
 }
