@@ -61,9 +61,21 @@ public class PassagePathing {
 		}
 		
 		int paths = 0;
-	
 		currentPath.add(currentCave);
+		markCaveAsVisited(currentCave, visitedSmallCaves);
 		
+		for(String adjacentCave : caveAdjacency.get(currentCave)) {
+			paths += findPaths(adjacentCave, currentPath, visitedSmallCaves);
+		}
+		
+		unmarkCaveAsVisited(currentCave, visitedSmallCaves);
+		
+		return paths;
+	}
+
+	private void markCaveAsVisited(String currentCave, Set<String> visitedSmallCaves) {
+	
+		// Only mark small caves as visited
 		if(isSmallCave(currentCave)) {
 			if(visitedSmallCaves.contains(currentCave)) {
 				hasVisitedSmallCaveTwice = true;
@@ -72,25 +84,19 @@ public class PassagePathing {
 				visitedSmallCaves.add(currentCave);
 			}
 		}
-		
-		List<String> adjacentCaves = caveAdjacency.get(currentCave);
-		
-		for(String cave : adjacentCaves) {
-			paths += findPaths(cave, currentPath, visitedSmallCaves);
-		}
-		
-		if(isSmallCave(currentCave)) {
-			if(currentCave.equals(visitedSmallCaveTwice)) {
-				hasVisitedSmallCaveTwice = false;
-				visitedSmallCaveTwice = "";
-			} else {
-				visitedSmallCaves.remove(currentCave);
-			}
-		}
-		
-		return paths;
 	}
+	
+
+	private void unmarkCaveAsVisited(String currentCave, Set<String> visitedSmallCaves) {
 		
+		if(currentCave.equals(visitedSmallCaveTwice)) {
+			hasVisitedSmallCaveTwice = false;
+			visitedSmallCaveTwice = "";
+		} else {
+			visitedSmallCaves.remove(currentCave);
+		}
+	
+	}
 
 
 	
