@@ -2,25 +2,22 @@ package com.adventofcode.flashk.day12;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PassagePathing {
 
+	private final static String SMALL_CAVE_PATTERN = "^(?!start|end)[a-z]*";
 	private final static String INPUT_PATTERN = "(start|end|[\\w]*)-(start|end|[\\w]*)";
 	private final static Pattern EDGE_PATTERN = Pattern.compile(INPUT_PATTERN);
 	private final static String START_CAVE = "start";
 	private final static String END_CAVE = "end";
-	
-	//private List<List<String>> paths;
+
 	private Map<String,List<String>> caveAdjacency = new HashMap<>();
 	private Map<String,Integer> visitedSmallCaveCount = new HashMap<>();
-	
-	private int maxSmallCaveVisits;
+
 	private boolean visitedSmallCaveMax;
 	
 	
@@ -213,7 +210,7 @@ public class PassagePathing {
 	}
 	
 	private boolean isSmallCave(String cave) {
-		return cave.toLowerCase().equals(cave);
+		return cave.matches(SMALL_CAVE_PATTERN);
 	}
 	
 	private List<String> getOrCreate(String origin) {
