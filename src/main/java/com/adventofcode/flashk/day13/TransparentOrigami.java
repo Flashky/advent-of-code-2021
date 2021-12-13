@@ -1,0 +1,160 @@
+package com.adventofcode.flashk.day13;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import com.adventofcode.flashk.common.Vector2;
+
+public class TransparentOrigami {
+
+	private final static Pattern COORDINATES_PATTERN = Pattern.compile("([0-9]*),([0-9]*)");
+	private final static Pattern INSTRUCTIONS_PATTERN = Pattern.compile("(x|y)[=]([0-9]*)");
+	private final static char DOT = '#';
+	
+	// Paper and dots representations
+	private int maxX = Integer.MIN_VALUE;
+	private int maxY = Integer.MIN_VALUE;
+	private char[][] paper;
+	private Set<Vector2> dots = new HashSet<>();
+
+	// Folding instructions
+	private List<Instruction> instructions = new ArrayList<>();
+	
+	public TransparentOrigami(List<String> inputs) {
+		
+		for(String input : inputs) {
+			
+			Matcher coordinatesMatcher = COORDINATES_PATTERN.matcher(input);
+			Matcher instructionsMatcher = INSTRUCTIONS_PATTERN.matcher(input);
+			
+			if(coordinatesMatcher.find()) {
+				
+				int x = Integer.valueOf(coordinatesMatcher.group(1));
+				int y = Integer.valueOf(coordinatesMatcher.group(2));
+
+				maxX = Math.max(x, maxX);
+				maxY = Math.max(y, maxY);
+				
+				dots.add(new Vector2(x,y));
+				
+			} else if (instructionsMatcher.find()){
+				
+				// Get instructions
+				String axis = instructionsMatcher.group(1);
+				Integer value = Integer.valueOf(instructionsMatcher.group(2));
+				
+				instructions.add(new Instruction(axis, value));
+				
+			}
+		}
+		
+		// Verify the paper is a perfectly shapped square
+		if(maxX % 2 != 0) {
+			maxX++;
+		}
+		
+		if(maxY % 2 != 0) {
+			maxY++;
+		}
+		
+		// Initialize square
+		paper = new char[maxX+1][maxY+1];
+		for(Vector2 coordinates : dots) {
+			paper[coordinates.getX()][coordinates.getY()] = DOT;
+		}
+		
+	}
+	
+	public int foldOnce() {
+		fold(instructions.get(0));
+		return dots.size();
+	}
+
+	public int foldAll(boolean printResult) {
+
+		for(Instruction instruction : instructions) {
+			fold(instruction);
+		}
+		
+		if(printResult) {
+			print();
+		}
+		
+		return dots.size();
+	}
+
+	/**
+	 * @param instruction
+	 */
+	private void fold(Instruction instruction) {
+		if("x".equals(instruction.getAxis())) {
+			foldLeft(instruction.getValue());
+		} else {
+			foldUp(instruction.getValue());
+		}
+	}
+	
+	/**
+	 * @param instruction
+	 */
+	private void foldLeft(Integer x) {
+		
+		// Obtains dots at the right of the folding point
+		List<Vector2> foldedDots = dots.stream()
+										.filter(dot -> dot.getX() > x)
+										.collect(Collectors.toList());
+
+		Vector2 foldX = new Vector2(maxX, 0);
+		
+		for(Vector2 foldedDot : foldedDots) {
+			
+			Vector2 newPos = Vector2.substractAbs(foldX, foldedDot);
+			
+			paper[newPos.getX()][newPos.getY()] = DOT;	
+			dots.add(newPos);
+			dots.remove(foldedDot);		
+
+		}
+		
+		maxX = x-1;
+	}
+
+	/**
+	 * @param instruction
+	 */
+	private void foldUp(Integer y) {
+		
+		List<Vector2> foldedDots = dots.stream()
+										.filter(dot -> dot.getY() > y)
+										.collect(Collectors.toList());
+		
+		Vector2 foldY = new Vector2(0, maxY);
+		
+		for(Vector2 foldedDot : foldedDots) {
+			
+			Vector2 newPos = Vector2.substractAbs(foldY, foldedDot);
+
+			paper[newPos.getX()][newPos.getY()] = DOT;
+			dots.add(newPos);
+			dots.remove(foldedDot);
+
+		}
+
+		maxY = y-1;
+	}
+	
+	private void print() {
+		System.out.println();
+		for(int y = 0; y <= maxY; y++) {
+			for(int x = 0; x <= maxX; x++) {
+				System.out.print(paper[x][y]);
+			}
+			System.out.println();
+		}
+	}
+}
