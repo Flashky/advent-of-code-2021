@@ -89,9 +89,6 @@ public class TransparentOrigami {
 		return dots.size();
 	}
 
-	/**
-	 * @param instruction
-	 */
 	private void fold(Instruction instruction) {
 		
 		if("x".equals(instruction.getAxis())) {
