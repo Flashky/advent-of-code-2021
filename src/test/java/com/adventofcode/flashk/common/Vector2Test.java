@@ -1,7 +1,7 @@
 package com.adventofcode.flashk.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +24,58 @@ class Vector2Test {
 		assertEquals(3, startPos.getX());
 		assertEquals(6, startPos.getY());
 		
+	}
+	
+	@Test
+	void testSubstractAbsY1Positive() {
+		
+		Vector2 leftOperand = new Vector2(0,14);
+		Vector2 rightOperand = new Vector2(0,7);
+		
+		Vector2 result = Vector2.substractAbs(leftOperand, rightOperand);
+		
+		assertNotNull(result);
+		assertEquals(0, result.getX());
+		assertEquals(7, result.getY());
+	}
+	
+	@Test
+	void testSubstractAbsYNegative() {
+		
+		Vector2 leftOperand = new Vector2(0,7);
+		Vector2 rightOperand = new Vector2(0,14);
+		
+		Vector2 result = Vector2.substractAbs(leftOperand, rightOperand);
+		
+		assertNotNull(result);
+		assertEquals(0, result.getX());
+		assertEquals(7, result.getY());
+	}
+	
+	@Test
+	void testSubstractAbsXPositive() {
+		
+		Vector2 leftOperand = new Vector2(11,0);
+		Vector2 rightOperand = new Vector2(5,0);
+		
+		Vector2 result = Vector2.substractAbs(leftOperand, rightOperand);
+		
+		assertNotNull(result);
+		assertEquals(6, result.getX());
+		assertEquals(0, result.getY());
+	}
+	
+	@Test
+	void testSubstractAbsXNegative() {
+		
+		Vector2 leftOperand = new Vector2(5,0);
+		Vector2 rightOperand = new Vector2(11,0);
+		
+		Vector2 result = Vector2.substractAbs(leftOperand, rightOperand);
+		
+		assertNotNull(result);
+		assertEquals(6, result.getX());
+		assertEquals(0, result.getY());
 	}
 	
 	@Test
