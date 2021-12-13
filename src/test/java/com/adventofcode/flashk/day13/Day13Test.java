@@ -85,7 +85,7 @@ public class Day13Test extends PuzzleTest {
 	@Test
 	@Order(4)
 	@Tag(TestTag.PART_TWO)
-	@Tag(TestTag.DEBUG)
+	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_TWO_INPUT)
 	public void testSolvePart2Input() {
 		
@@ -100,9 +100,26 @@ public class Day13Test extends PuzzleTest {
 	}
 	
 	@Test
+	@Order(4)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_TWO_INPUT)
+	public void testSolvePart2InputPrint() {
+		
+		System.out.print("2 | input  | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		
+		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
+		assertEquals(102,transparentOrigami.foldAll(true));
+		
+	}
+	
+	@Test
 	@Order(5)
 	@Tag(TestTag.PART_TWO)
-	@Tag(TestTag.INPUT)
+	@Tag(TestTag.DEBUG)
 	@DisplayName(TestDisplayName.PART_TWO_DEBUG + " - Even array")
 	public void testSolvePart2Input2() {
 		
