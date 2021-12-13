@@ -34,6 +34,7 @@ public class TransparentOrigami {
 			
 			if(coordinatesMatcher.find()) {
 				
+				// Points coordinates
 				int x = Integer.valueOf(coordinatesMatcher.group(1));
 				int y = Integer.valueOf(coordinatesMatcher.group(2));
 
@@ -44,7 +45,7 @@ public class TransparentOrigami {
 				
 			} else if (instructionsMatcher.find()){
 				
-				// Get instructions
+				// Folding instructions
 				String axis = instructionsMatcher.group(1);
 				Integer value = Integer.valueOf(instructionsMatcher.group(2));
 				
@@ -92,60 +93,42 @@ public class TransparentOrigami {
 	 * @param instruction
 	 */
 	private void fold(Instruction instruction) {
+		
 		if("x".equals(instruction.getAxis())) {
-			foldLeft(instruction.getValue());
+			
+			// Obtains dots at the right of the folding point
+			List<Vector2> dotsToFold = dots.stream()
+											.filter(dot -> dot.getX() > instruction.getValue())
+											.collect(Collectors.toList());
+			
+			fold(new Vector2(maxX, 0), dotsToFold);
+			maxX = instruction.getValue() - 1;
+			
 		} else {
-			foldUp(instruction.getValue());
+			
+			// Obtains dots at the top of the folding point
+			List<Vector2> dotsToFold = dots.stream()
+											.filter(dot -> dot.getY() > instruction.getValue())
+											.collect(Collectors.toList());
+			
+			fold(new Vector2(0, maxY), dotsToFold);
+			maxY = instruction.getValue() - 1;
+			
 		}
 	}
 	
-	/**
-	 * @param instruction
-	 */
-	private void foldLeft(Integer x) {
+	private void fold(Vector2 foldingPoint, List<Vector2> dotsToFold) {
 		
-		// Obtains dots at the right of the folding point
-		List<Vector2> foldedDots = dots.stream()
-										.filter(dot -> dot.getX() > x)
-										.collect(Collectors.toList());
-
-		Vector2 foldX = new Vector2(maxX, 0);
-		
-		for(Vector2 foldedDot : foldedDots) {
+		for(Vector2 dotToFold : dotsToFold) {
 			
-			Vector2 newPos = Vector2.substractAbs(foldX, foldedDot);
-			
-			paper[newPos.getX()][newPos.getY()] = DOT;	
-			dots.add(newPos);
-			dots.remove(foldedDot);		
-
-		}
-		
-		maxX = x-1;
-	}
-
-	/**
-	 * @param instruction
-	 */
-	private void foldUp(Integer y) {
-		
-		List<Vector2> foldedDots = dots.stream()
-										.filter(dot -> dot.getY() > y)
-										.collect(Collectors.toList());
-		
-		Vector2 foldY = new Vector2(0, maxY);
-		
-		for(Vector2 foldedDot : foldedDots) {
-			
-			Vector2 newPos = Vector2.substractAbs(foldY, foldedDot);
+			Vector2 newPos = Vector2.substractAbs(foldingPoint, dotToFold);
 
 			paper[newPos.getX()][newPos.getY()] = DOT;
 			dots.add(newPos);
-			dots.remove(foldedDot);
+			dots.remove(dotToFold);
 
 		}
-
-		maxY = y-1;
+		
 	}
 	
 	private void print() {
