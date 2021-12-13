@@ -40,7 +40,7 @@ class Vector2Test {
 	}
 	
 	@Test
-	void testSubstractAbsY1Positive() {
+	void testSubstractAbsY1PositiveStatic() {
 		
 		Vector2 leftOperand = new Vector2(0,14);
 		Vector2 rightOperand = new Vector2(0,7);
@@ -53,7 +53,7 @@ class Vector2Test {
 	}
 	
 	@Test
-	void testSubstractAbsYNegative() {
+	void testSubstractAbsYNegativeStatic() {
 		
 		Vector2 leftOperand = new Vector2(0,7);
 		Vector2 rightOperand = new Vector2(0,14);
@@ -66,7 +66,7 @@ class Vector2Test {
 	}
 	
 	@Test
-	void testSubstractAbsXPositive() {
+	void testSubstractAbsXPositiveStatic() {
 		
 		Vector2 leftOperand = new Vector2(11,0);
 		Vector2 rightOperand = new Vector2(5,0);
@@ -79,7 +79,7 @@ class Vector2Test {
 	}
 	
 	@Test
-	void testSubstractAbsXNegative() {
+	void testSubstractAbsXNegativeStatic() {
 		
 		Vector2 leftOperand = new Vector2(5,0);
 		Vector2 rightOperand = new Vector2(11,0);
@@ -89,6 +89,55 @@ class Vector2Test {
 		assertNotNull(result);
 		assertEquals(6, result.getX());
 		assertEquals(0, result.getY());
+	}
+	
+	@Test
+	void testSubstractAbsY1Positive() {
+		
+		Vector2 leftOperand = new Vector2(0,14);
+		Vector2 rightOperand = new Vector2(0,7);
+		
+		leftOperand.substractAbs(rightOperand);
+		
+		assertEquals(0, leftOperand.getX());
+		assertEquals(7, leftOperand.getY());
+	}
+	
+	@Test
+	void testSubstractAbsYNegative() {
+		
+		Vector2 leftOperand = new Vector2(0,7);
+		Vector2 rightOperand = new Vector2(0,14);
+		
+		leftOperand.substractAbs(rightOperand);
+
+		assertEquals(0, leftOperand.getX());
+		assertEquals(7, leftOperand.getY());
+	}
+	
+	@Test
+	void testSubstractAbsXPositive() {
+		
+		Vector2 leftOperand = new Vector2(11,0);
+		Vector2 rightOperand = new Vector2(5,0);
+		
+		leftOperand.substractAbs(rightOperand);
+		
+		assertEquals(6, leftOperand.getX());
+		assertEquals(0, leftOperand.getY());
+	}
+	
+	@Test
+	void testSubstractAbsXNegative() {
+		
+		Vector2 leftOperand = new Vector2(5,0);
+		Vector2 rightOperand = new Vector2(11,0);
+		
+		leftOperand.substractAbs(rightOperand);
+		
+		assertNotNull(leftOperand);
+		assertEquals(6, leftOperand.getX());
+		assertEquals(0, leftOperand.getY());
 	}
 	
 	@Test
