@@ -12,7 +12,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 class Vector2Test {
 	
 	@Test
-	void testTransform() {
+	void testTransformDirection() {
 		
 		Vector2 startPos = new Vector2(2,5);
 		Vector2 endPos = new Vector2(3,6);
@@ -23,6 +23,19 @@ class Vector2Test {
 		
 		assertEquals(3, startPos.getX());
 		assertEquals(6, startPos.getY());
+		
+	}
+	
+	@Test
+	void testTransform() {
+		
+		Vector2 startPos = new Vector2(2,5);
+		Vector2 endPos = new Vector2(3,7);
+		
+		startPos.transform(endPos);
+		
+		assertEquals(5, startPos.getX());
+		assertEquals(12, startPos.getY());
 		
 	}
 	
