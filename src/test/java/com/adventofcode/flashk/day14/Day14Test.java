@@ -32,7 +32,7 @@ public class Day14Test extends PuzzleTest {
 
 	
 	@Test
-	@Order(1)
+	@Order(5)
 	@Tag(TestTag.PART_ONE)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_ONE_SAMPLE)
@@ -49,7 +49,75 @@ public class Day14Test extends PuzzleTest {
 	}
 	
 	@Test
+	@Order(1)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 1 iteration")
+	public void testSolvePart1SampleDebug1() {
+		
+		System.out.print("1 | sample | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
+		
+		assertEquals(1L, polymerization.solveA(1));
+		
+	}
+	
+	@Test
 	@Order(2)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 2 iterations")
+	public void testSolvePart1SampleDebug2() {
+		
+		System.out.print("1 | sample | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
+		
+		assertEquals(5L, polymerization.solveA(2));
+		
+	}
+	
+	@Test
+	@Order(3)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 3 iterations")
+	public void testSolvePart1SampleDebug3() {
+		
+		System.out.print("1 | sample | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
+		
+		assertEquals(7L, polymerization.solveA(3));
+		
+	}
+	
+	@Test
+	@Order(4)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 4 iterations")
+	public void testSolvePart1SampleDebug4() {
+		
+		System.out.print("1 | sample | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
+		
+		assertEquals(18L, polymerization.solveA(4));
+		
+	}
+	
+	@Test
+	@Order(6)
 	@Tag(TestTag.PART_ONE)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_ONE_INPUT)
@@ -61,11 +129,11 @@ public class Day14Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
-		assertEquals(3009, polymerization.solveA(10));
+		assertEquals(3009L, polymerization.solveA(10));
 	}
 	
 	@Test
-	@Order(3)
+	@Order(7)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE)
@@ -75,13 +143,12 @@ public class Day14Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
-		//ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
-		//System.out.println(polymerization.solveA(40));
-		//assertEquals(3009, polymerization.solveA(10));
+		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
+		assertEquals(2188189693529L, polymerization.solveA(40));
 	}
 	
 	@Test
-	@Order(4)
+	@Order(8)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_TWO_INPUT)
