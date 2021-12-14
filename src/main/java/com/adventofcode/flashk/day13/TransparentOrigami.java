@@ -27,8 +27,6 @@ public class TransparentOrigami {
 	
 	public TransparentOrigami(List<String> inputs) {
 		
-
-		
 		for(String input : inputs) {
 			
 			Matcher coordinatesMatcher = COORDINATES_PATTERN.matcher(input);
@@ -55,8 +53,6 @@ public class TransparentOrigami {
 				
 			}
 		}
-		
-		// Verify the paper is a perfectly shapped square
 		
 		// Initialize square
 		paper = new char[maxX+1][maxY+1];
@@ -122,8 +118,8 @@ public class TransparentOrigami {
 	
 	private void print() {
 		System.out.println();
-		for(int y = 0; y <= maxY; y++) {
-			for(int x = 0; x <= maxX; x++) {
+		for(int y = 0; y <= 6; y++) {
+			for(int x = 0; x <= 40; x++) {
 				System.out.print(paper[x][y]);
 			}
 			System.out.println();
