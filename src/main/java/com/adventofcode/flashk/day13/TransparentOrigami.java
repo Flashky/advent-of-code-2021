@@ -27,6 +27,8 @@ public class TransparentOrigami {
 	
 	public TransparentOrigami(List<String> inputs) {
 		
+
+		
 		for(String input : inputs) {
 			
 			Matcher coordinatesMatcher = COORDINATES_PATTERN.matcher(input);
@@ -55,13 +57,6 @@ public class TransparentOrigami {
 		}
 		
 		// Verify the paper is a perfectly shapped square
-		if(maxX % 2 != 0) {
-			maxX++;
-		}
-		
-		if(maxY % 2 != 0) {
-			maxY++;
-		}
 		
 		// Initialize square
 		paper = new char[maxX+1][maxY+1];
@@ -98,8 +93,7 @@ public class TransparentOrigami {
 											.filter(dot -> dot.getX() > instruction.getValue())
 											.collect(Collectors.toList());
 			
-			fold(new Vector2(maxX, 0), dotsToFold);
-			maxX = instruction.getValue() - 1;
+			fold(new Vector2(2 * instruction.getValue(), 0), dotsToFold);
 			
 		} else {
 			
@@ -108,18 +102,16 @@ public class TransparentOrigami {
 											.filter(dot -> dot.getY() > instruction.getValue())
 											.collect(Collectors.toList());
 			
-			fold(new Vector2(0, maxY), dotsToFold);
-			maxY = instruction.getValue() - 1;
-			
+			fold(new Vector2(0, 2 * instruction.getValue()), dotsToFold);
 		}
 	}
 	
 	private void fold(Vector2 foldingPoint, List<Vector2> dotsToFold) {
 		
 		for(Vector2 dotToFold : dotsToFold) {
-			
-			Vector2 newPos = Vector2.substractAbs(foldingPoint, dotToFold);
 
+			Vector2 newPos = Vector2.substractAbs(foldingPoint, dotToFold);
+			
 			paper[newPos.getX()][newPos.getY()] = DOT;
 			dots.add(newPos);
 			dots.remove(dotToFold);
