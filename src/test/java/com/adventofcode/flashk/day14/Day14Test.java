@@ -55,7 +55,7 @@ public class Day14Test extends PuzzleTest {
 	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 1 iteration")
 	public void testSolvePart1SampleDebug1() {
 		
-		System.out.print("1 | sample | ");
+		System.out.print("1 | debug 1 | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
@@ -72,7 +72,7 @@ public class Day14Test extends PuzzleTest {
 	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 2 iterations")
 	public void testSolvePart1SampleDebug2() {
 		
-		System.out.print("1 | sample | ");
+		System.out.print("1 | debug 2 | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
@@ -89,7 +89,7 @@ public class Day14Test extends PuzzleTest {
 	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 3 iterations")
 	public void testSolvePart1SampleDebug3() {
 		
-		System.out.print("1 | sample | ");
+		System.out.print("1 | debug 3 | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
@@ -106,7 +106,7 @@ public class Day14Test extends PuzzleTest {
 	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 4 iterations")
 	public void testSolvePart1SampleDebug4() {
 		
-		System.out.print("1 | sample | ");
+		System.out.print("1 | debug 4 | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
@@ -158,9 +158,9 @@ public class Day14Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
-		System.out.println(polymerization.solveA(40));
-		//assertEquals(3009, polymerization.solveA(40));
+		assertEquals(3459822539451L, polymerization.solveA(40));
 	}
 
 }
