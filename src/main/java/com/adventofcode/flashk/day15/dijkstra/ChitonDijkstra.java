@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 import com.adventofcode.flashk.common.Vector2;
 import com.google.common.graph.MutableValueGraph;
@@ -12,94 +14,141 @@ import com.google.common.graph.ValueGraphBuilder;
 public class ChitonDijkstra {
 
 	private Integer[][] riskMap;
-	private int maxCols;
-	private int maxRows;
-	private MutableValueGraph<Vector2,Integer> graph;
+	private int maxX;
+	private int maxY;
+	private MutableValueGraph<Node,Integer> graph;
+	
+	//private Vector2 origin = new Vector2(0,0);
+	private Node origin;
+	private Node destination;
 	
 	public ChitonDijkstra(List<String> inputs) {
 		
-		maxCols = inputs.get(0).length();
-		maxRows = inputs.size();
+		maxX = inputs.get(0).length();
+		maxY = inputs.size();
 
 		// Initialize heat map values
-		riskMap = new Integer[maxRows][maxCols];
-		
-		Vector2 destination = new Vector2(maxCols-1, maxRows-1);
+		riskMap = new Integer[maxY][maxX];
 		
 		Map<Vector2, List<Vector2>> adjacencyList = new HashMap<>();
 		
-		for(int row = 0; row < inputs.size(); row++) {
+		
+		for(int y = 0; y < maxY; y++) {
 			
-			String[] numbers = inputs.get(row).split("|");
+			String[] numbers = inputs.get(y).split("|");
 			
-			for(int col = 0; col < maxCols; col++) {
-				riskMap[row][col] = Integer.valueOf(numbers[col]);
-				Vector2 currentPos = new Vector2(col, row);
+			for(int x = 0; x < maxX; x++) {
+				riskMap[y][x] = Integer.valueOf(numbers[x]);
+				Vector2 currentPos = new Vector2(x, y);
 				adjacencyList.put(currentPos, getAdjacentPositions(currentPos));
 			}
 		}
-		
-		// Set the destination
-		destination = new Vector2(maxCols-1, maxRows-1);
 
-		// Initialize Dijkstra
+		// Initialize graph
+		buildValueGraph(adjacencyList);
+		
+
+	}
+
+	public int solveA() {
+		
+		//Graph<Node> liveGraph = graph.asGraph();
+		origin.setRisk(0);
+		
+		PriorityQueue<Node> queue = new PriorityQueue<>();
+		queue.add(origin);
+
+		while(!queue.isEmpty()) {
+			
+			Node minNode = queue.poll();
+			minNode.setVisited(true);
+			//System.out.println(minNode.getPosition().toString());
+			
+			Set<Node> adjacentNodes = graph.successors(minNode);
+			for(Node adjacentNode : adjacentNodes) {
+				if(!adjacentNode.isVisited()) {
+					Integer risk = graph.edgeValueOrDefault(minNode, adjacentNode, Integer.MAX_VALUE);
+					if(adjacentNode.getRisk() > minNode.getRisk() + risk) {
+						adjacentNode.setRisk(minNode.getRisk() + risk);
+						adjacentNode.setParent(minNode);
+						queue.add(adjacentNode);
+					}
+				}
+			}
+		}
+		
+		return destination.getRisk();
+	}
+
+
+	private void buildValueGraph(Map<Vector2, List<Vector2>> adjacencyList) {
+		
 		graph = ValueGraphBuilder.directed().build();
 		
 		for(Vector2 position : adjacencyList.keySet()) {
 			
-			graph.addNode(position);
+			Node node = new Node(position);
+			
+			if(position.getX() == 0 && position.getY() == 0) {
+				origin = node;
+			}
+			
+			graph.addNode(node);
 			Integer edgeValue = getRiskValue(position);
 			
 			// Nodes adjacent to current position
-			List<Vector2> adjacentVectors = adjacencyList.get(position);
-			for(Vector2 adjacentVector : adjacentVectors) {
-				graph.addNode(adjacentVector);
-				graph.putEdgeValue(adjacentVector, position, edgeValue);
-				//graph.addEdge(adjacentVector, position, edgeValue);
+			for(Vector2 adjacentVector : adjacencyList.get(position)) {
+				Node adjacentNode = new Node(adjacentVector);
+				graph.addNode(adjacentNode);
+				graph.putEdgeValue(adjacentNode, node, edgeValue);
+				
+				if (adjacentVector.getX() == maxX-1 && adjacentVector.getY() == maxY - 1) {
+					destination = adjacentNode;
+				}
 			}
-			
-			
 		}
-		System.out.println("finished");
 	}
-
+	/*
+	private Set<Node> getAdjacentNodes(Node position) {
+		
+	}*/
 	private List<Vector2> getAdjacentPositions(Vector2 position) {
-		return getAdjacentPositions(position.getY(), position.getX());
+		return getAdjacentPositions(position.getY(),position.getX());
 	}
 	
-	private List<Vector2> getAdjacentPositions(int row, int col) {
+	private List<Vector2> getAdjacentPositions(int y, int x) {
 		
 		List<Vector2> adjacentCells = new ArrayList<>();
 		
-		int right = col+1;
-		int left = col-1;
-		int up = row-1;
-		int down = row+1;
+		int right = x+1;
+		int left = x-1;
+		int up = y-1;
+		int down = y+1;
 		
-		if(!isOutOfBounds(row, right)) {
-			adjacentCells.add(new Vector2(right, row));
+		if(!isOutOfBounds(y, right)) {
+			adjacentCells.add(new Vector2(right, y));
 		}
 		
-		if(!isOutOfBounds(row, left)) {
-			adjacentCells.add(new Vector2(left, row));
+		if(!isOutOfBounds(y, left)) {
+			adjacentCells.add(new Vector2(left, y));
 		}
 		
-		if(!isOutOfBounds(up, col)) {
-			adjacentCells.add(new Vector2(col, up));
+		if(!isOutOfBounds(up, y)) {
+			adjacentCells.add(new Vector2(x, up));
 		}
 		
-		if(!isOutOfBounds(down, col)) {
-			adjacentCells.add(new Vector2(col, down));
+		if(!isOutOfBounds(down, y)) {
+			adjacentCells.add(new Vector2(x, down));
 		}
 		
 		return adjacentCells;
 	}
 	
-	private boolean isOutOfBounds(int row, int col) {
-		return (col >= maxCols || col < 0) || (row >= maxRows || row < 0);
+	private boolean isOutOfBounds(int y, int x) {
+		return (y >= maxY || y < 0) || (x >= maxX || x < 0);
 	}
 	
 	private Integer getRiskValue(Vector2 cell) {
-		return riskMap[cell.getX()][cell.getY()];
+		return riskMap[cell.getY()][cell.getX()];
 	}
 }

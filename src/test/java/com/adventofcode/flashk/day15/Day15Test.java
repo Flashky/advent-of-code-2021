@@ -22,7 +22,7 @@ import com.adventofcode.flashk.day15.dijkstra.ChitonDijkstra;
 
 @DisplayName(TestDisplayName.DAY_15)
 @TestMethodOrder(OrderAnnotation.class)
-public class Day15 extends PuzzleTest {
+public class Day15Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day_15";
 
@@ -45,8 +45,8 @@ public class Day15 extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
-		
-		//assertEquals(40,chiton.solveA());
+		chiton.solveA();
+		assertEquals(40,chiton.solveA());
 		
 	}
 	
@@ -62,7 +62,7 @@ public class Day15 extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
-		//System.out.println(chiton.solveA());
+		System.out.println(chiton.solveA());
 		//assertEquals(40,chiton.solveA());
 	}
 	
