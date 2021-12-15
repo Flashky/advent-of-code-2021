@@ -18,6 +18,7 @@ import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
 import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.day15.dijkstra.ChitonDijkstra;
 
 @DisplayName(TestDisplayName.DAY_15)
 @TestMethodOrder(OrderAnnotation.class)
@@ -43,6 +44,10 @@ public class Day15 extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		
+		//assertEquals(40,chiton.solveA());
+		
 	}
 	
 	@Test
@@ -56,7 +61,9 @@ public class Day15 extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		//System.out.println(chiton.solveA());
+		//assertEquals(40,chiton.solveA());
 	}
 	
 	@Test
