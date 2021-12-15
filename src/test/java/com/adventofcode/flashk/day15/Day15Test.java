@@ -53,6 +53,22 @@ public class Day15Test extends PuzzleTest {
 	@Test
 	@Order(2)
 	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG)
+	public void testSolvePart1Debug() {
+		
+		System.out.print("1 | input  | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, "debug_special.input");
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		System.out.println(chiton.solveA());
+		//assertEquals(40,chiton.solveA());
+	}
+	
+	@Test
+	@Order(2)
+	@Tag(TestTag.PART_ONE)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_ONE_INPUT)
 	public void testSolvePart1Input() {
