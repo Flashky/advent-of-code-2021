@@ -124,7 +124,7 @@ public class Chiton {
 		//openSet.add(origin);
 		//PriorityQueue<Cell> openSet = new PriorityQueue<>(new CellComparator());
 		PriorityQueue<Cell> openSet = new PriorityQueue<>();
-		openSet.add(originCell);
+		//openSet.add(originCell);
 
 	    // For node n, cameFrom[n] is the node immediately preceding it on the cheapest path from start
 	    // to n currently known.
