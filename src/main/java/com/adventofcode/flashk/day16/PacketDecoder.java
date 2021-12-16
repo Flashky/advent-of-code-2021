@@ -90,6 +90,7 @@ public class PacketDecoder {
 
 			// Este es el caso difícil, sabemos que hay X paquetes, pero no cuantos hay.
 			for(int i = 0; i < bodyOperator.getSubpacketsSize(); i++) {
+				// esto está fallando
 				result += decode(binaryOutput);
 			}
 			
