@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.adventofcode.flashk.common.BaseUtil;
 
+// Ideas para resolver:
+// https://www.geeksforgeeks.org/expression-tree/
+// http://www.it.uc3m.es/java/2011-12/units/arboles/guides/2/guide_es.html
 public class PacketDecoder {
 	
 	//private final static String PACKET_VERSION_6 = "110";
@@ -15,15 +18,9 @@ public class PacketDecoder {
 	// Cualquier PACKET_ID que no sea 100 será un operador
 	// La parte A no especifica que operador es, de momento no importa.
 	
-	// Aparentemente, el primer paquete que aparece siempre ha de ser un operador.
+	// El primer paquete que aparece siempre ha de ser un operador.
 	// Los operadores pueden tener literales, pero los literales son nodos hoja, no pueden tener más paquetes por debajo.
 
-	// Implicaciones: expression trees?
-	// https://www.geeksforgeeks.org/expression-tree/
-	// La pregunta es, ¿cómo generar el árbol a partir de la cadena?
-	
-	// Parte 1: 
-	// Obtener todos los version numbers y sumarlos.
 	private String hexadecimalInput;
 	private String binaryInput;
 	
