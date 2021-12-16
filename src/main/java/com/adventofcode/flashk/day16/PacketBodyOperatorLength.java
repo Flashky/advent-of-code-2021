@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class PacketBodyOperatorLength {
+public class PacketBodyOperatorLength extends PacketBody {
 
 	private final static Integer LENGTH_SUBPACKETS_LENGTH = 15;
 	
