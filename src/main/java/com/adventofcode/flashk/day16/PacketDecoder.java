@@ -34,6 +34,7 @@ public class PacketDecoder {
 		System.out.println();
 		System.out.println("Input (hex): " + hexadecimalInput);
 		System.out.println("Input (bin): " + binaryInput);
+		System.out.println();
 		
 	}
 
@@ -47,6 +48,7 @@ public class PacketDecoder {
 			return 0;
 		} else if(binaryInput.matches("[0]*")) {
 			System.out.println("No more bits to decode");
+			System.out.println();
 			return 0;
 		}
 		
@@ -73,10 +75,10 @@ public class PacketDecoder {
 			PacketBodyOperatorLength bodyOperator = new PacketBodyOperatorLength(header, binaryInput);
 
 			// Hay dos cadenas, la que cubre la longitud del operador, y lo que hay a la derecha de esta
-			String leftBinaryOutput = bodyOperator.getBinarySubpackets();
+			String binarySubpacket = bodyOperator.getBinarySubpackets();
 			String rightBinaryOutput = bodyOperator.getBinaryOutput();
 			
-			result += decode(leftBinaryOutput);
+			result += decode(binarySubpacket);
 			result += decode(rightBinaryOutput);
 			
 		} else if(LengthTypeId.SUBPACKETS_NUMBER.equals(header.getLengthTypeId())){
@@ -88,7 +90,6 @@ public class PacketDecoder {
 
 			// Este es el caso difícil, sabemos que hay X paquetes, pero no cuantos hay.
 			for(int i = 0; i < bodyOperator.getSubpacketsSize(); i++) {
-				
 				result += decode(binaryOutput);
 			}
 			

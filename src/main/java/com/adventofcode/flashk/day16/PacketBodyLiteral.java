@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class PacketBodyLiteral {
+public class PacketBodyLiteral extends PacketBody {
 
 	private final static Integer LENGTH_NUMBER_GROUP = 5;
 	
