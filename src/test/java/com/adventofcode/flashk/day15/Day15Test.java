@@ -114,6 +114,9 @@ public class Day15Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs, 5);
+		System.out.println(chiton.solveA());
+		// assertEquals(315, chiton.solveA());
 		
 	}
 
