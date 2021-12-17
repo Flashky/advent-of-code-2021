@@ -1,0 +1,21 @@
+java.lang.IllegalArgumentException: 
+Node Node(position=Vector2(x=8, y=3), risk=25, 
+parent=Node(position=Vector2(x=7, y=3), risk=22, 
+parent=Node(position=Vector2(x=6, y=3), risk=21, 
+parent=Node(position=Vector2(x=6, y=4), risk=18, 
+parent=Node(position=Vector2(x=5, y=4), risk=17, 
+parent=Node(position=Vector2(x=4, y=4), risk=15, 
+parent=Node(position=Vector2(x=4, y=3), risk=14, 
+parent=Node(position=Vector2(x=3, y=3), risk=9, 
+parent=Node(position=Vector2(x=3, y=2), risk=7, 
+parent=Node(position=Vector2(x=2, y=2), risk=6, 
+parent=Node(position=Vector2(x=1, y=2), risk=3, 
+parent=Node(position=Vector2(x=1, y=1), risk=2, 
+parent=Node(position=Vector2(x=1, y=0), risk=1, 
+parent=Node(position=Vector2(x=0, y=0), risk=0, 
+parent=null, visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true), visited=true) 
+is not an element of this graph.
+	at com.google.common.graph.StandardValueGraph.checkedConnections(StandardValueGraph.java:162)
+	at com.google.common.graph.StandardValueGraph.successors(StandardValueGraph.java:115)
+	at com.adventofcode.flashk.day15.dijkstra.ChitonDijkstra.solveA(ChitonDijkstra.java:152)
+	at com.adventofcode.flashk.day15.Day15Test.testSolvePart2Input(Day15Test.java:118)
