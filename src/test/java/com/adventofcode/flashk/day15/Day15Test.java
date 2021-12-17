@@ -25,7 +25,10 @@ import com.adventofcode.flashk.day15.dijkstra.ChitonDijkstra;
 public class Day15Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day_15";
-
+	
+	private final static String INPUT_FILE_SAMPLE_SPECIAL = "debug_special.input";
+	private final static String INPUT_FILE_SAMPLE_PER_5 = "sample_per5.input";
+	
 	@BeforeAll
 	public static void beforeAll() {
 		Timer.printHeader(TestDisplayName.DAY_15);
@@ -60,7 +63,7 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("1 | debug  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, "debug_special.input");
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_SPECIAL);
 		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		System.out.println(chiton.solveA());
 		assertEquals(7, chiton.solveA());
@@ -92,7 +95,11 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_PER_5);
+		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		assertEquals(315, chiton.solveA());
+		
 		
 	}
 	

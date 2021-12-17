@@ -16,9 +16,8 @@ public class ChitonDijkstra {
 	private Integer[][] riskMap;
 	private int maxX;
 	private int maxY;
-	private MutableValueGraph<Node,Integer> graph;
 	
-	//private Vector2 origin = new Vector2(0,0);
+	private MutableValueGraph<Node,Integer> graph;
 	private Node origin;
 	private Node destination;
 	
@@ -50,9 +49,15 @@ public class ChitonDijkstra {
 
 	}
 
+	/**
+	 * Uses Dijkstra algorithm to solve part 1.
+	 * @return The cost to reach the destination
+	 * @see 
+	 * <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Dijkstra">Algoritmo de Dijkstra (Wikipedia)</a><br>
+	 * <a href="https://www.youtube.com/watch?v=EFg3u_E6eHU">Cómo funciona el Algoritmo de Dijkstra (Youtube)</a>
+	 */
 	public int solveA() {
-		
-		//Graph<Node> liveGraph = graph.asGraph();
+
 		origin.setRisk(0);
 		
 		PriorityQueue<Node> queue = new PriorityQueue<>();
@@ -62,7 +67,6 @@ public class ChitonDijkstra {
 			
 			Node minNode = queue.poll();
 			minNode.setVisited(true);
-			//System.out.println(minNode.getPosition().toString());
 			
 			Set<Node> adjacentNodes = graph.successors(minNode);
 			for(Node adjacentNode : adjacentNodes) {
@@ -83,10 +87,11 @@ public class ChitonDijkstra {
 
 	private void buildValueGraph(Map<Vector2, List<Vector2>> adjacencyList) {
 		
-		Map<Node,Node> createdNodes = new HashMap<>();
-		
 		graph = ValueGraphBuilder.directed().build();
 		
+		// Temporal store to avoid duplicating nodes
+		Map<Node,Node> createdNodes = new HashMap<>();
+
 		for(Vector2 position : adjacencyList.keySet()) {
 			
 			Node node = new Node(position);
@@ -123,10 +128,7 @@ public class ChitonDijkstra {
 			}
 		}
 	}
-	/*
-	private Set<Node> getAdjacentNodes(Node position) {
-		
-	}*/
+
 	private List<Vector2> getAdjacentPositions(Vector2 position) {
 		return getAdjacentPositions(position.getY(),position.getX());
 	}
