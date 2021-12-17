@@ -83,11 +83,19 @@ public class ChitonDijkstra {
 
 	private void buildValueGraph(Map<Vector2, List<Vector2>> adjacencyList) {
 		
+		Map<Node,Node> createdNodes = new HashMap<>();
+		
 		graph = ValueGraphBuilder.directed().build();
 		
 		for(Vector2 position : adjacencyList.keySet()) {
 			
 			Node node = new Node(position);
+			
+			if(createdNodes.containsKey(node)) {
+				node = createdNodes.get(node);
+			} else {
+				createdNodes.put(node,node);
+			}
 			
 			if(position.getX() == 0 && position.getY() == 0) {
 				origin = node;
@@ -98,8 +106,15 @@ public class ChitonDijkstra {
 			
 			// Nodes adjacent to current position
 			for(Vector2 adjacentVector : adjacencyList.get(position)) {
+				
 				Node adjacentNode = new Node(adjacentVector);
-				graph.addNode(adjacentNode);
+				
+				if(createdNodes.containsKey(adjacentNode)) {
+					adjacentNode = createdNodes.get(adjacentNode);
+				} else {
+					createdNodes.put(adjacentNode,adjacentNode);
+				}
+				
 				graph.putEdgeValue(adjacentNode, node, edgeValue);
 				
 				if (adjacentVector.getX() == maxX-1 && adjacentVector.getY() == maxY - 1) {

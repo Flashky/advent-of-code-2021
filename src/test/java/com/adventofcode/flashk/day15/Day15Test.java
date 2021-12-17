@@ -46,7 +46,7 @@ public class Day15Test extends PuzzleTest {
 		
 		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		chiton.solveA();
-		assertEquals(40,chiton.solveA());
+		assertEquals(40, chiton.solveA());
 		
 	}
 	
@@ -57,13 +57,13 @@ public class Day15Test extends PuzzleTest {
 	@DisplayName(TestDisplayName.PART_ONE_DEBUG)
 	public void testSolvePart1Debug() {
 		
-		System.out.print("1 | input  | ");
+		System.out.print("1 | debug  | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, "debug_special.input");
 		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		System.out.println(chiton.solveA());
-		//assertEquals(40,chiton.solveA());
+		assertEquals(7, chiton.solveA());
 	}
 	
 	@Test
