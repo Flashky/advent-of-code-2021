@@ -102,9 +102,16 @@ public class ChitonDijkstra {
 				
 				int tileX = x / initialMaxX;
 				int riskIncrement = tileY+tileX;
-				
+		
 				// Index that iterates from 0 to max number cols.
 				int numberCol = x % initialMaxX;
+				
+				int originalRisk = Integer.valueOf(numbers[numberCol]);
+				int baseRisk = originalRisk + riskIncrement;
+				int modRisk = baseRisk % 10;
+				int divRisk = baseRisk / 10;
+				int realRisk = modRisk + divRisk;
+			
 				
 				// tile 0: x = 0-9
 				// tile 1: x = 10-19
@@ -112,11 +119,13 @@ public class ChitonDijkstra {
 				// tile 3: x = 30-39
 				// tile 4: x = 40-49
 
-				riskMap[y][x] = Integer.valueOf(numbers[numberCol]) + riskIncrement;
+				riskMap[y][x] = realRisk;
+				//System.out.print(riskMap[y][x]);
 				Vector2 currentPos = new Vector2(x, y);
 				adjacencyList.put(currentPos, getAdjacentPositions(currentPos));
 				
 			}
+			//System.out.println();
 		}
 		
 		// Initialize graph
@@ -133,7 +142,9 @@ public class ChitonDijkstra {
 	 * <a href="https://www.youtube.com/watch?v=EFg3u_E6eHU">Cómo funciona el Algoritmo de Dijkstra (Youtube)</a>
 	 */
 	public int solveA() {
-
+		System.out.println();
+		System.out.println("Nodes: " + graph.nodes().size());
+		System.out.println("Edges: " +graph.edges().size());
 		origin.setRisk(0);
 		
 		PriorityQueue<Node> queue = new PriorityQueue<>();
@@ -203,7 +214,7 @@ public class ChitonDijkstra {
 				}
 			}
 		}
-
+		System.out.println("finished");
 	}
 
 	private List<Vector2> getAdjacentPositions(Vector2 position) {
