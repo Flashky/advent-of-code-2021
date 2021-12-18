@@ -6,8 +6,12 @@ public final class BaseUtil {
 
 	private BaseUtil() {}
 	
-	public static Integer binaryToDec(String bin) {
+	public static Integer binaryToDecInteger(String bin) {
 	    return Integer.parseInt(bin, 2);
+	}
+	
+	public static Long binaryToDec(String bin) {
+	    return Long.parseLong(bin, 2);
 	}
 	
 	/**

@@ -1,18 +1,28 @@
 package com.adventofcode.flashk.day16;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import com.adventofcode.flashk.common.BaseUtil;
 
 // Ideas para resolver:
 // https://www.geeksforgeeks.org/expression-tree/
 // http://www.it.uc3m.es/java/2011-12/units/arboles/guides/2/guide_es.html
+// El puzzle es también un árbol de expresión. 
+// Pero a diferencia de los árboles de expresión habituales, que son postfijos, este es prefijo.
+// Esto implica que primero meteremos operadores en la pila, cuando demos con un literal, sacaremos
+// el operador de la pila, y le asignaremos el literal.
 public class PacketDecoder {
 	
-	//private final static String PACKET_VERSION_6 = "110";
+	private final static Integer BITS_PACKET_VERSION = 3;
+	private final static Integer BITS_PACKET_ID = 3;
+	private final static Integer BITS_PACKET_LENGTH_TYPE_ID  = 1;
+	private final static Integer BITS_SUBPACKETS_LENGTH = 15;
+	private final static Integer BITS_SUBPACKETS_NUMBER = 11;
+	private final static Integer BITS_NUMBER_GROUP = 5;
+	
 	private final static String PACKET_ID_LITERAL_VALUE = "100";
-	private final static String LENGTH_TYPE_ID_SUBPACKETS_LENGTH = "0";
-	private final static String LENGTH_TYPE_ID_SUBPACKETS_NUMBER = "1";
 
 	
 	// Cualquier PACKET_ID que no sea 100 será un operador
@@ -21,80 +31,126 @@ public class PacketDecoder {
 	// El primer paquete que aparece siempre ha de ser un operador.
 	// Los operadores pueden tener literales, pero los literales son nodos hoja, no pueden tener más paquetes por debajo.
 
-	private String hexadecimalInput;
-	private String binaryInput;
+	private Queue<Packet> packets;
+	private Integer version = 0;
 	
 	public PacketDecoder(List<String> inputs) {
+
+		// Step 1 - Convert from hex to binary
+		String hexadecimalInput = inputs.get(0);
+		String binaryInput = BaseUtil.hexToBinaryPadLeft(hexadecimalInput);
 		
-		hexadecimalInput = inputs.get(0);
-		binaryInput = BaseUtil.hexToBinaryPadLeft(hexadecimalInput);
+		/*
 		System.out.println();
 		System.out.println("Input (hex): " + hexadecimalInput);
 		System.out.println("Input (bin): " + binaryInput);
 		System.out.println();
+		*/
+		// Step 2 - Process all the binary packets and add it to a queue.
+		packets = binaryToPackets(binaryInput);
 		
+		// Step 3 - Process the queue, polling elements, moving into a stack and building precedences.
+		// Only for part 2
+
 	}
 
-	public Integer solveA2() {
-		return decode(binaryInput);
-	}
-	
-	private Integer decode(String binaryInput) {
-		
-		if(binaryInput.isEmpty()) {
-			return 0;
-		} else if(binaryInput.matches("[0]*")) {
-			System.out.println("No more bits to decode");
-			System.out.println();
-			return 0;
-		}
-		
-		Integer result = 0;
-		
-		PacketHeader header = new PacketHeader(binaryInput);
-		result += header.getVersion();
-		
-		if(header.isLiteralPacket()) {
-			
-			System.out.print("Literal: ");
-			System.out.println(binaryInput);
-			
-			PacketBodyLiteral bodyLiteral = new PacketBodyLiteral(header, binaryInput);
-			String binaryOutput = bodyLiteral.getBinaryOutput();
-			
-			result += decode(binaryOutput);
-			
-		} else if(LengthTypeId.SUBPACKETS_LENGTH.equals(header.getLengthTypeId())){
-			
-			System.out.print("Packet length: "); 
-			System.out.println(binaryInput);
-			
-			PacketBodyOperatorLength bodyOperator = new PacketBodyOperatorLength(header, binaryInput);
+	private Queue<Packet> binaryToPackets(String binaryInput) {
 
-			// Hay dos cadenas, la que cubre la longitud del operador, y lo que hay a la derecha de esta
-			String binarySubpacket = bodyOperator.getBinarySubpackets();
-			String rightBinaryOutput = bodyOperator.getBinaryOutput();
+		Queue<Packet> packets = new LinkedList<>();
+		
+		while(hasPackets(binaryInput)) {
 			
-			result += decode(binarySubpacket);
-			result += decode(rightBinaryOutput);
+			Packet packet = new Packet();
 			
-		} else if(LengthTypeId.SUBPACKETS_NUMBER.equals(header.getLengthTypeId())){
+			// 3 bits - Packet version
+			Integer startPos = 0;
+			Integer endPos = BITS_PACKET_VERSION;			
+			String versionBin = binaryInput.substring(startPos, endPos);
+			packet.setVersion(BaseUtil.binaryToDecInteger(versionBin));
+			version += packet.getVersion();
 			
-			System.out.print("Packet number: ");
-			System.out.println(binaryInput);
-			PacketBodyOperatorNumber bodyOperator = new PacketBodyOperatorNumber(header, binaryInput);
-			String binaryOutput = bodyOperator.getBinaryOutput();
+			// 3 bits - Packet id
+			startPos = endPos;
+			endPos += BITS_PACKET_ID;
+			String typeIdBin = binaryInput.substring(startPos, endPos);
+			packet.setTypeId(BaseUtil.binaryToDecInteger(typeIdBin));
+			
+			
+			if(!PACKET_ID_LITERAL_VALUE.equals(typeIdBin)) {		
+				
+				// Only operators 
+				
+				// 1 bit - Packet length type
+				startPos = endPos;
+				endPos += BITS_PACKET_LENGTH_TYPE_ID;
+				String lengthTypeIdBin = binaryInput.substring(startPos,endPos);
+				packet.setLengthTypeId(LengthTypeId.fromId(lengthTypeIdBin));
+				
+				
+				if(packet.getLengthTypeId().equals(LengthTypeId.SUBPACKETS_LENGTH)) {
+					
+					// 15 bits - Subpackets length (only operators)
+					startPos = endPos;
+					endPos += BITS_SUBPACKETS_LENGTH;
+					String subpacketsLengthBin = binaryInput.substring(startPos, endPos);
+					packet.setSubpacketsLength(BaseUtil.binaryToDecInteger(subpacketsLengthBin));
+					
+				} else if(packet.getLengthTypeId().equals(LengthTypeId.SUBPACKETS_NUMBER)) {
+					
+					// 11 bits - Subpackets number (only operators)
+					startPos = endPos;
+					endPos += BITS_SUBPACKETS_NUMBER;
+					String subpacketsNumberBin = binaryInput.substring(startPos, endPos);
+					packet.setSubpacketsNumber(BaseUtil.binaryToDecInteger(subpacketsNumberBin));
+					
+				}
+				
+			} else {
+				
+				// Only literals 
+				
+				// n groups of 5 bits - Literal value
+				boolean lastGroup = false;
 
-			// Este es el caso difícil, sabemos que hay X paquetes, pero no cuantos hay.
-			for(int i = 0; i < bodyOperator.getSubpacketsSize(); i++) {
-				// esto está fallando
-				result += decode(binaryOutput);
+				// Se calcula el número
+				StringBuilder numberBuilder = new StringBuilder();
+				while(!binaryInput.isEmpty() && !lastGroup) {
+					
+					startPos = endPos;
+					endPos += BITS_NUMBER_GROUP;
+					String group = binaryInput.substring(startPos, endPos);
+
+					if(group.charAt(0) == '0') {
+						lastGroup = true;
+					}
+					
+					String groupNumber = group.substring(1, BITS_NUMBER_GROUP);
+					numberBuilder.append(groupNumber);
+					//binaryInput = binaryInput.substring(endPos);
+
+				}
+				
+				packet.setLiteral(BaseUtil.binaryToDec(numberBuilder.toString()));
+				
 			}
 			
+			// Length of the packet in bits
+			packet.setLength(endPos);
+			
+			packets.add(packet);
+			binaryInput = binaryInput.substring(endPos);
+			
 		}
 		
-		return result;
+		return packets;
 	}
 
+	private boolean hasPackets(String binaryInput) {
+		return !binaryInput.isEmpty() && !binaryInput.matches("[0]*");
+	}
+	
+	public Integer solveA() {
+		return version;
+	}
 
 }

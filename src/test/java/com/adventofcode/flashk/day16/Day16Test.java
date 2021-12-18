@@ -50,7 +50,7 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA2();
+		int result = packetDecoder.solveA();
 		
 		//assertEquals(,result);
 	}
@@ -68,7 +68,7 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_LITERAL);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA2();
+		int result = packetDecoder.solveA();
 		assertEquals(6, result);
 	}
 	
@@ -85,7 +85,7 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_12);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA2();
+		int result = packetDecoder.solveA();
 		assertEquals(12, result);
 	}
 	
@@ -102,7 +102,7 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_16);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA2();
+		int result = packetDecoder.solveA();
 		assertEquals(16, result);
 	}
 	
@@ -120,7 +120,7 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_23);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA2();
+		int result = packetDecoder.solveA();
 		assertEquals(23, result);
 	}
 	
@@ -137,8 +137,7 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_31);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA2();
-		assertEquals(31, result);
+		assertEquals(31, packetDecoder.solveA());
 	}
 	
 	@Test
@@ -155,6 +154,8 @@ public class Day16Test extends PuzzleTest {
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		int result = packetDecoder.solveA();
+		System.out.println(packetDecoder.solveA());
+		//assertEquals(31, packetDecoder.solveA());
 	}
 	
 	@Test
