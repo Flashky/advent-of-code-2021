@@ -10,7 +10,7 @@ import lombok.ToString;
 public class Packet {
 
 	private Integer version;
-	private Integer typeId;
+	private TypeId typeId;
 	private LengthTypeId lengthTypeId;
 	
 	// Only operators

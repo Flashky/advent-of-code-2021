@@ -3,6 +3,7 @@ package com.adventofcode.flashk.day16;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 import com.adventofcode.flashk.common.BaseUtil;
 
@@ -21,8 +22,7 @@ public class PacketDecoder {
 	private final static Integer BITS_SUBPACKETS_LENGTH = 15;
 	private final static Integer BITS_SUBPACKETS_NUMBER = 11;
 	private final static Integer BITS_NUMBER_GROUP = 5;
-	
-	private final static String PACKET_ID_LITERAL_VALUE = "100";
+
 
 	
 	// Cualquier PACKET_ID que no sea 100 será un operador
@@ -73,10 +73,10 @@ public class PacketDecoder {
 			startPos = endPos;
 			endPos += BITS_PACKET_ID;
 			String typeIdBin = binaryInput.substring(startPos, endPos);
-			packet.setTypeId(BaseUtil.binaryToDecInteger(typeIdBin));
+			packet.setTypeId(TypeId.fromId(typeIdBin));
 			
 			
-			if(!PACKET_ID_LITERAL_VALUE.equals(typeIdBin)) {		
+			if(!TypeId.LITERAL.equals(packet.getTypeId())) {		
 				
 				// Only operators 
 				
@@ -112,7 +112,6 @@ public class PacketDecoder {
 				// n groups of 5 bits - Literal value
 				boolean lastGroup = false;
 
-				// Se calcula el número
 				StringBuilder numberBuilder = new StringBuilder();
 				while(!binaryInput.isEmpty() && !lastGroup) {
 					
@@ -126,7 +125,6 @@ public class PacketDecoder {
 					
 					String groupNumber = group.substring(1, BITS_NUMBER_GROUP);
 					numberBuilder.append(groupNumber);
-					//binaryInput = binaryInput.substring(endPos);
 
 				}
 				
@@ -151,6 +149,20 @@ public class PacketDecoder {
 	
 	public Integer solveA() {
 		return version;
+	}
+
+	public Integer solveB() {
+		
+		// In a postfix
+		Stack<Packet> packetStack = new Stack<>();
+		
+		while(!packets.isEmpty()) {
+			Packet currentPacket = packets.poll();
+			
+			switch(currentPacket.getTypeId()) { 
+			}
+		}
+		return null;
 	}
 
 }
