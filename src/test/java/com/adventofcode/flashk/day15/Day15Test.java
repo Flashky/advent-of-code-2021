@@ -46,7 +46,7 @@ public class Day15Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Chiton chiton = new Chiton(inputs);
-		assertEquals(40, chiton.solveA());
+		assertEquals(40, chiton.solve());
 		
 	}
 	
@@ -63,7 +63,7 @@ public class Day15Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_SPECIAL);
 		
 		Chiton chiton = new Chiton(inputs);
-		assertEquals(7, chiton.solveA());
+		assertEquals(7, chiton.solve());
 	}
 	
 	@Test
@@ -79,7 +79,7 @@ public class Day15Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Chiton chiton = new Chiton(inputs);
-		assertEquals(423,chiton.solveA());
+		assertEquals(423,chiton.solve());
 	}
 	
 	@Test
@@ -95,7 +95,7 @@ public class Day15Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Chiton chiton = new Chiton(inputs, 5);
-		assertEquals(315, chiton.solveA());
+		assertEquals(315, chiton.solve());
 		
 		
 	}
@@ -113,7 +113,7 @@ public class Day15Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Chiton chiton = new Chiton(inputs, 5);
-		assertEquals(2778, chiton.solveA());
+		assertEquals(2778, chiton.solve());
 
 	}
 
