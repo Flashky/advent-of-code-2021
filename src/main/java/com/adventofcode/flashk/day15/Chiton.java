@@ -53,10 +53,7 @@ public class Chiton {
 				int divRisk = baseRisk / 10;
 				int realRisk = modRisk + divRisk;
 
-				// Add node to array
-				Node currentNode = new Node(x, y);
-				currentNode.setRisk(realRisk);
-				riskMap[y][x] = currentNode;
+				riskMap[y][x] = new Node(x, y, realRisk);
 				
 			}
 		}
@@ -66,13 +63,13 @@ public class Chiton {
 	}
 
 	/**
-	 * Uses Dijkstra algorithm to solve part 1.
+	 * Uses Dijkstra algorithm to solve the problem.
 	 * @return The cost to reach the destination
 	 * @see 
 	 * <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Dijkstra">Algoritmo de Dijkstra (Wikipedia)</a><br>
 	 * <a href="https://www.youtube.com/watch?v=EFg3u_E6eHU">Cómo funciona el Algoritmo de Dijkstra (Youtube)</a>
 	 */
-	public int solveA() {
+	public int solve() {
 	
 		origin.setTotalRisk(0);
 		
