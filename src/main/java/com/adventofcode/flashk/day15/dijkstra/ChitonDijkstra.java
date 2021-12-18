@@ -1,23 +1,15 @@
 package com.adventofcode.flashk.day15.dijkstra;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import com.adventofcode.flashk.common.Vector2;
-
 public class ChitonDijkstra {
 
-	private Integer[][] riskMap;
+	private Node[][] riskMap;
 	private int maxX;
 	private int maxY;
-	
-	// Graph
-	private Map<Node, Node> createdNodes = new HashMap<>();
-	private Map<Node, Set<Node>> adjacencyList = new HashMap<>();
 
 	private Node origin;
 	private Node destination;
@@ -39,7 +31,7 @@ public class ChitonDijkstra {
 		maxY = initialMaxY * tileSize;
 		
 		// Initialize heat map values
-		riskMap = new Integer[maxY][maxX];
+		riskMap = new Node[maxY][maxX];
 		
 		for(int y = 0; y < maxY; y++) {
 			
@@ -51,44 +43,26 @@ public class ChitonDijkstra {
 			
 			for(int x = 0; x < maxX; x++) {
 				
+				// Calculate the risk for the n-tile
 				int tileX = x / initialMaxX;
 				int riskIncrement = tileY+tileX;
-		
-				// Index that iterates from 0 to max number cols.
 				int numberCol = x % initialMaxX;
-				
 				int originalRisk = Integer.valueOf(numbers[numberCol]);
 				int baseRisk = originalRisk + riskIncrement;
 				int modRisk = baseRisk % 10;
 				int divRisk = baseRisk / 10;
 				int realRisk = modRisk + divRisk;
 
-				riskMap[y][x] = realRisk;
-				//System.out.print(riskMap[y][x]);
-				Node currentNode = new Node(new Vector2(x, y));
+				// Add node to array
+				Node currentNode = new Node(x, y);
 				currentNode.setRisk(realRisk);
-				
-				createdNodes.put(currentNode, currentNode);
+				riskMap[y][x] = currentNode;
 				
 			}
-			System.out.println();
 		}
 		
-		System.out.println();
-		System.out.println(createdNodes.size());
-		
-		// Build adjacency list
-		for(Node node : createdNodes.keySet()) {
-			adjacencyList.put(node, getAdjacentNodes(node));
-		}
-		
-		origin = createdNodes.get(new Node(new Vector2(0,0)));
-		destination = createdNodes.get(new Node(new Vector2(maxX-1,maxY-1)));
-		
-		System.out.println(adjacencyList.size());
-		
-		// Initialize graph
-		//buildValueGraph();
+		origin = riskMap[0][0];
+		destination = riskMap[maxY-1][maxX-1];
 	}
 
 	/**
@@ -99,9 +73,6 @@ public class ChitonDijkstra {
 	 * <a href="https://www.youtube.com/watch?v=EFg3u_E6eHU">Cómo funciona el Algoritmo de Dijkstra (Youtube)</a>
 	 */
 	public int solveA() {
-		System.out.println();
-		//System.out.println("Nodes: " + createdNodes.size());
-		//System.out.println("Edges: " +graph.edges().size());
 	
 		origin.setTotalRisk(0);
 		
@@ -112,9 +83,9 @@ public class ChitonDijkstra {
 			
 			Node minNode = queue.poll();
 			minNode.setVisited(true);
+
+			Set<Node> adjacentNodes = getAdjacentNodesFromArray(minNode);
 			
-			//Set<Node> adjacentNodes = graph.successors(minNode);
-			Set<Node> adjacentNodes = adjacencyList.get(minNode);
 			for(Node adjacentNode : adjacentNodes) {
 				if(!adjacentNode.isVisited()) {
 					
@@ -134,49 +105,36 @@ public class ChitonDijkstra {
 		
 		return destination.getTotalRisk();
 	}
-
-/*
-	private void buildValueGraph() {
-		
-		//graph = ValueGraphBuilder.directed().expectedNodeCount(createdNodes.size()).build();
-		graph = GraphBuilder.undirected().expectedNodeCount(createdNodes.size()).build();
-		
-		for(Node node : createdNodes.keySet()) {
-			
-			// Nodes adjacent to current position
-			for(Node adjacentNode : adjacencyList.get(node)) {
-				graph.putEdge(node, adjacentNode);
-			}
-		}
-		System.out.println("finished");
-	}*/
-
-	private Set<Node> getAdjacentNodes(Node node) {
+	
+	private Set<Node> getAdjacentNodesFromArray(Node node) {
 		
 		Set<Node> adjacentNodes = new HashSet<>();
 		
-		int x = node.getPosition().getX();
-		int y = node.getPosition().getY();
+		int x = node.getX();
+		int y = node.getY();
 		
 		int right = x+1;
 		int left = x-1;
 		int up = y-1;
 		int down = y+1;
 		
+		// In case of using real nodes, it would be:
+		// adjacentNodes.add(new Node(x,y));
+		
 		if(!isOutOfBounds(y, right)) {
-			adjacentNodes.add(getCreatedNode(right,y));
+			adjacentNodes.add(riskMap[y][right]);
 		}
 		
 		if(!isOutOfBounds(y, left)) {
-			adjacentNodes.add(getCreatedNode(left,y));
+			adjacentNodes.add(riskMap[y][left]);
 		}
 		
 		if(!isOutOfBounds(up, y)) {
-			adjacentNodes.add(getCreatedNode(x,up));
+			adjacentNodes.add(riskMap[up][x]);
 		}
 		
 		if(!isOutOfBounds(down, y)) {
-			adjacentNodes.add(getCreatedNode(x,down));
+			adjacentNodes.add(riskMap[down][x]);
 		}
 		
 		return adjacentNodes;
@@ -184,12 +142,6 @@ public class ChitonDijkstra {
 	
 	private boolean isOutOfBounds(int y, int x) {
 		return (y >= maxY || y < 0) || (x >= maxX || x < 0);
-	}
-	
-	private Node getCreatedNode(int x, int y) {
-		Node createdNode = new Node(new Vector2(x,y));
-		return createdNodes.get(createdNode);
-		
 	}
 	
 }
