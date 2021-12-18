@@ -27,7 +27,6 @@ public class Day15Test extends PuzzleTest {
 	private final static String INPUT_FOLDER = "day_15";
 	
 	private final static String INPUT_FILE_SAMPLE_SPECIAL = "debug_special.input";
-	private final static String INPUT_FILE_SAMPLE_PER_5 = "sample_per5.input";
 	
 	@BeforeAll
 	public static void beforeAll() {
@@ -92,7 +91,7 @@ public class Day15Test extends PuzzleTest {
 	public void testSolvePart2Sample() {
 		
 		System.out.print("2 | sample | ");
-		System.out.println();
+
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
@@ -113,10 +112,10 @@ public class Day15Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs, 5);
-		System.out.println("solution: " + chiton.solveA() + " |");
-		// assertEquals(315, chiton.solveA());
 		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs, 5);
+		assertEquals(2778, chiton.solveA());
+
 	}
 
 }

@@ -1,25 +1,30 @@
 package com.adventofcode.flashk.day15.dijkstra;
 
-import com.adventofcode.flashk.common.Vector2;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
-@ToString
 public class Node implements Comparable<Node> {
 
-	private Vector2 position;
+	private final Integer x;
+	private final Integer y;
+
+	@Setter
 	private Integer totalRisk = Integer.MAX_VALUE;
+	
+	@Setter
 	private Integer risk;
 	
+	@Setter
 	private Node parent = null;
+	
+	@Setter
 	private boolean visited = false;
 	
-	public Node(Vector2 position) {
-		this.position = position;
+	public Node(Integer x, Integer y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	@Override
@@ -31,7 +36,8 @@ public class Node implements Comparable<Node> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((x == null) ? 0 : x.hashCode());
+		result = prime * result + ((y == null) ? 0 : y.hashCode());
 		return result;
 	}
 
@@ -44,13 +50,28 @@ public class Node implements Comparable<Node> {
 		if (getClass() != obj.getClass())
 			return false;
 		Node other = (Node) obj;
-		if (position == null) {
-			if (other.position != null)
+		if (x == null) {
+			if (other.x != null)
 				return false;
-		} else if (!position.equals(other.position))
+		} else if (!x.equals(other.x))
+			return false;
+		if (y == null) {
+			if (other.y != null)
+				return false;
+		} else if (!y.equals(other.y))
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Node [x=" + x + ", y=" + y + ", totalRisk=" + totalRisk + ", risk=" + risk + ", parent=" + parent
+				+ ", visited=" + visited + "]";
+	}
+	
+	
+
+
 
 	    
 }
