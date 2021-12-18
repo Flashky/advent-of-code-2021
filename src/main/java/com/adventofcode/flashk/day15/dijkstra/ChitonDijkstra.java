@@ -22,33 +22,14 @@ public class ChitonDijkstra {
 	private Node destination;
 	
 	public ChitonDijkstra(List<String> inputs) {
-		
-		maxX = inputs.get(0).length();
-		maxY = inputs.size();
-
-		// Initialize heat map values
-		riskMap = new Integer[maxY][maxX];
-		
-		Map<Vector2, List<Vector2>> adjacencyList = new HashMap<>();
-		
-		
-		for(int y = 0; y < maxY; y++) {
-			
-			String[] numbers = inputs.get(y).split("|");
-			
-			for(int x = 0; x < maxX; x++) {
-				riskMap[y][x] = Integer.valueOf(numbers[x]);
-				Vector2 currentPos = new Vector2(x, y);
-				adjacencyList.put(currentPos, getAdjacentPositions(currentPos));
-			}
-		}
-
-		// Initialize graph
-		buildValueGraph(adjacencyList);
-
+		initialize(inputs, 1);
 	}
 	
 	public ChitonDijkstra(List<String> inputs, int tileSize) {
+		initialize(inputs, tileSize);
+	}
+
+	private void initialize(List<String> inputs, int tileSize) {
 		
 		int initialMaxX = inputs.get(0).length();
 		int initialMaxY = inputs.size();
@@ -67,35 +48,6 @@ public class ChitonDijkstra {
 			int numberRow = y % initialMaxY;
 			String[] numbers = inputs.get(numberRow).split("|");
 			
-			// tile 0: y = 0-9
-			// tile 1: y = 10-19
-			// tile 2: y = 20-29
-			// tile 3: y = 30-39
-			// tile 4: y = 40-49
-			
-			// Idea:
-			// 1. Calcular el número de tileY en el que estamos [0 - tileSize-1]
-			// 2. Calcular el número de tileX en el que estamos [0 - tileSize-1]
-			// 3. Sumar: tileIncrement = tileY+tileX
-			// 3. riskMap[y][x] = Integer.valueOf(numbers[x]) + tileIncrement 
-			
-			// Formula para determinar tileY/tileX?
-			// Para un array de 10x10, división quedándo solo la parte entera: 
-			// [0-9] / 10 = 0
-			// [10-19] / 10 = 1
-			// [20-29] / 10 = 2
-			// [30-39] / 10 = 3
-			// [40-49] / 10 = 4
-
-			// ¿Y si el array es de tamaño 5?
-			// [0-4] / 5 = 0
-			// [5-9] / 5 = 1
-			// Y así.
-			
-			// Por lo tanto, la fórmula es: 
-			// tileY = y / initialMaxY
-			// tileX = x / initialMaxX
-			
 			int tileY = y / initialMaxY;
 			
 			for(int x = 0; x < maxX; x++) {
@@ -111,13 +63,6 @@ public class ChitonDijkstra {
 				int modRisk = baseRisk % 10;
 				int divRisk = baseRisk / 10;
 				int realRisk = modRisk + divRisk;
-			
-				
-				// tile 0: x = 0-9
-				// tile 1: x = 10-19
-				// tile 2: x = 20-29
-				// tile 3: x = 30-39
-				// tile 4: x = 40-49
 
 				riskMap[y][x] = realRisk;
 				//System.out.print(riskMap[y][x]);
@@ -130,8 +75,6 @@ public class ChitonDijkstra {
 		
 		// Initialize graph
 		buildValueGraph(adjacencyList);
-		
-		
 	}
 
 	/**
