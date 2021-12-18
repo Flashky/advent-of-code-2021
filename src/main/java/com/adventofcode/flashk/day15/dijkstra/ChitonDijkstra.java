@@ -203,8 +203,7 @@ public class ChitonDijkstra {
 				}
 			}
 		}
-		
-		System.out.println("finished");
+
 	}
 
 	private List<Vector2> getAdjacentPositions(Vector2 position) {
