@@ -18,7 +18,6 @@ import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
 import com.adventofcode.flashk.common.test.utils.Util;
-import com.adventofcode.flashk.day15.dijkstra.ChitonDijkstra;
 
 @DisplayName(TestDisplayName.DAY_15)
 @TestMethodOrder(OrderAnnotation.class)
@@ -46,7 +45,7 @@ public class Day15Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		Chiton chiton = new Chiton(inputs);
 		assertEquals(40, chiton.solveA());
 		
 	}
@@ -63,7 +62,7 @@ public class Day15Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_SPECIAL);
 		
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		Chiton chiton = new Chiton(inputs);
 		assertEquals(7, chiton.solveA());
 	}
 	
@@ -79,7 +78,7 @@ public class Day15Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
+		Chiton chiton = new Chiton(inputs);
 		assertEquals(423,chiton.solveA());
 	}
 	
@@ -95,7 +94,7 @@ public class Day15Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs, 5);
+		Chiton chiton = new Chiton(inputs, 5);
 		assertEquals(315, chiton.solveA());
 		
 		
@@ -113,7 +112,7 @@ public class Day15Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs, 5);
+		Chiton chiton = new Chiton(inputs, 5);
 		assertEquals(2778, chiton.solveA());
 
 	}

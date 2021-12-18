@@ -1,4 +1,4 @@
-package com.adventofcode.flashk.day15.dijkstra;
+package com.adventofcode.flashk.day15;
 
 import lombok.Getter;
 import lombok.Setter;
