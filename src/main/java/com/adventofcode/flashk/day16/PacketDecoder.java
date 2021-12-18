@@ -1,5 +1,6 @@
 package com.adventofcode.flashk.day16;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -152,28 +153,138 @@ public class PacketDecoder {
 		return version;
 	}
 
-	public Integer solveB() {
+	public Long solveB() {
 		
-		// In a postfix
+		// Build expression tree
 		Stack<Packet> packetStack = new Stack<>();
 		
 		while(!packets.isEmpty()) {
 			Packet currentPacket = packets.poll();
 			
-			if(currentPacket.getSubpacketsNumber() != null) {
+			if(LengthTypeId.SUBPACKETS_NUMBER.equals(currentPacket.getLengthTypeId())) {
 				
 				// Packet with subpackets by number
 				for(int i = 0; i < currentPacket.getSubpacketsNumber(); i++) {
 					Packet child = packets.poll();
 					currentPacket.addSubpacket(child);
+					packets.add(child);
+				}
+
+				packetStack.add(currentPacket);
+				
+			} else if(currentPacket.getSubpacketsLength() != null) {
+				
+				// Packet with subpackets by length
+				int totalLength = 0;
+				
+				while(totalLength < currentPacket.getSubpacketsLength()) {
+					Packet child = packets.poll();
+					currentPacket.addSubpacket(child);
+					totalLength += child.getLength();
+					packets.add(child);
 				}
 				
 				packetStack.add(currentPacket);
+				
 			}
-			
-		
 		}
-		return null;
+		
+		// Traverse expression tree
+		Packet root = packetStack.pop();
+		Long result = evaluate(root);
+		
+		return result;
+
+	}
+
+	private Long evaluate(Packet currentPacket) {
+
+		// Leaf nodes
+		if(TypeId.LITERAL.equals(currentPacket.getTypeId())) {
+			return currentPacket.getLiteral();
+		}
+
+		List<Long> literalValues = new ArrayList<>();
+		for(Packet subpacket : currentPacket.getSubpackets()) {
+			Long literal = evaluate(subpacket);
+			literalValues.add(literal);
+		}
+
+		return operate(currentPacket.getTypeId(), literalValues);
+	}
+
+	private Long operate(TypeId typeId, List<Long> literalValues) {
+		
+		switch(typeId) {
+			case SUM: 			return sum(literalValues);
+			case PRODUCT: 		return product(literalValues);
+			case MINIMUM: 		return min(literalValues);
+			case MAXIMUM: 		return max(literalValues);
+			case LESS_THAN: 	return lessThan(literalValues.get(0), literalValues.get(1));
+			case GREATER_THAN: 	return greaterThan(literalValues.get(0), literalValues.get(1));
+			case EQUAL_TO:		return equalTo(literalValues.get(0), literalValues.get(1));
+			default: throw new IllegalArgumentException("Unknown operation: " + typeId);
+		}
+
+	}
+
+	private Long product(List<Long> literalValues) {
+		
+		Long result = 1L;
+		
+		for(Long literal : literalValues) {
+			result *= literal;
+		}
+		
+		return result;
+	}
+
+	private Long sum(List<Long> literalValues) {
+
+		Long result = 0L;
+		
+		for(Long literal : literalValues) {
+			result += literal;
+		}
+		
+		return result;
+	}
+	
+
+	private Long min(List<Long> literalValues) {
+
+		Long result = Long.MAX_VALUE;
+		
+		for(Long literal: literalValues) {
+			result =  Math.min(literal, result);
+		}
+		
+		return result;
+	}
+	
+
+	private Long max(List<Long> literalValues) {
+		Long result = Long.MIN_VALUE;
+		
+		for(Long literal: literalValues) {
+			result =  Math.max(literal, result);
+		}
+		
+		return result;
+	}
+	
+
+	private Long lessThan(Long a, Long b) {
+		return (a < b) ? 1L : 0L; 
+	}
+	
+	private Long greaterThan(Long a, Long b) {
+		return (a > b) ? 1L : 0L; 
+	}
+	
+
+	private Long equalTo(Long a, Long b) {
+		return (a == b) ? 1L : 0L; 
 	}
 
 }
