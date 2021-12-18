@@ -12,7 +12,9 @@ import lombok.ToString;
 public class Node implements Comparable<Node> {
 
 	private Vector2 position;
-	private Integer risk = Integer.MAX_VALUE;
+	private Integer totalRisk = Integer.MAX_VALUE;
+	private Integer risk;
+	
 	private Node parent = null;
 	private boolean visited = false;
 	
@@ -22,7 +24,7 @@ public class Node implements Comparable<Node> {
 
 	@Override
 	public int compareTo(Node other) {
-		return Integer.compare(risk, other.risk);
+		return Integer.compare(totalRisk, other.totalRisk);
 	}
 
 	@Override
@@ -49,6 +51,6 @@ public class Node implements Comparable<Node> {
 			return false;
 		return true;
 	}
-	
+
 	    
 }
