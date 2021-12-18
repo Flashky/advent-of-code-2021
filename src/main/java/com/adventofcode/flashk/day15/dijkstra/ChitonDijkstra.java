@@ -1,15 +1,13 @@
 package com.adventofcode.flashk.day15.dijkstra;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 import com.adventofcode.flashk.common.Vector2;
-import com.google.common.graph.MutableValueGraph;
-import com.google.common.graph.ValueGraphBuilder;
 
 public class ChitonDijkstra {
 
@@ -17,7 +15,10 @@ public class ChitonDijkstra {
 	private int maxX;
 	private int maxY;
 	
-	private MutableValueGraph<Node,Integer> graph;
+	// Graph
+	private Map<Node, Node> createdNodes = new HashMap<>();
+	private Map<Node, Set<Node>> adjacencyList = new HashMap<>();
+
 	private Node origin;
 	private Node destination;
 	
@@ -39,8 +40,6 @@ public class ChitonDijkstra {
 		
 		// Initialize heat map values
 		riskMap = new Integer[maxY][maxX];
-		
-		Map<Vector2, List<Vector2>> adjacencyList = new HashMap<>();
 		
 		for(int y = 0; y < maxY; y++) {
 			
@@ -66,15 +65,30 @@ public class ChitonDijkstra {
 
 				riskMap[y][x] = realRisk;
 				//System.out.print(riskMap[y][x]);
-				Vector2 currentPos = new Vector2(x, y);
-				adjacencyList.put(currentPos, getAdjacentPositions(currentPos));
+				Node currentNode = new Node(new Vector2(x, y));
+				currentNode.setRisk(realRisk);
+				
+				createdNodes.put(currentNode, currentNode);
 				
 			}
-			//System.out.println();
+			System.out.println();
 		}
 		
+		System.out.println();
+		System.out.println(createdNodes.size());
+		
+		// Build adjacency list
+		for(Node node : createdNodes.keySet()) {
+			adjacencyList.put(node, getAdjacentNodes(node));
+		}
+		
+		origin = createdNodes.get(new Node(new Vector2(0,0)));
+		destination = createdNodes.get(new Node(new Vector2(maxX-1,maxY-1)));
+		
+		System.out.println(adjacencyList.size());
+		
 		// Initialize graph
-		buildValueGraph(adjacencyList);
+		//buildValueGraph();
 	}
 
 	/**
@@ -86,9 +100,10 @@ public class ChitonDijkstra {
 	 */
 	public int solveA() {
 		System.out.println();
-		System.out.println("Nodes: " + graph.nodes().size());
-		System.out.println("Edges: " +graph.edges().size());
-		origin.setRisk(0);
+		//System.out.println("Nodes: " + createdNodes.size());
+		//System.out.println("Edges: " +graph.edges().size());
+	
+		origin.setTotalRisk(0);
 		
 		PriorityQueue<Node> queue = new PriorityQueue<>();
 		queue.add(origin);
@@ -98,12 +113,18 @@ public class ChitonDijkstra {
 			Node minNode = queue.poll();
 			minNode.setVisited(true);
 			
-			Set<Node> adjacentNodes = graph.successors(minNode);
+			//Set<Node> adjacentNodes = graph.successors(minNode);
+			Set<Node> adjacentNodes = adjacencyList.get(minNode);
 			for(Node adjacentNode : adjacentNodes) {
 				if(!adjacentNode.isVisited()) {
-					Integer risk = graph.edgeValueOrDefault(minNode, adjacentNode, Integer.MAX_VALUE);
-					if(adjacentNode.getRisk() > minNode.getRisk() + risk) {
-						adjacentNode.setRisk(minNode.getRisk() + risk);
+					
+					// Cost of moving to the adjacent node
+					Integer risk = adjacentNode.getRisk();
+					// Cost of moving to the adjacent node + total cost to reach to this node
+					Integer estimatedRisk = minNode.getTotalRisk() + risk;
+					
+					if(adjacentNode.getTotalRisk() > estimatedRisk) {
+						adjacentNode.setTotalRisk(estimatedRisk);
 						adjacentNode.setParent(minNode);
 						queue.add(adjacentNode);
 					}
@@ -111,62 +132,31 @@ public class ChitonDijkstra {
 			}
 		}
 		
-		return destination.getRisk();
+		return destination.getTotalRisk();
 	}
 
-
-	private void buildValueGraph(Map<Vector2, List<Vector2>> adjacencyList) {
+/*
+	private void buildValueGraph() {
 		
-		graph = ValueGraphBuilder.directed().build();
+		//graph = ValueGraphBuilder.directed().expectedNodeCount(createdNodes.size()).build();
+		graph = GraphBuilder.undirected().expectedNodeCount(createdNodes.size()).build();
 		
-		// Temporal store to avoid duplicating nodes
-		Map<Node,Node> createdNodes = new HashMap<>();
-
-		for(Vector2 position : adjacencyList.keySet()) {
-			
-			Node node = new Node(position);
-			
-			if(createdNodes.containsKey(node)) {
-				node = createdNodes.get(node);
-			} else {
-				createdNodes.put(node,node);
-			}
-			
-			if(position.getX() == 0 && position.getY() == 0) {
-				origin = node;
-			}
-			
-			graph.addNode(node);
-			Integer edgeValue = getRiskValue(position);
+		for(Node node : createdNodes.keySet()) {
 			
 			// Nodes adjacent to current position
-			for(Vector2 adjacentVector : adjacencyList.get(position)) {
-				
-				Node adjacentNode = new Node(adjacentVector);
-				
-				if(createdNodes.containsKey(adjacentNode)) {
-					adjacentNode = createdNodes.get(adjacentNode);
-				} else {
-					createdNodes.put(adjacentNode,adjacentNode);
-				}
-				
-				graph.putEdgeValue(adjacentNode, node, edgeValue);
-				
-				if (adjacentVector.getX() == maxX-1 && adjacentVector.getY() == maxY - 1) {
-					destination = adjacentNode;
-				}
+			for(Node adjacentNode : adjacencyList.get(node)) {
+				graph.putEdge(node, adjacentNode);
 			}
 		}
 		System.out.println("finished");
-	}
+	}*/
 
-	private List<Vector2> getAdjacentPositions(Vector2 position) {
-		return getAdjacentPositions(position.getY(),position.getX());
-	}
-	
-	private List<Vector2> getAdjacentPositions(int y, int x) {
+	private Set<Node> getAdjacentNodes(Node node) {
 		
-		List<Vector2> adjacentCells = new ArrayList<>();
+		Set<Node> adjacentNodes = new HashSet<>();
+		
+		int x = node.getPosition().getX();
+		int y = node.getPosition().getY();
 		
 		int right = x+1;
 		int left = x-1;
@@ -174,29 +164,32 @@ public class ChitonDijkstra {
 		int down = y+1;
 		
 		if(!isOutOfBounds(y, right)) {
-			adjacentCells.add(new Vector2(right, y));
+			adjacentNodes.add(getCreatedNode(right,y));
 		}
 		
 		if(!isOutOfBounds(y, left)) {
-			adjacentCells.add(new Vector2(left, y));
+			adjacentNodes.add(getCreatedNode(left,y));
 		}
 		
 		if(!isOutOfBounds(up, y)) {
-			adjacentCells.add(new Vector2(x, up));
+			adjacentNodes.add(getCreatedNode(x,up));
 		}
 		
 		if(!isOutOfBounds(down, y)) {
-			adjacentCells.add(new Vector2(x, down));
+			adjacentNodes.add(getCreatedNode(x,down));
 		}
 		
-		return adjacentCells;
+		return adjacentNodes;
 	}
 	
 	private boolean isOutOfBounds(int y, int x) {
 		return (y >= maxY || y < 0) || (x >= maxX || x < 0);
 	}
 	
-	private Integer getRiskValue(Vector2 cell) {
-		return riskMap[cell.getY()][cell.getX()];
+	private Node getCreatedNode(int x, int y) {
+		Node createdNode = new Node(new Vector2(x,y));
+		return createdNodes.get(createdNode);
+		
 	}
+	
 }
