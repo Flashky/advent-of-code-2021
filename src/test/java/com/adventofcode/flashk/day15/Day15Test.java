@@ -45,8 +45,8 @@ public class Day15Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		assertEquals(40, chiton.solveA());
 		
 	}
@@ -62,8 +62,8 @@ public class Day15Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_SPECIAL);
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		assertEquals(7, chiton.solveA());
 	}
 	
@@ -78,8 +78,8 @@ public class Day15Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		
+		ChitonDijkstra chiton = new ChitonDijkstra(inputs);
 		assertEquals(423,chiton.solveA());
 	}
 	
