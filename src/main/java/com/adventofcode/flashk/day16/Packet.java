@@ -1,5 +1,8 @@
 package com.adventofcode.flashk.day16;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,5 +24,11 @@ public class Packet {
 	private Long literal;
 	
 	private Integer length;
+	
+	private List<Packet> subpackets = new ArrayList<>();
+	
+	public void addSubpacket(Packet subpacket) {
+		this.subpackets.add(subpacket);
+	}
 	
 }

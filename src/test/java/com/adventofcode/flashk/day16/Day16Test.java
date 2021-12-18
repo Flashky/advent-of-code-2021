@@ -25,11 +25,15 @@ public class Day16Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day_16";
 
+	// Part 1 inputs
 	private final static String INPUT_FILE_SAMPLE_LITERAL = "sample_literal.input";
 	private final static String INPUT_FILE_SAMPLE_12 = "sample_12.input";
 	private final static String INPUT_FILE_SAMPLE_16 = "sample_16.input";
 	private final static String INPUT_FILE_SAMPLE_23 = "sample_23.input";
 	private final static String INPUT_FILE_SAMPLE_31 = "sample_31.input";
+	
+	// Part 2 inputs
+	private final static String INPUT_FILE_SAMPLE_OP_0_SUM = "sample_op_0_sum.input";
 	
 	@BeforeAll
 	public static void beforeAll() {
@@ -37,29 +41,12 @@ public class Day16Test extends PuzzleTest {
 	}
 
 	
-	@Test
-	@Order(1)
-	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.SAMPLE)
-	@DisplayName(TestDisplayName.PART_ONE_SAMPLE)
-	public void testSolvePart1Sample() {
-		
-		System.out.print("1 | sample | ");
-		
-		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		
-		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA();
-		
-		//assertEquals(,result);
-	}
 	
 	@Test
 	@Order(1)
 	@Tag(TestTag.PART_ONE)
 	@Tag(TestTag.DEBUG)
-	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - Literal")
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE + " - Literal")
 	public void testSolvePart1SampleLiteral() {
 		
 		System.out.print("1 | sample literal | ");
@@ -73,27 +60,10 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(1)
+	@Order(2)
 	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.DEBUG)
-	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 12")
-	public void testSolvePart1Sample12() {
-		
-		System.out.print("1 | sample 12 | ");
-		
-		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_12);
-		
-		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA();
-		assertEquals(12, result);
-	}
-	
-	@Test
-	@Order(1)
-	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.DEBUG)
-	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 16")
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE + " - 16")
 	public void testSolvePart1Sample16() {
 		
 		System.out.print("1 | sample 16 | ");
@@ -102,16 +72,33 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_16);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA();
-		assertEquals(16, result);
+		assertEquals(16, packetDecoder.solveA());
 	}
 	
+	@Test
+	@Order(3)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE + " - 12")
+	public void testSolvePart1Sample() {
+		
+		System.out.print("1 | sample 12 | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_12);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(12, packetDecoder.solveA());
+		
+	}
+	
+
 	
 	@Test
-	@Order(1)
+	@Order(4)
 	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.DEBUG)
-	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 23")
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE + " - 23")
 	public void testSolvePart1Sample23() {
 		
 		System.out.print("1 | sample 23 | ");
@@ -120,15 +107,15 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_23);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA();
-		assertEquals(23, result);
+		assertEquals(23, packetDecoder.solveA());
+		
 	}
 	
 	@Test
-	@Order(1)
+	@Order(5)
 	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.DEBUG)
-	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - 31")
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_ONE_SAMPLE + " - 31")
 	public void testSolvePart1Sample31() {
 		
 		System.out.print("1 | sample 31 | ");
@@ -141,7 +128,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(2)
+	@Order(6)
 	@Tag(TestTag.PART_ONE)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_ONE_INPUT)
@@ -153,27 +140,28 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		int result = packetDecoder.solveA();
-		System.out.println(packetDecoder.solveA());
-		//assertEquals(31, packetDecoder.solveA());
+		assertEquals(854, packetDecoder.solveA());
 	}
 	
 	@Test
-	@Order(3)
+	@Order(7)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
-	@DisplayName(TestDisplayName.PART_TWO_SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - sum")
 	public void testSolvePart2Sample() {
 		
-		System.out.print("2 | sample | ");
+		System.out.print("2 | sample sum | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_0_SUM);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(3, packetDecoder.solveB());
 		
 	}
 	
 	@Test
-	@Order(4)
+	@Order(8)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_TWO_INPUT)
@@ -183,7 +171,9 @@ public class Day16Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		
+	
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		System.out.println(packetDecoder.solveB());
 	}
 
 }
