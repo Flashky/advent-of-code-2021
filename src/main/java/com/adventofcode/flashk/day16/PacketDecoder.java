@@ -54,9 +54,10 @@ public class PacketDecoder {
 
 	}
 
-	private Queue<Packet> binaryToPackets(String binaryInput) {
+	private Queue<Packet> binaryToPackets(String input) {
 
 		Queue<Packet> packets = new LinkedList<>();
+		String binaryInput = input;
 		
 		while(hasPackets(binaryInput)) {
 			
