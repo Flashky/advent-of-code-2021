@@ -33,7 +33,14 @@ public class Day16Test extends PuzzleTest {
 	private final static String INPUT_FILE_SAMPLE_31 = "sample_31.input";
 	
 	// Part 2 inputs
-	private final static String INPUT_FILE_SAMPLE_OP_0_SUM = "sample_op_0_sum.input";
+	private final static String INPUT_FILE_SAMPLE_OP_0_SUM 		= "sample_op_0_sum.input";
+	private final static String INPUT_FILE_SAMPLE_OP_1_PRODUCT 	= "sample_op_1_product.input";
+	private final static String INPUT_FILE_SAMPLE_OP_2_MIN 		= "sample_op_2_min.input";
+	private final static String INPUT_FILE_SAMPLE_OP_3_MAX 		= "sample_op_3_max.input";
+	private final static String INPUT_FILE_SAMPLE_OP_5_LESS		= "sample_op_5_less.input";
+	private final static String INPUT_FILE_SAMPLE_OP_6_GREATER	= "sample_op_6_greater.input";
+	private static final String INPUT_FILE_SAMPLE_OP_7_EQUALS 	= "sample_op_7_equal.input";
+	private final static String INPUT_FILE_SAMPLE_OP_COMPLEX	= "sample_op_complex.input";
 	
 	@BeforeAll
 	public static void beforeAll() {
@@ -156,7 +163,126 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_0_SUM);
 		
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		//assertEquals(3, packetDecoder.solveB());
+		assertEquals(3, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(8)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - product")
+	public void testSolvePart2SampleProduct() {
+		
+		System.out.print("2 | sample product | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_1_PRODUCT);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(54, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(9)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - min")
+	public void testSolvePart2SampleMin() {
+		
+		System.out.print("2 | sample min | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_2_MIN);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(7, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(9)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - max")
+	public void testSolvePart2SampleMax() {
+		
+		System.out.print("2 | sample max | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_3_MAX);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(9, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(10)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - less")
+	public void testSolvePart2SampleLessThan() {
+		
+		System.out.print("2 | sample greater | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_5_LESS);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(1, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(11)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - greater")
+	public void testSolvePart2SampleGreaterThan() {
+		
+		System.out.print("2 | sample greater | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_6_GREATER);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(0, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(11)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - equal")
+	public void testSolvePart2SampleEqualTo() {
+		
+		System.out.print("2 | sample equals | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_7_EQUALS);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(0, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(12)
+	@Tag(TestTag.PART_TWO)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - complex")
+	public void testSolvePart2SampleComplexOperation() {
+		
+		System.out.print("2 | sample complex | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_COMPLEX);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		assertEquals(1, packetDecoder.solveB());
 		
 	}
 	
