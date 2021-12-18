@@ -159,8 +159,18 @@ public class PacketDecoder {
 		while(!packets.isEmpty()) {
 			Packet currentPacket = packets.poll();
 			
-			switch(currentPacket.getTypeId()) { 
+			if(currentPacket.getSubpacketsNumber() != null) {
+				
+				// Packet with subpackets by number
+				for(int i = 0; i < currentPacket.getSubpacketsNumber(); i++) {
+					Packet child = packets.poll();
+					currentPacket.addSubpacket(child);
+				}
+				
+				packetStack.add(currentPacket);
 			}
+			
+		
 		}
 		return null;
 	}
