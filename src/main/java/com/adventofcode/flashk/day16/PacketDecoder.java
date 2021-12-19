@@ -144,18 +144,13 @@ public class PacketDecoder {
 		Packet currentPacket = null;
 		
 		while(!packets.isEmpty()) {
-			//Packet currentPacket = packets.poll();
 			
-			// Treat the deque as a stack
-			// - Retrieve literals (which are at the tail of the deque)
-			// - Move already processed nodes to an auxiliar stack
 			currentPacket = packets.pollLast();
 			
 			if(TypeId.LITERAL.equals(currentPacket.getTypeId())) {
 				packetStack.push(currentPacket);
 			} else if(LengthTypeId.SUBPACKETS_NUMBER.equals(currentPacket.getLengthTypeId())){
-
-					
+	
 					// Packet with subpackets by number
 					for(int i = 0; i < currentPacket.getSubpacketsNumber(); i++) {
 						Packet child = packetStack.pop();
@@ -173,6 +168,7 @@ public class PacketDecoder {
 						Packet child = packetStack.pop();
 						totalLength += child.getTotalLength();
 						currentPacket.addSubpacket(child);
+
 					}
 					
 					packetStack.push(currentPacket);
