@@ -206,7 +206,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(9)
+	@Order(10)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - max")
@@ -224,13 +224,13 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(10)
+	@Order(11)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - less")
 	public void testSolvePart2SampleLessThan() {
 		
-		System.out.print("2 | sample greater | ");
+		System.out.print("2 | sample less | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_5_LESS);
@@ -242,7 +242,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(11)
+	@Order(12)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - greater")
@@ -260,7 +260,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(11)
+	@Order(13)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - equal")
@@ -278,7 +278,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(12)
+	@Order(14)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - complex")
@@ -296,13 +296,13 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(13)
+	@Order(15)
 	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.SAMPLE)
-	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - Multilevel (12)")
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_TWO_DEBUG + " - Multilevel (12)")
 	public void testSolvePart2MultilevelSample() {
 		
-		System.out.print("2 | sample 12 | ");
+		System.out.print("2 | debug 12 | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_12);
@@ -315,13 +315,13 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(13)
+	@Order(16)
 	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.SAMPLE)
-	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - Multilevel (31)")
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_TWO_DEBUG + " - Multilevel (31)")
 	public void testSolvePart2MultilevelSample2() {
 		
-		System.out.print("2 | sample 12 | ");
+		System.out.print("2 | debug 31 | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_31);
@@ -334,7 +334,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(8)
+	@Order(20)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_TWO_INPUT)
