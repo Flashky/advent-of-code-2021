@@ -69,6 +69,22 @@ public class TrickShot {
 			// Cuidado:
 			// - Son lanzamientos válidos lanzamientos horizontales y hacia abajo.
 			// - En ese caso, el punto y más alto es el punto de lanzamiento inicial (0,0).
+			
+			// Conceptos:
+			// - Ángulo de alcance (angle of reach) para alcanzar una coordenada
+			// http://www.sc.ehu.es/sbweb/fisica3/cinematica/curvilineo/curvilineo_3.html
+			//
+			// - Altura máxima: se da cuando v(y) = 0
+			// - Componentes de velocidad: no necesario en este caso:
+			// 		x e y decrecen de una manera constante independientemente del ángulo
+			
+			// Posible enfoque del problema:
+			// - Hay infinitas combinaciones de velocidad x e y, aunque se poden ciertos casos por ser inviables.
+			// - En vez de enfocar el problema desde el submarino, lo podemos enfocar desde la zona objetivo:
+			// 		-> Hay un número límitado de coordenadas en un cuadrado. 
+			// 		-> Por lo tanto, para cada coordenada perteneciente al cuadrado, calcularíamos ángulo rho de disparo para llegar al mismo.
+			
+			
 		}
 		
 		return 0;
