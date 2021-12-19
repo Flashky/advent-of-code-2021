@@ -134,6 +134,7 @@ public class Day16Test extends PuzzleTest {
 		assertEquals(31, packetDecoder.solveA());
 	}
 	
+	
 	@Test
 	@Order(6)
 	@Tag(TestTag.PART_ONE)
@@ -162,6 +163,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_0_SUM);
 		
+		// +[1,2] = 3
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(3, packetDecoder.solveB());
 		
@@ -179,6 +181,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_1_PRODUCT);
 		
+		// *[6,9] = 54
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(54, packetDecoder.solveB());
 		
@@ -196,6 +199,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_2_MIN);
 		
+		// min[7,8,9] = 7
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(7, packetDecoder.solveB());
 		
@@ -213,6 +217,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_3_MAX);
 		
+		// max[7,8,9] = 9
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(9, packetDecoder.solveB());
 		
@@ -230,6 +235,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_5_LESS);
 		
+		// less[5,15] = 1
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(1, packetDecoder.solveB());
 		
@@ -247,6 +253,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_6_GREATER);
 		
+		// greater[5,15] = 0
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(0, packetDecoder.solveB());
 		
@@ -264,6 +271,7 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_7_EQUALS);
 		
+		// equal[5,15] = 0
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(0, packetDecoder.solveB());
 		
@@ -281,8 +289,47 @@ public class Day16Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_OP_COMPLEX);
 		
+		// equal[+[1,3], *[2,2]] = equal[4.4] = 1
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		assertEquals(1, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(13)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - Multilevel (12)")
+	public void testSolvePart2MultilevelSample() {
+		
+		System.out.print("2 | sample 12 | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_12);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		
+		// +[+[10,11], +[12,13]] = +[21,25] = 46
+		assertEquals(46, packetDecoder.solveB());
+		
+	}
+	
+	@Test
+	@Order(13)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.SAMPLE)
+	@DisplayName(TestDisplayName.PART_TWO_SAMPLE + " - Multilevel (31)")
+	public void testSolvePart2MultilevelSample2() {
+		
+		System.out.print("2 | sample 12 | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_31);
+		
+		PacketDecoder packetDecoder = new PacketDecoder(inputs);
+		
+		// +[+[+[6, 6, 12, 15, 15]]] = 54
+		assertEquals(54, packetDecoder.solveB());
 		
 	}
 	
@@ -301,7 +348,7 @@ public class Day16Test extends PuzzleTest {
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		System.out.println(packetDecoder.solveB());
 		
-		// 131056233816 -> Too low
+		// 131056233816 -> Too low (probado dos veces por si acaso)
 	}
 
 }
