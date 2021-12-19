@@ -334,7 +334,7 @@ public class Day16Test extends PuzzleTest {
 	}
 	
 	@Test
-	@Order(20)
+	@Order(17)
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_TWO_INPUT)
@@ -346,9 +346,8 @@ public class Day16Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 	
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
-		System.out.println(packetDecoder.solveB());
-		
-		// 131056233816 -> Too low (probado dos veces por si acaso)
+		assertEquals(186189840660L, packetDecoder.solveB());
+
 	}
 
 }
