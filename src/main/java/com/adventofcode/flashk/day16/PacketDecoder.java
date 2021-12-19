@@ -263,7 +263,7 @@ public class PacketDecoder {
 	
 
 	private Long equalTo(Long a, Long b) {
-		return (a == b) ? 1L : 0L; 
+		return (a.equals(b)) ? 1L : 0L; 
 	}
 
 }
