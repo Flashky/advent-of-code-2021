@@ -8,13 +8,6 @@ import java.util.Stack;
 
 import com.adventofcode.flashk.common.BaseUtil;
 
-// Ideas para resolver:
-// https://www.geeksforgeeks.org/expression-tree/
-// http://www.it.uc3m.es/java/2011-12/units/arboles/guides/2/guide_es.html
-// El puzzle es también un árbol de expresión. 
-// Pero a diferencia de los árboles de expresión habituales, que son postfijos, este es prefijo.
-// Esto implica que primero meteremos operadores en la pila, cuando demos con un literal, sacaremos
-// el operador de la pila, y le asignaremos el literal.
 public class PacketDecoder {
 	
 	private final static Integer BITS_PACKET_VERSION = 3;
@@ -23,14 +16,6 @@ public class PacketDecoder {
 	private final static Integer BITS_SUBPACKETS_LENGTH = 15;
 	private final static Integer BITS_SUBPACKETS_NUMBER = 11;
 	private final static Integer BITS_NUMBER_GROUP = 5;
-
-
-	
-	// Cualquier PACKET_ID que no sea 100 será un operador
-	// La parte A no especifica que operador es, de momento no importa.
-	
-	// El primer paquete que aparece siempre ha de ser un operador.
-	// Los operadores pueden tener literales, pero los literales son nodos hoja, no pueden tener más paquetes por debajo.
 
 	private Deque<Packet> packets;
 	private Integer version = 0;
@@ -41,7 +26,7 @@ public class PacketDecoder {
 		String hexadecimalInput = inputs.get(0);
 		String binaryInput = BaseUtil.hexToBinaryPadLeft(hexadecimalInput);
 		
-		// Step 2 - Process all the binary packets and add it to a queue.
+		// Step 2 - Process all the binary packets and add it to a deque.
 		packets = binaryToPackets(binaryInput);
 
 	}
@@ -146,7 +131,14 @@ public class PacketDecoder {
 
 	public Long solveB() {
 		
-		// Build expression tree
+		// Build expression tree and then evaluate it
+		Packet rootPacket = buildExpressionTree();
+		return evaluate(rootPacket);
+
+	}
+
+	private Packet buildExpressionTree() {
+		
 		Stack<Packet> packetStack = new Stack<>();
 		
 		Packet currentPacket = null;
@@ -187,10 +179,7 @@ public class PacketDecoder {
 					
 			}
 		}
-				
-		// Traverse expression tree for evaluation
-		return evaluate(currentPacket);
-
+		return currentPacket;
 	}
 
 	private Long evaluate(Packet currentPacket) {
@@ -258,6 +247,7 @@ public class PacketDecoder {
 	}
 
 	private Long max(List<Long> literalValues) {
+		
 		Long result = Long.MIN_VALUE;
 		
 		for(Long literal: literalValues) {
