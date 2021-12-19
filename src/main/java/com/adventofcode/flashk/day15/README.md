@@ -30,7 +30,7 @@ Your goal is to find a path with the **lowest total risk**. In this example, a p
 1319128<b>13</b>7
 13599124<b>2</b>1
 31254216<b>3</b>9
-12931385</b>2</b>
+12931385</b>21</b>
 231194458<b>1</b>
 </pre>
 
@@ -166,4 +166,4 @@ Equipped with the full map, you can now find a path from the top left corner to 
 
 The total risk of this path is <code><b>315</b></code> (the starting position is still never entered, so its risk is not counted).
 
-Using the full map**, what is the lowest total risk of any path from the top left to the bottom right?**
+Using the full map, **what is the lowest total risk of any path from the top left to the bottom right?**
