@@ -17,8 +17,8 @@ public class Packet {
 	private LengthTypeId lengthTypeId;
 	
 	// Only operators
-	private Integer subpacketsLength;
-	private Integer subpacketsNumber;
+	private Integer subpacketsLength = 0;
+	private Integer subpacketsNumber = 0;
 	
 	// Only literals
 	private Long literal;
@@ -28,7 +28,42 @@ public class Packet {
 	private List<Packet> subpackets = new ArrayList<>();
 	
 	public void addSubpacket(Packet subpacket) {
+		
+		switch(lengthTypeId) {
+		
+			case SUBPACKETS_NUMBER: {
+				if(subpackets.size() == subpacketsNumber) {
+					throw new IllegalArgumentException("Packet has reached maximum number of subpackets (1).");
+				}
+				this.subpacketsLength += subpacket.getTotalLength();
+			} break;
+			
+			case SUBPACKETS_LENGTH: {
+				if(subpacket.getTotalLength() > this.getSubpacketsLength()) {
+					throw new IllegalArgumentException("Packet has reached maximum number of subpackets (2).");
+				}
+				this.subpacketsNumber++;
+			} break;
+			
+			default: throw new IllegalArgumentException("Cannot add subpackets to a literal");
+		}
+		/*
+		if(LengthTypeId.SUBPACKETS_NUMBER.equals(lengthTypeId)) {
+			if(subpackets.size() == subpacketsNumber) {
+				throw new IllegalArgumentException("Packet has reached maximum number of subpackets.");
+			}
+			this.subpacketsLength += subpacket.length;
+		} else if(LengthTypeId.SUBPACKETS_LENGTH.equals(lengthTypeId)) {
+			
+			this.subpacketsNumber++;
+		}*/
+		
 		this.subpackets.add(subpacket);
+		
+	}
+	
+	public Integer getTotalLength() {
+		return length + subpacketsLength;
 	}
 	
 }
