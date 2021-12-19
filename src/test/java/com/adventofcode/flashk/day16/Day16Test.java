@@ -300,6 +300,8 @@ public class Day16Test extends PuzzleTest {
 	
 		PacketDecoder packetDecoder = new PacketDecoder(inputs);
 		System.out.println(packetDecoder.solveB());
+		
+		// 131056233816 -> Too low
 	}
 
 }

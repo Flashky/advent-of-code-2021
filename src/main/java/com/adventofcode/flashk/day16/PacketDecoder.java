@@ -1,9 +1,9 @@
 package com.adventofcode.flashk.day16;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 
 import com.adventofcode.flashk.common.BaseUtil;
@@ -32,7 +32,7 @@ public class PacketDecoder {
 	// El primer paquete que aparece siempre ha de ser un operador.
 	// Los operadores pueden tener literales, pero los literales son nodos hoja, no pueden tener más paquetes por debajo.
 
-	private Queue<Packet> packets;
+	private Deque<Packet> packets;
 	private Integer version = 0;
 	
 	public PacketDecoder(List<String> inputs) {
@@ -55,9 +55,9 @@ public class PacketDecoder {
 
 	}
 
-	private Queue<Packet> binaryToPackets(String input) {
+	private Deque<Packet> binaryToPackets(String input) {
 
-		Queue<Packet> packets = new LinkedList<>();
+		Deque<Packet> packets = new ArrayDeque<>();
 		String binaryInput = input;
 		
 		while(hasPackets(binaryInput)) {
@@ -158,42 +158,47 @@ public class PacketDecoder {
 		// Build expression tree
 		Stack<Packet> packetStack = new Stack<>();
 		
+		Packet currentPacket = null;
+		
 		while(!packets.isEmpty()) {
-			Packet currentPacket = packets.poll();
+			//Packet currentPacket = packets.poll();
 			
-			if(LengthTypeId.SUBPACKETS_NUMBER.equals(currentPacket.getLengthTypeId())) {
-				
-				// Packet with subpackets by number
-				for(int i = 0; i < currentPacket.getSubpacketsNumber(); i++) {
-					Packet child = packets.poll();
-					currentPacket.addSubpacket(child);
-					packets.add(child);
-				}
+			// Treat the deque as a stack
+			// - Retrieve literals (which are at the tail of the deque)
+			// - Move already processed nodes to an auxiliar stack
+			currentPacket = packets.pollLast();
+			
+			if(TypeId.LITERAL.equals(currentPacket.getTypeId())) {
+				packetStack.push(currentPacket);
+			} else if(LengthTypeId.SUBPACKETS_NUMBER.equals(currentPacket.getLengthTypeId())){
 
-				packetStack.add(currentPacket);
-				
-			} else if(currentPacket.getSubpacketsLength() != null) {
-				
-				// Packet with subpackets by length
-				int totalLength = 0;
-				
-				while(totalLength < currentPacket.getSubpacketsLength()) {
-					Packet child = packets.poll();
-					currentPacket.addSubpacket(child);
-					totalLength += child.getLength();
-					packets.add(child);
-				}
-				
-				packetStack.add(currentPacket);
-				
+					
+					// Packet with subpackets by number
+					for(int i = 0; i < currentPacket.getSubpacketsNumber(); i++) {
+						Packet child = packetStack.pop();
+						currentPacket.addSubpacket(child);
+					}
+	
+					packetStack.push(currentPacket);
+					
+			} else if(LengthTypeId.SUBPACKETS_LENGTH.equals(currentPacket.getLengthTypeId())) {
+					
+					// Packet with subpackets by length
+					int totalLength = 0;
+					
+					while(totalLength < currentPacket.getSubpacketsLength()) {
+						Packet child = packetStack.pop();
+						totalLength += child.getTotalLength();
+						currentPacket.addSubpacket(child);
+					}
+					
+					packetStack.push(currentPacket);
+					
 			}
 		}
-		
-		// Traverse expression tree
-		Packet root = packetStack.pop();
-		Long result = evaluate(root);
-		
-		return result;
+				
+		// Traverse expression tree for evaluation
+		return evaluate(currentPacket);
 
 	}
 
@@ -223,7 +228,7 @@ public class PacketDecoder {
 			case LESS_THAN: 	return lessThan(literalValues.get(0), literalValues.get(1));
 			case GREATER_THAN: 	return greaterThan(literalValues.get(0), literalValues.get(1));
 			case EQUAL_TO:		return equalTo(literalValues.get(0), literalValues.get(1));
-			default: throw new IllegalArgumentException("Unknown operation: " + typeId);
+			default: 			throw new IllegalArgumentException("Unknown operation: " + typeId);
 		}
 
 	}
@@ -249,7 +254,6 @@ public class PacketDecoder {
 		
 		return result;
 	}
-	
 
 	private Long min(List<Long> literalValues) {
 
@@ -261,7 +265,6 @@ public class PacketDecoder {
 		
 		return result;
 	}
-	
 
 	private Long max(List<Long> literalValues) {
 		Long result = Long.MIN_VALUE;
@@ -272,7 +275,6 @@ public class PacketDecoder {
 		
 		return result;
 	}
-	
 
 	private Long lessThan(Long a, Long b) {
 		return (a < b) ? 1L : 0L; 
