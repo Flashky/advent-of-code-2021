@@ -5,7 +5,7 @@
 
 - Packet version: 		3
 - Packet type: 			0
-- Packet length type:	1 -> Por nÃºmero de paquetes
+- Packet length type:	1 -> Por número de paquetes
 - Subpackets number:	2
 
 00000000000000000101100001000101010110001011001000100000000010000100011000111000110100
@@ -21,14 +21,14 @@ Subpacket: 0001000101010110001011
 
 - Packet version: 		0
 - Packet type: 			4 -> Literal
-- Grupos numÃ©ricos:
+- Grupos numéricos:
 	- 01010				10
 
 101 100 01011 | output: vacÃ­o
 
 - Packet version: 		5
 - Packet type: 			4 -> Literal
-- Grupos numÃ©ricos:
+- Grupos numéricos:
 	- 01011				11
 
 
@@ -37,7 +37,7 @@ Subpacket: 0001000101010110001011
 
 - Packet version: 		1
 - Packet type: 			0
-- Packet length type:	1 -> Por nÃºmero de paquetes
+- Packet length type:	1 -> Por número de paquetes
 - Subpackets number:	2
 
 000100011000111000110100
@@ -45,7 +45,7 @@ Subpacket: 0001000101010110001011
 
 - Packet version: 		0
 - Packet type: 			4 -> Literal
-- Grupos numÃ©ricos:
+- Grupos numéricos:
 	- 01100				12
 	
 0111000110100
@@ -53,8 +53,11 @@ Subpacket: 0001000101010110001011
 
 - Packet version: 		3
 - Packet type: 			4 -> Literal
-- Grupos numÃ©ricos:
+- Grupos numéricos:
 	- 01101				13
 	
 00
 Fin de cadena - Total packet version = 12
+
+Cadena generada en árbol: 
++[+[10,11], +[12,13]] = +[21,25] = 46
