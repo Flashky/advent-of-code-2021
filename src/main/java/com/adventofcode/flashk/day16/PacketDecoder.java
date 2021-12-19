@@ -41,17 +41,8 @@ public class PacketDecoder {
 		String hexadecimalInput = inputs.get(0);
 		String binaryInput = BaseUtil.hexToBinaryPadLeft(hexadecimalInput);
 		
-		/*
-		System.out.println();
-		System.out.println("Input (hex): " + hexadecimalInput);
-		System.out.println("Input (bin): " + binaryInput);
-		System.out.println();
-		*/
 		// Step 2 - Process all the binary packets and add it to a queue.
 		packets = binaryToPackets(binaryInput);
-		
-		// Step 3 - Process the queue, polling elements, moving into a stack and building precedences.
-		// Only for part 2
 
 	}
 
