@@ -221,14 +221,14 @@ public class PacketDecoder {
 	private Long operate(TypeId typeId, List<Long> literalValues) {
 		
 		switch(typeId) {
-			case SUM: 			return sum(literalValues);
+			case SUM:			return sum(literalValues);
 			case PRODUCT: 		return product(literalValues);
 			case MINIMUM: 		return min(literalValues);
 			case MAXIMUM: 		return max(literalValues);
-			case LESS_THAN: 	return lessThan(literalValues.get(0), literalValues.get(1));
-			case GREATER_THAN: 	return greaterThan(literalValues.get(0), literalValues.get(1));
+			case LESS_THAN:		return lessThan(literalValues.get(0), literalValues.get(1));
+			case GREATER_THAN:	return greaterThan(literalValues.get(0), literalValues.get(1));
 			case EQUAL_TO:		return equalTo(literalValues.get(0), literalValues.get(1));
-			default: 			throw new IllegalArgumentException("Unknown operation: " + typeId);
+			default:			throw new IllegalArgumentException("Unknown operation: " + typeId);
 		}
 
 	}
