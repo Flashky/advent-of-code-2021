@@ -47,16 +47,6 @@ public class Packet {
 			
 			default: throw new IllegalArgumentException("Cannot add subpackets to a literal");
 		}
-		/*
-		if(LengthTypeId.SUBPACKETS_NUMBER.equals(lengthTypeId)) {
-			if(subpackets.size() == subpacketsNumber) {
-				throw new IllegalArgumentException("Packet has reached maximum number of subpackets.");
-			}
-			this.subpacketsLength += subpacket.length;
-		} else if(LengthTypeId.SUBPACKETS_LENGTH.equals(lengthTypeId)) {
-			
-			this.subpacketsNumber++;
-		}*/
 		
 		this.subpackets.add(subpacket);
 		
