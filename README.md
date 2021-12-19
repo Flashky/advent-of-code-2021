@@ -17,7 +17,7 @@
 - [Day 12: Passage Pathing](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day12)
 - [Day 13: Transparent Origami](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day13)
 - [Day 14: Extended Polymerization](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day14)
-- [Day 155: Chiton](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day15)
+- [Day 15: Chiton](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day15)
 
 ## About
 
