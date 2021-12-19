@@ -1,63 +1,60 @@
 620080001611562C8802118E34
-
 01100010000000001000000000000000000101100001000101010110001011001000100000000010000100011000111000110100
+
 011 000 1 00000000010 | 00000000000000000101100001000101010110001011001000100000000010000100011000111000110100
 
-- Packet version: 		3
-- Packet type: 			0
-- Packet length type:	1 -> Por número de paquetes
-- Subpackets number:	2
+- Packet version: 3
+- Packet type id: 0 (sum)
+- Number of subpackets: 2
 
 00000000000000000101100001000101010110001011001000100000000010000100011000111000110100
-000 000 0 000000000010110 | subpackets: 0001000101010110001011 | output: 001000100000000010000100011000111000110100
+000 000 0 000000000010110 | 0001000101010110001011001000100000000010000100011000111000110100
 
-- Packet version: 		0
-- Packet type: 			0
-- Packet length type:	0 -> Por longitud de subpaquetes
-- Subpackets length:	22
+- Packet version: 3
+- Packet type id: 0 (sum)
+- Length of subpackets: 22
 
-Subpacket: 0001000101010110001011
-000 100 01010 | output: 10110001011
+000 100 01010 | 10110001011001000100000000010000100011000111000110100
 
-- Packet version: 		0
-- Packet type: 			4 -> Literal
-- Grupos numéricos:
-	- 01010				10
+- Packet version: 0
+- Packet type id: 4 (literal)
+- Literal: 10
+- Length: 11
 
-101 100 01011 | output: vacÃ­o
+101 100 01011 | 001000100000000010000100011000111000110100
 
-- Packet version: 		5
-- Packet type: 			4 -> Literal
-- Grupos numéricos:
-	- 01011				11
+- Packet version: 5
+- Packet type id: 4 (literal)
+- Literal: 11
+- Length: 11
 
+Hasta este punto, tenemos subárbol izquierdo con esta estructura: +[10, 11]
 
-001000100000000010000100011000111000110100
-001 000 1 00000000010 | subpackets: 000100011000111000110100
+001 000 1 00000000010 | 000100011000111000110100
 
-- Packet version: 		1
-- Packet type: 			0
-- Packet length type:	1 -> Por número de paquetes
-- Subpackets number:	2
+- Packet version: 1
+- Packet type id: 0 (sum)
+- Number of subpackets: 2
 
-000100011000111000110100
 000 100 01100 | 0111000110100
 
-- Packet version: 		0
-- Packet type: 			4 -> Literal
-- Grupos numéricos:
-	- 01100				12
-	
-0111000110100
-011 100 01101 | 00
+- Packet version: 0
+- Packet type id: 4
+- Literal: 12
 
-- Packet version: 		3
-- Packet type: 			4 -> Literal
-- Grupos numéricos:
-	- 01101				13
-	
-00
-Fin de cadena - Total packet version = 12
+011 100 01101 | (sobrantes) 00
 
-Cadena generada en árbol: 
-+[+[10,11], +[12,13]] = +[21,25] = 46
+- Packet version: 3
+- Packet type id: 4
+- Literal: 13
+
+Hasta este punto, tenemos el subárbol derecho con esta estructura: +[12, 13]
+
+Finalmente, sumando ambos subárboles tenemos:
+
++[+[10,11], +[12,13]]
+
+El cálculo sería: 
+10+11 = 21 (árbol izquierdo)
+12+13 = 25 (árbol derecho)
+21+25 = 46 (raíz)
