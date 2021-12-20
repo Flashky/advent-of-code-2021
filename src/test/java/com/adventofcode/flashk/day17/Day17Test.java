@@ -1,5 +1,7 @@
 package com.adventofcode.flashk.day17;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -42,7 +44,7 @@ public class Day17Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		TrickShot trickShot = new TrickShot(inputs.get(0));
-		int result = trickShot.solveA();
+		assertEquals(45, trickShot.solveA());
 	}
 	
 	@Test
@@ -57,6 +59,8 @@ public class Day17Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
+		TrickShot trickShot = new TrickShot(inputs.get(0));
+		assertEquals(6555, trickShot.solveA());
 	}
 	
 	@Test
@@ -71,6 +75,8 @@ public class Day17Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
+		TrickShot trickShot = new TrickShot(inputs.get(0));
+		assertEquals(112, trickShot.solveB());
 	}
 	
 	@Test
@@ -85,6 +91,8 @@ public class Day17Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
+		TrickShot trickShot = new TrickShot(inputs.get(0));
+		assertEquals(4973, trickShot.solveB());
 	}
 
 }
