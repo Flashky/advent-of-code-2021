@@ -19,6 +19,7 @@
 - [Day 14: Extended Polymerization](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day14)
 - [Day 15: Chiton](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day15)
 - [Day 16: Packet Decoder](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day16)
+- [Day 17: Trick Shot](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day17)
 
 ## About
 
