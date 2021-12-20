@@ -21,7 +21,7 @@ import com.adventofcode.flashk.common.test.utils.Util;
 @TestMethodOrder(OrderAnnotation.class)
 public class Day17Test extends PuzzleTest {
 
-	private final static String INPUT_FOLDER = "day_XX";
+	private final static String INPUT_FOLDER = "day_17";
 
 	@BeforeAll
 	public static void beforeAll() {
@@ -41,6 +41,8 @@ public class Day17Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
+		TrickShot trickShot = new TrickShot(inputs.get(0));
+		int result = trickShot.solveA();
 	}
 	
 	@Test
