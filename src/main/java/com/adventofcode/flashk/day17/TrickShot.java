@@ -57,7 +57,6 @@ public class TrickShot {
 		// Calculate max v(x)
 		maxVx = maxX;
 		
-		System.out.println("finished");
 	}
 	
 	public int solveA() {
