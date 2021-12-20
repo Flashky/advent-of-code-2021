@@ -1,8 +1,8 @@
 package com.adventofcode.flashk.common;
 
-public final class AdvancedMath {
+public final class MathUtil {
 
-	private AdvancedMath() {}
+	private MathUtil() {}
 	
 	public static long summation(long value) {
 		

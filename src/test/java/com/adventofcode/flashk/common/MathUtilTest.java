@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AdvancedMathTest {
+class MathUtilTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -18,21 +18,21 @@ class AdvancedMathTest {
 
 	@Test
 	void testSummation0() {
-		assertEquals(0, AdvancedMath.summation(0));
+		assertEquals(0, MathUtil.summation(0));
 	}
 
 	@Test
 	void testSummation1() {
-		assertEquals(1, AdvancedMath.summation(1));
+		assertEquals(1, MathUtil.summation(1));
 	}
 	
 	@Test
 	void testSummation2() {
-		assertEquals(3, AdvancedMath.summation(2));
+		assertEquals(3, MathUtil.summation(2));
 	}
 	
 	@Test
 	void testSummation10() {
-		assertEquals(55, AdvancedMath.summation(10));
+		assertEquals(55, MathUtil.summation(10));
 	}
 }
