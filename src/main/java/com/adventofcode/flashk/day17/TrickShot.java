@@ -3,7 +3,7 @@ package com.adventofcode.flashk.day17;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.adventofcode.flashk.common.AdvancedMath;
+import com.adventofcode.flashk.common.MathUtil;
 import com.adventofcode.flashk.common.Vector2;
 
 public class TrickShot {
@@ -46,7 +46,7 @@ public class TrickShot {
 		minVx = 1;
 		
 		while(!foundMinVx) {
-			int maxXDistance = (int) AdvancedMath.summation(minVx);
+			int maxXDistance = (int) MathUtil.summation(minVx);
 			if(maxXDistance >= minX) {
 				foundMinVx = true;
 			} else {
@@ -143,16 +143,7 @@ public class TrickShot {
 	}
 
 	private boolean isFactible(Vector2 probePosition) {
-
-		if(probePosition.getX() > maxX) {
-			return false;
-		}
-		
-		if(probePosition.getY() < minY) {
-			return false;
-		}
-		
-		return true;
+		return probePosition.getX() <= maxX && probePosition.getY() >= minY;
 	}
 	
 	private boolean isSolution(Vector2 probePosition) {	
