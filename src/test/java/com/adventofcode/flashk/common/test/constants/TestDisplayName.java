@@ -23,6 +23,7 @@ public final class TestDisplayName {
 	public final static String DAY_15 = "Day 15";
 	public final static String DAY_16 = "Day 16";
 	public final static String DAY_17 = "Day 17";
+	public final static String DAY_21 = "Day 21";
 	
 	// Single test display name
 	public final static String PART_ONE_SAMPLE = "Part 1 - Sample data";
