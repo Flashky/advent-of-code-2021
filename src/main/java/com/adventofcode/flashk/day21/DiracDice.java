@@ -9,22 +9,22 @@ import java.util.regex.Pattern;
 public class DiracDice {
 
 	private static final Pattern PLAYER_POSITIONS_PATTERN = Pattern.compile("position: ([0-9]*)");
-	
-	private static final int MAX_SCORE = 1000;
 	private static final int MIN_DICE_VALUE = 1;
-
 	private static final int ROLLS_PER_TURN = 3;
 
+	private int maxScore; 
+	private int maxDiceValue;
+	
 	private Deque<Player> turns = new ArrayDeque<>();
 	private Player currentPlayer;
-	
-	private int maxDiceValue;
 	
 	// Total number of times the dice it has been rolled
 	private int rolledTimes = 0; 
 	
-	// Rotates from MIN_DICE_VALUE to MAX_DICE_VALUE and repeats
-	private int nextDiceValue = MIN_DICE_VALUE; 
+	// Rotates from MIN_DICE_VALUE to maxDiceValue and repeats
+	private int nextDiceValue = MIN_DICE_VALUE;
+
+
 	
 	public DiracDice(List<String> inputs) {
 
@@ -41,8 +41,9 @@ public class DiracDice {
 		
 	}
 	
-	public int solveA(int diceSides) {
+	public int solveA(final int diceSides, final int maxScore) {
 
+		this.maxScore = maxScore;
 		this.maxDiceValue = diceSides;
 		
 		do {
@@ -56,7 +57,7 @@ public class DiracDice {
 
 			turns.add(currentPlayer);
 			
-		} while(currentPlayer.getScore() < MAX_SCORE);
+		} while(currentPlayer.getScore() < this.maxScore);
 
 		// Poll the losing player to calculate score
 		currentPlayer = turns.poll();
