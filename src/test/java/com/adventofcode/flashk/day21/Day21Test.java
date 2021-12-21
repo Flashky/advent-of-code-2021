@@ -76,6 +76,9 @@ public class Day21Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
+		DiracDice diracDice = new DiracDice(inputs);
+		assertEquals(444356092776315L, diracDice.solveB(3, 21));
+		
 	}
 	
 	@Test

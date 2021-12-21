@@ -2,7 +2,9 @@ package com.adventofcode.flashk.day21;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,24 +25,44 @@ public class DiracDice {
 	
 	// Rotates from MIN_DICE_VALUE to maxDiceValue and repeats
 	private int nextDiceValue = MIN_DICE_VALUE;
-
-
+	
+	// Quantum only
+	private Map<Player,Long> wonGames = new HashMap<>();;
 	
 	public DiracDice(List<String> inputs) {
 
 		Matcher playerMatcher = PLAYER_POSITIONS_PATTERN.matcher(inputs.get(0));
+		
 		playerMatcher.find();
-		Player player = new Player(Integer.valueOf(playerMatcher.group(1)));
+		Player player = new Player(1, Integer.valueOf(playerMatcher.group(1)));
 		turns.add(player);
+		wonGames.put(player, 0L);
 		
 		playerMatcher = PLAYER_POSITIONS_PATTERN.matcher(inputs.get(1));
-		playerMatcher.find();
 		
-		player = new Player(Integer.valueOf(playerMatcher.group(1)));
+		playerMatcher.find();
+		player = new Player(2, Integer.valueOf(playerMatcher.group(1)));
 		turns.add(player);
+		wonGames.put(player, 0L);
+
 		
 	}
 	
+	public DiracDice(DiracDice other) {
+		
+		// Copy universe status
+		this.maxScore = other.maxScore;
+		this.maxDiceValue = other.maxDiceValue;
+		this.rolledTimes = other.rolledTimes;
+		this.nextDiceValue = other.nextDiceValue;
+		this.currentPlayer = new Player(other.currentPlayer);
+		this.turns.add(new Player(other.turns.peek()));
+		
+		this.wonGames.put(this.currentPlayer, other.wonGames.get(other.currentPlayer));
+		this.wonGames.put(this.turns.peek(), other.wonGames.get(other.turns.peek()));
+		
+	}
+
 	public int solveA(final int diceSides, final int maxScore) {
 
 		this.maxScore = maxScore;
@@ -49,10 +71,11 @@ public class DiracDice {
 		do {
 			
 			currentPlayer = turns.poll();
+			currentPlayer.resetPendingRolls();
 			
 			for(int i = 1; i <= ROLLS_PER_TURN; i++) {
 				int rollValue = roll();
-				currentPlayer.move(rollValue, i);	
+				currentPlayer.move(rollValue);	
 			}
 
 			turns.add(currentPlayer);
@@ -62,6 +85,45 @@ public class DiracDice {
 		// Poll the losing player to calculate score
 		currentPlayer = turns.poll();
 		return rolledTimes * currentPlayer.getScore();
+	}
+
+	public long solveB(final int diceSides, final int maxScore) {
+		
+		this.maxScore = maxScore;
+		this.maxDiceValue = diceSides;
+		
+		wonGames = new HashMap<>();
+
+		
+		this.currentPlayer = turns.poll();
+		playQuantumDiracDice();
+		
+		if(wonGames.get(turns.peekFirst()) > wonGames.get(turns.peekLast())) {
+			return wonGames.get(turns.getFirst());
+		}
+		
+		return wonGames.get(turns.getLast());
+	}
+	
+	private void playQuantumDiracDice() {
+		
+		if(currentPlayer.getScore() >= this.maxScore) {
+			long currentPlayerWonGames = wonGames.get(currentPlayer);
+			wonGames.put(currentPlayer, currentPlayerWonGames+1);
+			System.out.println("End of branch");
+			return;
+		} else if(!currentPlayer.hasPendingRolls()) {
+			turns.add(currentPlayer);
+			currentPlayer = turns.poll();
+			currentPlayer.resetPendingRolls();
+		}
+		
+		int rollValue = roll();
+		currentPlayer.move(rollValue);	
+
+		DiracDice child = new DiracDice(this);
+		child.playQuantumDiracDice();
+		
 	}
 
 	/**
