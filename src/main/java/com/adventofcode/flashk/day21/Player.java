@@ -12,7 +12,7 @@ public class Player {
 		this.position = position;
 	}
 	
-	public void move(int rollValue) {
+	public void move(int rollValue, int rollNumber) {
 
 		int estimatedPosition = position + rollValue;
 		if(estimatedPosition < 10) {
@@ -27,7 +27,10 @@ public class Player {
 			}
 		}
 		
-		score += position;
+		if(rollNumber == 3) {
+			score += position;
+		}
 
 	}
+
 }

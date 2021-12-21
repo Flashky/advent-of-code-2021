@@ -12,10 +12,13 @@ public class DiracDice {
 	
 	private static final int MAX_SCORE = 1000;
 	private static final int MIN_DICE_VALUE = 1;
-	private static final int MAX_DICE_VALUE = 100;
+
 	private static final int ROLLS_PER_TURN = 3;
 
 	private Deque<Player> turns = new ArrayDeque<>();
+	private Player currentPlayer;
+	
+	private int maxDiceValue;
 	
 	// Total number of times the dice it has been rolled
 	private int rolledTimes = 0; 
@@ -38,22 +41,26 @@ public class DiracDice {
 		
 	}
 	
-	public int solveA() {
+	public int solveA(int diceSides) {
 
-		Player playerTurn;
+		this.maxDiceValue = diceSides;
 		
 		do {
 			
-			playerTurn = turns.poll();
-			int rollValue = roll(ROLLS_PER_TURN);
-			playerTurn.move(rollValue);
-			turns.add(playerTurn);
+			currentPlayer = turns.poll();
 			
-		} while(playerTurn.getScore() < MAX_SCORE);
+			for(int i = 1; i <= ROLLS_PER_TURN; i++) {
+				int rollValue = roll();
+				currentPlayer.move(rollValue, i);	
+			}
+
+			turns.add(currentPlayer);
+			
+		} while(currentPlayer.getScore() < MAX_SCORE);
 
 		// Poll the losing player to calculate score
-		playerTurn = turns.poll();
-		return rolledTimes * playerTurn.getScore();
+		currentPlayer = turns.poll();
+		return rolledTimes * currentPlayer.getScore();
 	}
 
 	/**
@@ -61,24 +68,18 @@ public class DiracDice {
 	 * @param numberOfRolls number of rolls
 	 * @return the number of positions to move
 	 */
-	public int roll(int numberOfRolls) {
+	public int roll() {
 		
-		int totalRoll = 0;
+		int roll = nextDiceValue;
 		
-		for(int i = 1; i <= numberOfRolls; i++) {
-			
-			totalRoll += nextDiceValue;
-			
-			if(nextDiceValue >= MAX_DICE_VALUE) {
-				nextDiceValue = MIN_DICE_VALUE;
-			} else {
-				nextDiceValue++;
-			}
-			
+		if(nextDiceValue >= maxDiceValue) {
+			nextDiceValue = MIN_DICE_VALUE;
+		} else {
+			nextDiceValue++;
 		}
 		
-		rolledTimes += numberOfRolls;
+		rolledTimes++;;
 		
-		return totalRoll;
+		return roll;
 	}
 }
