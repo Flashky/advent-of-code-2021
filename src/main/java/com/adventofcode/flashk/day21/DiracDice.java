@@ -16,7 +16,6 @@ public class DiracDice {
 	private static final int ROLLS_PER_TURN = 3;
 
 	private Deque<Player> turns = new ArrayDeque<>();
-	private Player currentPlayer;
 	
 	// Total number of times the dice it has been rolled
 	private int rolledTimes = 0; 
@@ -42,6 +41,8 @@ public class DiracDice {
 	}
 
 	public int solveA() {
+		
+		Player currentPlayer;
 		
 		do {
 			
@@ -77,7 +78,7 @@ public class DiracDice {
 			nextDiceValue++;
 		}
 		
-		rolledTimes++;;
+		rolledTimes++;
 		
 		return roll;
 	}

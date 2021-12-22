@@ -102,20 +102,19 @@ public class QuantumDiracDice {
 	
 	private int move(int rollValue, int currentPosition) {
 
-		int estimatedPosition = currentPosition + rollValue;
-		if(estimatedPosition < 10) {
-			currentPosition = estimatedPosition;
+		int finalPosition = currentPosition + rollValue;
+		
+		if(finalPosition < 10) {
+			return finalPosition;
+		} 
+	
+		finalPosition = finalPosition % 10;
+		if(finalPosition == 0) {
+			return 10;
 		} else {
-				
-			estimatedPosition = estimatedPosition % 10;
-			if(estimatedPosition == 0) {
-				currentPosition = 10;
-			} else {
-				currentPosition = estimatedPosition;
-			}
+			return finalPosition;
 		}
-		return currentPosition;
-
+		
 	}
 	
 }
