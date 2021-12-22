@@ -1,7 +1,6 @@
 package com.adventofcode.flashk.day21;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class Player {
@@ -10,18 +9,8 @@ public class Player {
 	private int position;
 	private int pendingRolls = 3;
 	
-	@Setter
-	private int wonGames = 0;
-	
 	public Player(int position) {
 		this.position = position;
-	}
-	
-	public Player(Player other) {
-		this.score = other.score;
-		this.position = other.position;
-		this.pendingRolls = other.pendingRolls;
-		this.wonGames = other.wonGames;
 	}
 	
 	public void move(int rollValue) {
@@ -55,10 +44,6 @@ public class Player {
 	
 	public boolean hasPendingRolls() {
 		return pendingRolls > 0;
-	}
-	
-	public void increaseWonGameCount() {
-		wonGames++;
 	}
 
 }
