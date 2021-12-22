@@ -27,6 +27,7 @@ public class Snailfish {
 	// Subproblema - Magnitud
 	// 1. Fórmula: 3 * elemento izquierdo + 2 * elemento derecho.
 	// 2. Se aplica recursión.
+	
 	public Snailfish(List<String> inputs) {
 		this.numbers = inputs;
 	}
