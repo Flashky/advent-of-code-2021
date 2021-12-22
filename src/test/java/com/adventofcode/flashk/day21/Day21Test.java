@@ -42,7 +42,7 @@ public class Day21Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
-		DiracDice diracDice = new DiracDice(inputs);
+		DeterministicDiracDice diracDice = new DeterministicDiracDice(inputs);
 		
 		assertEquals(739785, diracDice.solveA());
 	}
@@ -59,7 +59,7 @@ public class Day21Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
-		DiracDice diracDice = new DiracDice(inputs);
+		DeterministicDiracDice diracDice = new DeterministicDiracDice(inputs);
 		assertEquals(926610, diracDice.solveA());
 
 	}
