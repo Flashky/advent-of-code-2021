@@ -16,7 +16,7 @@ public class QuantumDiracDice {
 	private int initialP2Position;
 	
 	// Any single roll has 3 possible values: {1,2,3}
-	// There are 3 rolls per turn = 3^3 = 27 total roll value combinations
+	// There are 3 rolls per turn = 3^3 = 27 total roll value variations
 	// Some roll values yield the same result. Frequency analysis:
 	// - A total roll of 3 happens 1 times.
 	// - A total roll of 4 happens 3 times.
@@ -54,45 +54,46 @@ public class QuantumDiracDice {
 	
 	public long solveB() {
 
-		Scoreboard totalScoreboard = rollPartial(initialP1Position, 0, initialP2Position, 0, 0);
+		Leaderboard totalLeaderboard = rollPartial(initialP1Position, 0, initialP2Position, 0, 0);
 		
-		if(totalScoreboard.getP1Score() > totalScoreboard.getP2Score()) {
-			return totalScoreboard.getP1Score();
+		if(totalLeaderboard.getP1Wins() > totalLeaderboard.getP2Wins()) {
+			return totalLeaderboard.getP1Wins();
 		}
 		
-		return totalScoreboard.getP2Score();
+		return totalLeaderboard.getP2Wins();
 	}
 
-	private Scoreboard rollPartial(int p1Position, int p1Score, int p2Position, int p2Score, int turn) {
+	private Leaderboard rollPartial(int p1Position, int p1Score, int p2Position, int p2Score, int turn) {
 
 		if(p1Score >= MAX_SCORE) {
-			return new Scoreboard(1,0);
+			return new Leaderboard(1,0);
 		} else if(p2Score >= MAX_SCORE) {
-			return new Scoreboard(0,1);
+			return new Leaderboard(0,1);
 		} else {
 			
-			Scoreboard totalScoreboard = new Scoreboard(0,0);
+			Leaderboard totalLeaderboard = new Leaderboard(0,0);
 			
 			// Iterates through all possible total roll results
 			for(int totalRollValue = 3; totalRollValue <= 9; totalRollValue++) {
 			
-				Scoreboard childScoreboard;
+				Leaderboard childLeaderboard;
 				if(turn == 0) {
 					int nextP1Position = move(totalRollValue, p1Position);
 					int nextP1Score = p1Score + nextP1Position;
-					childScoreboard = rollPartial(nextP1Position, nextP1Score, p2Position, p2Score, 1);
+					childLeaderboard = rollPartial(nextP1Position, nextP1Score, p2Position, p2Score, 1);
 				} else {
 					int nextP2Position = move(totalRollValue, p2Position);
 					int nextP2Score = p2Score + nextP2Position;
-					childScoreboard = rollPartial(p1Position, p1Score, nextP2Position, nextP2Score, 0);
+					childLeaderboard = rollPartial(p1Position, p1Score, nextP2Position, nextP2Score, 0);
 				}
 				
-				// Multiply the scoreboard by its frequency and add to the total scoreboard
-				childScoreboard.multiply(rollFrequency.get(totalRollValue));
-				totalScoreboard.sum(childScoreboard);
+				// Multiply the child leaderboard by its frequency of happening to avoid repeating calculations.
+				// Then add it to the total result.
+				childLeaderboard.multiply(rollFrequency.get(totalRollValue));
+				totalLeaderboard.sum(childLeaderboard);
 			}
 			
-			return totalScoreboard;
+			return totalLeaderboard;
 			
 		}
 			
