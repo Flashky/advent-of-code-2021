@@ -93,6 +93,8 @@ public class Day21Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
+		QuantumDiracDice diracDice = new QuantumDiracDice(inputs);
+		assertEquals(146854918035875L, diracDice.solveB());
 	}
 
 }
