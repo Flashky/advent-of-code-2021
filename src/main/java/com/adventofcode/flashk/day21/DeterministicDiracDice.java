@@ -1,12 +1,12 @@
 package com.adventofcode.flashk.day21;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DiracDice {
+public class DeterministicDiracDice {
 
 	private static final Pattern PLAYER_POSITIONS_PATTERN = Pattern.compile("position: ([0-9]*)");
 	
@@ -15,7 +15,7 @@ public class DiracDice {
 	private static final int MIN_DICE_VALUE = 1;
 	private static final int ROLLS_PER_TURN = 3;
 
-	private Deque<Player> turns = new ArrayDeque<>();
+	private Queue<Player> turns = new LinkedList<>();
 	
 	// Total number of times the dice it has been rolled
 	private int rolledTimes = 0; 
@@ -23,7 +23,7 @@ public class DiracDice {
 	// Rotates from MIN_DICE_VALUE to maxDiceValue and repeats
 	private int nextDiceValue = MIN_DICE_VALUE;
 	
-	public DiracDice(List<String> inputs) {
+	public DeterministicDiracDice(List<String> inputs) {
 
 		Matcher playerMatcher = PLAYER_POSITIONS_PATTERN.matcher(inputs.get(0));
 		
@@ -46,40 +46,36 @@ public class DiracDice {
 		
 		do {
 			
+			// Take a player, play the turn and put it back in the queue
 			currentPlayer = turns.poll();
-			currentPlayer.resetPendingRolls();
-			
-			for(int i = 1; i <= ROLLS_PER_TURN; i++) {
-				int rollValue = roll();
-				currentPlayer.move(rollValue);	
-			}
-
+			currentPlayer.move(roll());	
 			turns.add(currentPlayer);
 			
 		} while(currentPlayer.getScore() < MAX_SCORE);
 
 		// Poll the losing player to calculate score
-		currentPlayer = turns.poll();
-		return rolledTimes * currentPlayer.getScore();
+		return rolledTimes *  turns.poll().getScore();
 	}
 
 	/**
-	 * Rolls the dice the specified number of rolls.
-	 * @param numberOfRolls number of rolls
-	 * @return the number of positions to move
+	 * Rolls the dice the specifiedd amount by {@link #ROLLS_PER_TURN}.
 	 */
-	public int roll() {
+	private int roll() {
 		
-		int roll = nextDiceValue;
+		int totalRollValue = 0;
 		
-		if(nextDiceValue >= MAX_DICE_VALUE) {
-			nextDiceValue = MIN_DICE_VALUE;
-		} else {
-			nextDiceValue++;
+		for(int i = 1; i <= ROLLS_PER_TURN; i++) {
+			totalRollValue += nextDiceValue;
+			
+			if(nextDiceValue >= MAX_DICE_VALUE) {
+				nextDiceValue = MIN_DICE_VALUE;
+			} else {
+				nextDiceValue++;
+			}
+			
+			rolledTimes++;
 		}
 		
-		rolledTimes++;
-		
-		return roll;
+		return totalRollValue;
 	}
 }
