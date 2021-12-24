@@ -1,11 +1,7 @@
 package com.adventofcode.flashk.day18;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public final class SnailfishMath {
 
@@ -14,10 +10,14 @@ public final class SnailfishMath {
 	private static final String OPEN_BRACKET = "[";
 	private static final String CLOSE_BRACKET = "]";
 	private static final String SEPARATOR = ",";
-	private static final Pattern PATTERN_SIMPLE_NUMBER = Pattern.compile("\\[([0-9]*),([0-9]*)\\]");
-	private static final Pattern PATTERN_SINGLE_NUMBER = Pattern.compile("([0-9]*)");
 	
-	public static String sum(String a, String b) {
+	private static final Pattern PATTERN_SIMPLE_NUMBER = Pattern.compile("\\[([0-9]*),([0-9]*)\\]");
+	
+	
+	//private static final Pattern PATTERN_LEFT_NUMBER = Pattern.compile("([0-9]*)\\[");
+	//private static final Pattern PATTERN_RIGHT_NUMBER = Pattern.compile(",([0-9]*)");
+	
+	public static String sum(String a , String b) {
 		return new StringBuilder()
 				.append(OPEN_BRACKET)
 				.append(a)
@@ -35,126 +35,183 @@ public final class SnailfishMath {
 	
 	public static String explode(String number) {
 		
-		Deque<String> numberComponents = new ArrayDeque<>();
-		
-		for(int i = 0; i < number.length(); i++) {
-			numberComponents.add(String.valueOf(number.charAt(i))); 
-		}
-		
-		Stack<String> leftComponents = new Stack<>();
-		
+
+		// Step 1 - Find if there are any 5-nested brackets
 		int openingBrackets = 0;
+		boolean foundExplodeIndexes = false;
+		int openBracketIndex = -1;
+		int closeBracketIndex = -1;
+		int currentIndex = 0;
 		
-		while((openingBrackets < 5) && (!numberComponents.isEmpty())) {
+		while(!foundExplodeIndexes && currentIndex < number.length()) {
 			
-			String component = numberComponents.poll();
-			leftComponents.add(component);
+			String currentCharacter = number.substring(currentIndex, currentIndex+1);
 			
-			if(OPEN_BRACKET.equals(component)) {
+			if(OPEN_BRACKET.equals(currentCharacter)) {
 				openingBrackets++;
-			} else if (CLOSE_BRACKET.equals(component)) {
+				if(openingBrackets == 5) {
+					openBracketIndex = currentIndex;
+				}
+			} else if (CLOSE_BRACKET.equals(currentCharacter)) {
 				openingBrackets--;
-			}
-		}
-		
-		if(openingBrackets == 5) {
-			
-			// Obtain left and right number to explode
-			String leftNumber = numberComponents.poll();
-			numberComponents.remove();
-			String rightNumber = numberComponents.poll();
-			
-			leftComponents.pop();
-			String leftNumberString = leftComponents.stream().collect(Collectors.joining(""));
-		
-			if(leftNumberString.matches("([0-9]*)")) {
-				
-				Matcher matcher = PATTERN_SINGLE_NUMBER.matcher(leftNumberString);
-				matcher.find();
-				
-				int newNumber = Integer.valueOf(matcher.group(1)) + Integer.valueOf(leftNumber);
-				matcher.replaceFirst(String.valueOf(newNumber));
-			} else {
-				leftNumberString += "0";
-			}
-			
-			
-			numberComponents.removeFirst();
-			String rightNumberString = numberComponents.stream().collect(Collectors.joining(""));
-			
-			System.out.println(leftNumberString + " ---- " + rightNumberString);
-			
-			// TODO: find the last number at the left side
-			// if there is a match, replace with the sum of number + leftNumber
-			// if there is no match: 0
-			
-			// TODO fid the first number at the right side
-			// if there is a match, replace with the sum of number + rightNumber
-			// if there is no match: 0
-		}
-/*		
-		Deque<String> definitiveLeftComponents = new ArrayDeque();
-		Deque<String> definitiveRightComponents = new ArrayDeque();
-		
-		if(openingBrackets == 5) {
-			
-			// Explode value to the left
-			leftComponents.removeLast();
-			
-			int newValue = 0;
-			boolean foundNumber = false;
-			while((!leftComponents.isEmpty()) && (!foundNumber)) {
-				
-				String component = leftComponents.pollLast();
-				
-				if(component.matches("[0-9]*")) {
-					foundNumber = true;
-					newValue = Integer.valueOf(component) +  Integer.valueOf(leftNumber);
-				} else {
-					definitiveLeftComponents.addLast(component);
+				if(openBracketIndex != -1) {
+					closeBracketIndex = currentIndex;
+					foundExplodeIndexes = true;
 				}
 			}
 			
-
-			definitiveLeftComponents.addLast(String.valueOf(newValue));
-			definitiveLeftComponents.addAll(leftComponents);
-
-			// Explode value to the right
-			numberComponents.removeFirst();
-			
-			newValue = 0;
-			foundNumber = false;
-			
-			while((!numberComponents.isEmpty()) && (!foundNumber)) {
-				
-				String component = numberComponents.pollFirst();
-				
-				if(component.matches("[0-9]*")) {
-					foundNumber = true;
-					newValue = Integer.valueOf(component) +  Integer.valueOf(rightNumber);
-				} else {
-					definitiveRightComponents.addFirst(component);
-				}
-			}
-			
-			definitiveRightComponents.addLast(String.valueOf(newValue));
-			definitiveRightComponents.addAll(numberComponents);
-
-			
-			definitiveLeftComponents.addAll(definitiveRightComponents);
+			currentIndex++;
+		}
+		
+		if(!foundExplodeIndexes) {
+			return number; // Nothing to explode
 		}
 
-		StringBuilder explodedNumberBuilder = new StringBuilder();
 		
-		while(!definitiveLeftComponents.isEmpty()) {
-			explodedNumberBuilder.append(definitiveLeftComponents.poll());
-		}
-		*/
-		//return explodedNumberBuilder.toString();
+		// Step 2 - Obtain left, middle and right side
 		
-		return "";
+		String left = number.substring(0, openBracketIndex);
+		String middle = number.substring(openBracketIndex, closeBracketIndex+1);
+		String right = number.substring(closeBracketIndex+1);
+		
+		Matcher matcher = PATTERN_SIMPLE_NUMBER.matcher(middle);
+		matcher.find();
+		
+		int leftNumber = Integer.valueOf(matcher.group(1));
+		int rightNumber = Integer.valueOf(matcher.group(2));
+		
+		// Step 3 - Apply explotion addition to the left and right side of the number
+		left = addLeft(left, leftNumber);
+		right = addRight(right, rightNumber);
+		
+		return new StringBuilder().append(left).append(right).toString();
 	}
+
+	/**
+	 * Adds the passed number to the right side of a snailfish number.
+	 * <p>If there are no numbers at the right side, then a 0 is preppended.</p>
+	 * <p>If the number is not immediately to the right, then an additional 0 is preppended,</p>
+	 * 
+	 * <b>Examples:</b>
+	 * <pre>
+	 * addRight("]]]]", 3)		=> "0]]]]"
+	 * addRight("4],5],6],7]",3)	=> "7,5],6],7]"
+	 * addRight("]]],7]")		=> "0]]],10]"
+	 * </pre>
+	 * @param leftSide The left side of an exploded snailfish number
+	 * @param number The number to add to the left side
+	 * @return the left side of the exploded numbe including the needed addition.
+	 */
+	private static String addRight(String rightSide, int number) {
+
+		int currentIndex = 0;
+		int openNumberIndex = -1;
+		int closeNumberIndex = -1;
+		boolean foundNumber = false;
+		
+		// Found the number if there is any.
+		while(!foundNumber &&  currentIndex < rightSide.length()) {
+			String currentCharacter = rightSide.substring(currentIndex, currentIndex+1);
+			
+			boolean currentCharacterIsNumeric = isNumeric(currentCharacter);
+			
+			if(!currentCharacterIsNumeric && openNumberIndex != -1) {
+				foundNumber = true;
+				closeNumberIndex = currentIndex;
+			}
+			
+			if(currentCharacterIsNumeric && openNumberIndex == -1) {
+				openNumberIndex = currentIndex;
+			}
+			
+			currentIndex++;
+		}
+		
+		// Build the result of adding
+		StringBuilder rightNumberBuilder = new StringBuilder();
+		if(!foundNumber) {
+			rightNumberBuilder.append("0").append(rightSide);
+		} else {
+			
+			String left = rightSide.substring(0, openNumberIndex);
+			String middle = rightSide.substring(openNumberIndex, closeNumberIndex);
+			String right = rightSide.substring(closeNumberIndex);
+			
+			int newNumber = Integer.valueOf(middle) + number;
+			
+			if(openNumberIndex > 1) {
+				rightNumberBuilder.append("0");
+			}
+			
+			rightNumberBuilder.append(left).append(newNumber).append(right);
+		}
+		
+		return rightNumberBuilder.toString();
+	}
+
+	/**
+	 * Adds the passed number to the left side of a snailfish number.
+	 * <p>If there are no numbers at the left side, then a 0 is appended.</p>
+	 * <p>If the number is not immediately to the left, then an additional 0 is appended,</p>
+	 * 
+	 * <b>Examples:</b>
+	 * <pre>
+	 * addLeft("[[[[", 3)		=> "[[[[0"
+	 * addLeft("[7,[6,[5,[4",3)	=> "[7,[6,[5,[7"
+	 * addLeft("[7,[[[")		=> "[10,[[[0"
+	 * </pre>
+	 * @param leftSide The left side of an exploded snailfish number
+	 * @param number The number to add to the left side
+	 * @return the left side of the exploded numbe including the needed addition.
+	 */
+	private static String addLeft(String leftSide, int number) {
 	
+		int currentIndex = leftSide.length() - 1;
+		int openNumberIndex = -1;
+		int closeNumberIndex = -1;
+		boolean foundNumber = false;
+		
+		// Found the number if there is any.
+		while(!foundNumber &&  currentIndex > 0) {
+			String currentCharacter = leftSide.substring(currentIndex-1, currentIndex);
+			
+			boolean currentCharacterIsNumeric = isNumeric(currentCharacter);
+			
+			if(closeNumberIndex != -1 && !currentCharacterIsNumeric) {
+				foundNumber = true;
+				openNumberIndex = currentIndex;
+			}
+			
+			if(closeNumberIndex == -1 && currentCharacterIsNumeric) {
+				closeNumberIndex = currentIndex;
+			}
+			
+			currentIndex--;
+		}
+		
+		// Build the result of adding
+		StringBuilder leftNumberBuilder = new StringBuilder();
+		if(!foundNumber) {
+			leftNumberBuilder.append(leftSide).append("0");
+		} else {
+			
+			String left = leftSide.substring(0, openNumberIndex);
+			String middle = leftSide.substring(openNumberIndex, closeNumberIndex);
+			String right = leftSide.substring(closeNumberIndex);
+			
+			int newNumber = Integer.valueOf(middle) + number;
+		
+			
+			leftNumberBuilder.append(left).append(newNumber).append(right);
+			
+			if(closeNumberIndex < leftSide.length() - 1) {
+				leftNumberBuilder.append("0");
+			}
+		}
+		
+		return leftNumberBuilder.toString();
+	}
+
 	public static String split(String number) {
 		return "";
 	}
@@ -185,5 +242,16 @@ public final class SnailfishMath {
 		
 		return Long.valueOf(result);
 	}
-	
+
+	private static boolean isNumeric(String number) {
+	    if (number == null) {
+	        return false;
+	    }
+	    try {
+	        Long.parseLong(number);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
 }
