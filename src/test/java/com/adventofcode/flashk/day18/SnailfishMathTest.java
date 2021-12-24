@@ -26,57 +26,57 @@ class SnailfishMathTest {
 	}
 	
 	@Test
-	void testMagnitudeSimple91() {
+	void testMagnitude1() {
 
 		String number = "[9,1]";
 		assertEquals(29, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeSimple19() {
+	void testMagnitude2() {
 
 		String number = "[1,9]";
 		assertEquals(21, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex1() {
+	void testMagnitude3() {
 		String number = "[[9,1],[1,9]]";
 		assertEquals(129, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex2() {
+	void testMagnitude4() {
 		String number = "[[[[0,7],4],[[7,8],[6,0]]],[8,1]]";
 		assertEquals(1384, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex3() {
+	void testMagnitude5() {
 		String number = "[[[[1,1],[2,2]],[3,3]],[4,4]]";
 		assertEquals(445, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex4() {
+	void testMagnitude6() {
 		String number = "[[[[3,0],[5,3]],[4,4]],[5,5]]";
 		assertEquals(791, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex5() {
+	void testMagnitude7() {
 		String number = "[[[[5,0],[7,4]],[5,5]],[6,6]]";
 		assertEquals(1137, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex6() {
+	void testMagnitude8() {
 		String number = "[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]";
 		assertEquals(3488, SnailfishMath.magnitude(number));
 	}
 	
 	@Test
-	void testMagnitudeComplex7() {
+	void testMagnitude9() {
 		String number = "[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]";
 		assertEquals(4140, SnailfishMath.magnitude(number));
 	}
@@ -127,6 +127,66 @@ class SnailfishMathTest {
 	void testExplode8() {
 		String number = "[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]";
 		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.explode(number));
+	}
+	
+	@Test
+	void testSplit1() {
+		String number = "10";
+		assertEquals("[5,5]", SnailfishMath.split(number));
+	}
+	
+	@Test
+	void testSplit2() {
+		String number = "11";
+		assertEquals("[5,6]", SnailfishMath.split(number));
+	}
+	
+	@Test
+	void testSplit3() {
+		String number = "[[[[0,7],4],[15,[0,13]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]", SnailfishMath.split(number));
+	}
+	
+	@Test
+	void testSplit4() {
+		String number = "[[[[0,7],4],[[7,8],[0,13]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]", SnailfishMath.split(number));
+	}
+	
+	@Test
+	void testReduce1() {
+		String number = "[[[[0,7],4],[[7,8],[6,0]]],[8,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.reduce(number));
+	}
+	
+	@Test
+	void testReduce2() {
+		String number = "[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.reduce(number));
+	}
+	
+	@Test
+	void testReduce3() {
+		String number = "[[[[0,7],4],[[7,8],[0,13]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.reduce(number));
+	}
+	
+	@Test
+	void testReduce4() {
+		String number = "[[[[0,7],4],[15,[0,13]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.reduce(number));
+	}
+	
+	@Test
+	void testReduce5() {
+		String number = "[[[[0,7],4],[7,[[8,4],9]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.reduce(number));
+	}
+	
+	@Test
+	void testReduce6() {
+		String number = "[[[[[4,3],4],4],[7,[[8,4],9]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.reduce(number));
 	}
 }
 

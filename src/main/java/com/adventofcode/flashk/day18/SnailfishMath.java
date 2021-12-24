@@ -12,10 +12,7 @@ public final class SnailfishMath {
 	private static final String SEPARATOR = ",";
 	
 	private static final Pattern PATTERN_SIMPLE_NUMBER = Pattern.compile("\\[([0-9]*),([0-9]*)\\]");
-	
-	
-	//private static final Pattern PATTERN_LEFT_NUMBER = Pattern.compile("([0-9]*)\\[");
-	//private static final Pattern PATTERN_RIGHT_NUMBER = Pattern.compile(",([0-9]*)");
+	private static final Pattern PATTERN_NUMBER_SPLIT = Pattern.compile("(\\d{2,})");
 	
 	public static String sum(String a , String b) {
 		return new StringBuilder()
@@ -29,8 +26,24 @@ public final class SnailfishMath {
 	
 	public static String reduce(String number) {
 		
-		// Uses explode and split to reduce the number
-		return "";
+		String previousReducedNumber = number;
+		String reducedNumber = previousReducedNumber;
+		
+		boolean isReduced = false;
+		
+		do {
+			
+			previousReducedNumber = reducedNumber;
+			reducedNumber = explode(previousReducedNumber);
+			
+			if(reducedNumber.equals(previousReducedNumber)) {
+				reducedNumber = split(previousReducedNumber);
+				isReduced = (reducedNumber.equals(previousReducedNumber));
+			}
+
+		} while(!isReduced);
+		
+		return reducedNumber;
 	}
 	
 	public static String explode(String number) {
@@ -213,7 +226,32 @@ public final class SnailfishMath {
 	}
 
 	public static String split(String number) {
-		return "";
+		
+		String result = number;
+		
+		// Step 1 - Find if there is any 2-digit number
+		Matcher matcher = PATTERN_NUMBER_SPLIT.matcher(number);
+		
+		if(matcher.find()) {
+			
+			float numberToSplit = Float.valueOf(matcher.group(1));
+			float division = numberToSplit / 2;
+	
+			int leftNumber = (int) Math.floor(division);
+			int rightNumber = (int) Math.ceil(division);
+			
+			String newPair = new StringBuilder()
+					.append(OPEN_BRACKET)
+					.append(leftNumber)
+					.append(SEPARATOR)
+					.append(rightNumber)
+					.append(CLOSE_BRACKET)
+					.toString();
+			
+			result = matcher.replaceFirst(newPair);
+		}
+		
+		return result;
 	}
 	
 	/**
