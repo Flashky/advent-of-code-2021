@@ -92,6 +92,42 @@ class SnailfishMathTest {
 		String number = "[7,[6,[5,[4,[3,2]]]]]";
 		assertEquals("[7,[6,[5,[7,0]]]]", SnailfishMath.explode(number));
 	}
+	
+	@Test
+	void testExplode3() {
+		String number = "[[6,[5,[4,[3,2]]]],1]";
+		assertEquals("[[6,[5,[7,0]]],3]", SnailfishMath.explode(number));
+	}
+	
+	@Test
+	void testExplode4() {
+		String number = "[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]";
+		assertEquals("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]", SnailfishMath.explode(number));
+	}
+	
+	@Test
+	void testExplode5() {
+		String number = "[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]";
+		assertEquals("[[3,[2,[8,0]]],[9,[5,[7,0]]]]", SnailfishMath.explode(number));
+	}
+	
+	@Test
+	void testExplode6() {
+		String number = "[[[[[4,3],4],4],[7,[[8,4],9]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[7,[[8,4],9]]],[1,1]]", SnailfishMath.explode(number));
+	}
+	
+	@Test
+	void testExplode7() {
+		String number = "[[[[0,7],4],[7,[[8,4],9]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[15,[0,13]]],[1,1]]", SnailfishMath.explode(number));
+	}
+	
+	@Test
+	void testExplode8() {
+		String number = "[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]";
+		assertEquals("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", SnailfishMath.explode(number));
+	}
 }
 
 
