@@ -78,8 +78,7 @@ public class Day18Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Snailfish snailfish = new Snailfish(inputs);
-		System.out.println(snailfish.solveA());
-		//assertEquals(4140, snailfish.solveA());
+		assertEquals(3494, snailfish.solveA());
 		
 	}
 	
@@ -95,6 +94,9 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
+		Snailfish snailfish = new Snailfish(inputs);
+		assertEquals(3993, snailfish.solveB());
+		
 	}
 	
 	@Test
@@ -108,6 +110,10 @@ public class Day18Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		
+		Snailfish snailfish = new Snailfish(inputs);
+		System.out.println(snailfish.solveB());
+		// assertEquals(3993, snailfish.solveB());
 		
 	}
 
