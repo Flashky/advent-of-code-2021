@@ -30,19 +30,25 @@ public class Snailfish {
 		
 	}
 	
-	// Subproblema - Magnitud
-	public long magnitude(String number) {
+	public long solveB() {
 		
-		// The magnitude of a pair is 3 times the magnitude of its left element plus 2 times the magnitude of its right element. 
-		// The magnitude of a regular number is just that number.
+		long maxMagnitude = Integer.MIN_VALUE;
 		
-		// Example: 
-		// [9,1] -> 3*9 + 2*1 = 29
-		// [1,9] -> 3*1 + 2*9 = 21
-		// [[9,1],[1,9]] -> 3*29 + 2*21 = 129
-		// Es decir, es como si calculásemos la magnitud de un número como el siguiente:
-		// [29,21]
+		for(int i = 0; i < numbers.size(); i++) {
+			for(int j = 0; j < numbers.size(); j++) {
+				
+				// Only sum different numbers
+				if(i != j) {
+					
+					String sum = SnailfishMath.sum(numbers.get(i), numbers.get(j));
+					String reducedSum = SnailfishMath.reduce(sum);
+					long magnitude = SnailfishMath.magnitude(reducedSum);
+					
+					maxMagnitude = Math.max(magnitude, maxMagnitude);
+				}
+			}
+		}
 		
-		return 0;
+		return maxMagnitude;
 	}
 }

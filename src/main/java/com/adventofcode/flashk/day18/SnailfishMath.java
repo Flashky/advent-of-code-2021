@@ -5,14 +5,14 @@ import java.util.regex.Pattern;
 
 public final class SnailfishMath {
 
-	private SnailfishMath() {}
-	
 	private static final String OPEN_BRACKET = "[";
 	private static final String CLOSE_BRACKET = "]";
 	private static final String SEPARATOR = ",";
 	
 	private static final Pattern PATTERN_SIMPLE_NUMBER = Pattern.compile("\\[([0-9]*),([0-9]*)\\]");
 	private static final Pattern PATTERN_NUMBER_SPLIT = Pattern.compile("(\\d{2,})");
+	
+	private SnailfishMath() {}
 	
 	public static String sum(String a , String b) {
 		return new StringBuilder()
