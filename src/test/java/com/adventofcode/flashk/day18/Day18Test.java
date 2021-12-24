@@ -1,5 +1,6 @@
 package com.adventofcode.flashk.day18;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -22,12 +23,31 @@ import com.adventofcode.flashk.common.test.utils.Util;
 public class Day18Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day_18";
-
+	
+	private static final String INPUT_FILE_DEBUG_3488 = "sample_debug_3488.input";
+	
 	@BeforeAll
 	public static void beforeAll() {
 		Timer.printHeader(TestDisplayName.DAY_18);
 	}
 
+
+	@Test
+	@Order(1)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - (3488)")
+	public void testSolvePart1Debug() {
+		
+		System.out.print("1 | debug | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_3488);
+		
+		Snailfish snailfish = new Snailfish(inputs);
+		assertEquals(3488, snailfish.solveA());
+	}
+	
 	
 	@Test
 	@Order(1)
@@ -41,6 +61,8 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
+		Snailfish snailfish = new Snailfish(inputs);
+		assertEquals(4140, snailfish.solveA());
 	}
 	
 	@Test
@@ -54,6 +76,10 @@ public class Day18Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		
+		Snailfish snailfish = new Snailfish(inputs);
+		System.out.println(snailfish.solveA());
+		//assertEquals(4140, snailfish.solveA());
 		
 	}
 	
