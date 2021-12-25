@@ -1,4 +1,4 @@
-package com.adventofcode.flashk.day18;
+package com.adventofcode.flashk.day20;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
@@ -18,36 +18,19 @@ import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
 import com.adventofcode.flashk.common.test.utils.Util;
 
-@DisplayName(TestDisplayName.DAY_18)
+@DisplayName(TestDisplayName.DAY_20)
 @TestMethodOrder(OrderAnnotation.class)
-public class Day18Test extends PuzzleTest {
+public class Day20Test extends PuzzleTest {
 
-	private final static String INPUT_FOLDER = "day_18";
-	
-	private static final String INPUT_FILE_DEBUG_3488 = "sample_debug_3488.input";
+	private final static String INPUT_FOLDER = "day_20";
+
+	private static final String INPUT_FILE_DEBUG_5326 = "debug_5326.input";
 	
 	@BeforeAll
 	public static void beforeAll() {
-		Timer.printHeader(TestDisplayName.DAY_18);
+		Timer.printHeader(TestDisplayName.DAY_20);
 	}
 
-
-	@Test
-	@Order(1)
-	@Tag(TestTag.PART_ONE)
-	@Tag(TestTag.DEBUG)
-	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " - (3488)")
-	public void testSolvePart1Debug() {
-		
-		System.out.print("1 | debug | ");
-		
-		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_3488);
-		
-		Snailfish snailfish = new Snailfish(inputs);
-		assertEquals(3488, snailfish.solveA());
-	}
-	
 	
 	@Test
 	@Order(1)
@@ -61,8 +44,9 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		Snailfish snailfish = new Snailfish(inputs);
-		assertEquals(4140, snailfish.solveA());
+		TrenchMap trenchMap = new TrenchMap(inputs, 3);
+		assertEquals(35, trenchMap.solveA(2));
+		
 	}
 	
 	@Test
@@ -76,9 +60,30 @@ public class Day18Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		TrenchMap trenchMap = new TrenchMap(inputs, 3);
+		System.out.println(trenchMap.solveA(2));
+		//assertEquals(35, trenchMap.solveA());
 		
-		Snailfish snailfish = new Snailfish(inputs);
-		assertEquals(3494, snailfish.solveA());
+		// 5127 -> Too high
+		
+	}
+	
+	@Test
+	@Order(2)
+	@Tag(TestTag.PART_ONE)
+	@Tag(TestTag.DEBUG)
+	@DisplayName(TestDisplayName.PART_ONE_DEBUG + " (5326)")
+	public void testSolvePart1Debug5326() {
+		
+		System.out.print("1 | debug  | ");
+		
+		// Read input file
+		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_5326);
+		
+		TrenchMap trenchMap = new TrenchMap(inputs, 3);
+		assertEquals(5326, trenchMap.solveA(2));
+
+
 		
 	}
 	
@@ -94,9 +99,6 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		Snailfish snailfish = new Snailfish(inputs);
-		assertEquals(3993, snailfish.solveB());
-		
 	}
 	
 	@Test
@@ -110,9 +112,6 @@ public class Day18Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		
-		Snailfish snailfish = new Snailfish(inputs);
-		assertEquals(4712, snailfish.solveB());
 		
 	}
 
