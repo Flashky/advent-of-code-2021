@@ -24,6 +24,7 @@ public final class TestDisplayName {
 	public final static String DAY_16 = "Day 16";
 	public final static String DAY_17 = "Day 17";
 	public final static String DAY_18 = "Day 18";
+	public final static String DAY_20 = "Day 20";
 	public final static String DAY_21 = "Day 21";
 	
 	// Single test display name
