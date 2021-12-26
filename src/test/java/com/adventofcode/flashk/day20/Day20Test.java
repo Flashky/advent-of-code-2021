@@ -60,11 +60,10 @@ public class Day20Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		TrenchMap trenchMap = new TrenchMap(inputs);
-		System.out.println(trenchMap.solveA(2));
-		//assertEquals(35, trenchMap.solveA());
 		
-		// 5127 -> Too high
+		TrenchMap trenchMap = new TrenchMap(inputs);
+		assertEquals(4964, trenchMap.solveA(2));
+		
 		
 	}
 	
@@ -100,9 +99,8 @@ public class Day20Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
-		//assertEquals(5326, trenchMap.solveA(50));
-		
-		System.out.println(trenchMap.solveA(50));
+		assertEquals(3351, trenchMap.solveA(50));
+
 	}
 	
 	@Test
@@ -118,9 +116,8 @@ public class Day20Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
-		//assertEquals(5326, trenchMap.solveA(50));
-		
-		System.out.println(trenchMap.solveA(50));
+		assertEquals(13202, trenchMap.solveA(50));
+
 	}
 
 }

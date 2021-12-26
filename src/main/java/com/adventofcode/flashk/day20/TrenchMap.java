@@ -6,23 +6,11 @@ import com.adventofcode.flashk.common.BaseUtil;
 
 public class TrenchMap {
 	
-	private static final int EVALUATION_IMAGE_OFFSET = 1;
-	private static final int ENHANCED_IMAGE_OFFSET = 2;
+	private static final int INFINITE_SIZE_EVEN = 188;
+	private static final int INFINITE_SIZE_ODD = 189;
 	
 	private int[] imageEnhancer;
-	
-	// enhancedImage is always slightly bigger than evaluationImage.
-	// My arrays have an outer bounds size and and inner bounds (the evaluation region) size.
-	//
-	// For example, for initial input of 5x5:
-	// - evaluationImage outer size will be 9x9 and inner size will be 7x7
-	// - enhancedImage outer size will be 11x11 and inner size will be 7x7
-	// Then, at increaseEnhancedImageSize() method, enhancedImage is swapped to be evaluationImage and a new enhancedImage will be created.
-	//
-	// At this new iteration:
-	// - evaluationImage outer size will be 11x11 and inner size will be 9x9
-	// - enhancedImage outer size will be 13x13 and inner size will be 9x9
-	
+
 	private int[][] evaluationImage;
 	private int[][] enhancedImage;
 	
@@ -38,20 +26,26 @@ public class TrenchMap {
 		inputs.remove(0);
 		inputs.remove(0);
 		
-		// Evaluation image size
-		int initialImageSize = inputs.get(0).length();
+		// Initialize arrays sizes
+		int inputImageSize = inputs.get(0).length();
+		boolean isEven = inputImageSize % 2 == 0;
+		int infiniteSize;
 		
-		int evaluationImageSize = initialImageSize + (4 * EVALUATION_IMAGE_OFFSET);
-		this.evaluationImage = new int[evaluationImageSize][evaluationImageSize];
 		
-		// Outer image size
-		int enhancedImageSize = evaluationImageSize + ENHANCED_IMAGE_OFFSET;
-		enhancedImage = new int[enhancedImageSize][enhancedImageSize];
+		if(isEven) {
+			infiniteSize = INFINITE_SIZE_EVEN;
+		} else {
+			infiniteSize = INFINITE_SIZE_ODD;
+		}
+		
+		evaluationImage = new int[infiniteSize][infiniteSize];
+		enhancedImage  = new int[infiniteSize][infiniteSize];
 		
 		// Initialize evaluationImage pixels
-		int innerEvaluationImageOffset = 2 * EVALUATION_IMAGE_OFFSET;
-		int row = innerEvaluationImageOffset;
-		int col = innerEvaluationImageOffset;
+		int evaluationImageOffset = (infiniteSize - inputImageSize) / 2;
+
+		int row = evaluationImageOffset;
+		int col = evaluationImageOffset;
 		for(String imageRow : inputs) {
 
 			char[] pixels = imageRow.toCharArray();
@@ -61,7 +55,7 @@ public class TrenchMap {
 				evaluationImage[row][col] = value;
 				col++;
 			}
-			col = innerEvaluationImageOffset;
+			col = evaluationImageOffset;
 			row++;
 		}
 		
@@ -74,32 +68,23 @@ public class TrenchMap {
 		for(int i = 0; i < iterations; i++) {
 
 			litPixelCount = 0;
-			int offsetStart = EVALUATION_IMAGE_OFFSET;
-			int offsetEnd = evaluationImage.length - EVALUATION_IMAGE_OFFSET;
 			
-			for(int y = offsetStart; y < offsetEnd; y++) {
-
-				int enhancedImageOffsetY = y + EVALUATION_IMAGE_OFFSET;
-				
-				for(int x = offsetStart; x < offsetEnd; x++) {
-					
-					int enhancedImageOffsetX = x + EVALUATION_IMAGE_OFFSET;
+			for(int y = 0; y < evaluationImage.length; y++) {
+				for(int x = 0; x < evaluationImage.length; x++) {
 					int imageEnhancementIndex = getImageEnhancementIndex(y,x);
-					int pixelValue = imageEnhancer[imageEnhancementIndex];			
+					int pixelValue = imageEnhancer[imageEnhancementIndex];	
 					
-					enhancedImage[enhancedImageOffsetY][enhancedImageOffsetX] = pixelValue;
+					enhancedImage[y][x] = pixelValue;
 					
 					if(pixelValue == 1) {
 						litPixelCount++;
 					}
-				
 				}
 			}
-			printImage();
+			
 			increaseEnhancedImageSize();
 		}
 		
-		printImage();
 		return litPixelCount;
 	}
 	
@@ -107,8 +92,31 @@ public class TrenchMap {
 
 		StringBuilder imageEnhancementCode = new StringBuilder();
 		for(int row = y-1; row <= y+1; row++) {
+			
+			// Works as it was an sphere or a cylinder, if the index is out of bounds
+			// then it search for the index at the opposite site of the array.
+			
+			int finalY;
+			if(row == -1) {
+				finalY = evaluationImage.length - 1;
+			} else if(row == evaluationImage.length) {
+				finalY = 0;
+			} else {
+				finalY = row;
+			}
+			
 			for(int col = x-1; col <= x+1; col++) {
-				imageEnhancementCode.append(evaluationImage[row][col]);
+				
+				int finalX; 
+				if(col == -1) {
+					finalX = evaluationImage.length - 1;
+				} else if(col == evaluationImage.length) {
+					finalX = 0;
+				} else {
+					finalX = col;
+				}
+				
+				imageEnhancementCode.append(evaluationImage[finalY][finalX]);
 			}
 		}
 		
@@ -118,23 +126,7 @@ public class TrenchMap {
 	private void increaseEnhancedImageSize() {
 		
 		this.evaluationImage = enhancedImage;
-		
-		int enhancedImageSize = evaluationImage.length + ENHANCED_IMAGE_OFFSET;
-		enhancedImage = new int[enhancedImageSize][enhancedImageSize];
+		enhancedImage = new int[evaluationImage.length][evaluationImage.length];
 	}
-	
-	private void printImage() {
-		System.out.println();
-		for(int row = 0; row < evaluationImage.length; row++) {
-			for(int col = 0; col < evaluationImage.length; col++) {
-				if(evaluationImage[row][col] == 1) {
-					System.out.print("#");
-				} else {
-					System.out.print(".");
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
+
 }
