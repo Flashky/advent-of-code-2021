@@ -3,7 +3,6 @@ package com.adventofcode.flashk.day20;
 import java.util.List;
 
 import com.adventofcode.flashk.common.BaseUtil;
-import com.adventofcode.flashk.common.Vector2;
 
 public class TrenchMap {
 	
@@ -15,15 +14,9 @@ public class TrenchMap {
 	private int[][] evaluationImage;
 	private int[][] enhancedImage;
 	
-	private int imageSizeIncrement;
+	//private int imageSizeIncrement;
 	private int enhancedImageSizeIncrement;
 	private int evaluationImageOffset;
-	
-	
-	//private int enhancedImageSizeX;
-	//private int enhancedImageSizeY;
-	
-	private int litPixelCount = 0;
 	
 	public TrenchMap( List<String> inputs, int sampleSize) {
 		
@@ -38,7 +31,7 @@ public class TrenchMap {
 		inputs.remove(0);
 		
 		// Set increment and offset values which are based on sample size
-		this.imageSizeIncrement = 2 * sampleSize - 2;
+		int imageSizeIncrement = 2 * sampleSize - 2;
 		this.enhancedImageSizeIncrement = 2 * (sampleSize /2);
 		this.evaluationImageOffset = sampleSize / 2;
 		
@@ -72,8 +65,10 @@ public class TrenchMap {
 	
 	public int solveA(int iterations) {
 
+		int litPixelCount = 0;
+		
 		for(int i = 0; i < iterations; i++) {
-			
+
 			litPixelCount = 0;
 			int offsetStart = evaluationImageOffset;
 			int offsetEnd = evaluationImage.length - evaluationImageOffset;
