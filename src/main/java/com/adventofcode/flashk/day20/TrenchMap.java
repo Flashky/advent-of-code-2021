@@ -6,19 +6,27 @@ import com.adventofcode.flashk.common.BaseUtil;
 
 public class TrenchMap {
 	
+	private static final int EVALUATION_IMAGE_OFFSET = 1;
+	private static final int ENHANCED_IMAGE_OFFSET = 2;
+	
 	private int[] imageEnhancer;
 	
-	// If evaluationImage is 7x7, enhancedImage will be 11x11
-	// In other words:
-	// - enhancedImage size will be evaluation image size + imageSizeIncrement.
+	// enhancedImage is always slightly bigger than evaluationImage.
+	// My arrays have an outer bounds size and and inner bounds (the evaluation region) size.
+	//
+	// For example, for initial input of 5x5:
+	// - evaluationImage outer size will be 9x9 and inner size will be 7x7
+	// - enhancedImage outer size will be 11x11 and inner size will be 7x7
+	// Then, at increaseEnhancedImageSize() method, enhancedImage is swapped to be evaluationImage and a new enhancedImage will be created.
+	//
+	// At this new iteration:
+	// - evaluationImage outer size will be 11x11 and inner size will be 9x9
+	// - enhancedImage outer size will be 13x13 and inner size will be 9x9
+	
 	private int[][] evaluationImage;
 	private int[][] enhancedImage;
 	
-	//private int imageSizeIncrement;
-	private int enhancedImageSizeIncrement;
-	private int evaluationImageOffset;
-	
-	public TrenchMap( List<String> inputs, int sampleSize) {
+	public TrenchMap( List<String> inputs) {
 		
 		// Initialize image enhancer data
 		char[] imageEnhancementValues = inputs.get(0).toCharArray();
@@ -30,24 +38,20 @@ public class TrenchMap {
 		inputs.remove(0);
 		inputs.remove(0);
 		
-		// Set increment and offset values which are based on sample size
-		int imageSizeIncrement = 2 * sampleSize - 2;
-		this.enhancedImageSizeIncrement = 2 * (sampleSize /2);
-		this.evaluationImageOffset = sampleSize / 2;
-		
-		// Eval image size
+		// Evaluation image size
 		int initialImageSize = inputs.get(0).length();
 		
-		int evaluationImageSize = initialImageSize + imageSizeIncrement;
+		int evaluationImageSize = initialImageSize + (4 * EVALUATION_IMAGE_OFFSET);
 		this.evaluationImage = new int[evaluationImageSize][evaluationImageSize];
 		
 		// Outer image size
-		int enhancedImageSize = evaluationImageSize + enhancedImageSizeIncrement;
+		int enhancedImageSize = evaluationImageSize + ENHANCED_IMAGE_OFFSET;
 		enhancedImage = new int[enhancedImageSize][enhancedImageSize];
 		
 		// Initialize evaluationImage pixels
-		int row = enhancedImageSizeIncrement;
-		int col = enhancedImageSizeIncrement;
+		int innerEvaluationImageOffset = 2 * EVALUATION_IMAGE_OFFSET;
+		int row = innerEvaluationImageOffset;
+		int col = innerEvaluationImageOffset;
 		for(String imageRow : inputs) {
 
 			char[] pixels = imageRow.toCharArray();
@@ -57,7 +61,7 @@ public class TrenchMap {
 				evaluationImage[row][col] = value;
 				col++;
 			}
-			col = enhancedImageSizeIncrement;
+			col = innerEvaluationImageOffset;
 			row++;
 		}
 		
@@ -66,20 +70,20 @@ public class TrenchMap {
 	public int solveA(int iterations) {
 
 		int litPixelCount = 0;
-		
+
 		for(int i = 0; i < iterations; i++) {
 
 			litPixelCount = 0;
-			int offsetStart = evaluationImageOffset;
-			int offsetEnd = evaluationImage.length - evaluationImageOffset;
+			int offsetStart = EVALUATION_IMAGE_OFFSET;
+			int offsetEnd = evaluationImage.length - EVALUATION_IMAGE_OFFSET;
 			
 			for(int y = offsetStart; y < offsetEnd; y++) {
 
-				int enhancedImageOffsetY = y + evaluationImageOffset;
+				int enhancedImageOffsetY = y + EVALUATION_IMAGE_OFFSET;
 				
 				for(int x = offsetStart; x < offsetEnd; x++) {
 					
-					int enhancedImageOffsetX = x + evaluationImageOffset;
+					int enhancedImageOffsetX = x + EVALUATION_IMAGE_OFFSET;
 					int imageEnhancementIndex = getImageEnhancementIndex(y,x);
 					int pixelValue = imageEnhancer[imageEnhancementIndex];			
 					
@@ -115,7 +119,7 @@ public class TrenchMap {
 		
 		this.evaluationImage = enhancedImage;
 		
-		int enhancedImageSize = evaluationImage.length + enhancedImageSizeIncrement;
+		int enhancedImageSize = evaluationImage.length + ENHANCED_IMAGE_OFFSET;
 		enhancedImage = new int[enhancedImageSize][enhancedImageSize];
 	}
 	
