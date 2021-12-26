@@ -44,7 +44,7 @@ public class Day20Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		TrenchMap trenchMap = new TrenchMap(inputs, 3);
+		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(35, trenchMap.solveA(2));
 		
 	}
@@ -60,7 +60,7 @@ public class Day20Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		TrenchMap trenchMap = new TrenchMap(inputs, 3);
+		TrenchMap trenchMap = new TrenchMap(inputs);
 		System.out.println(trenchMap.solveA(2));
 		//assertEquals(35, trenchMap.solveA());
 		
@@ -80,7 +80,7 @@ public class Day20Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_5326);
 		
-		TrenchMap trenchMap = new TrenchMap(inputs, 3);
+		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(5326, trenchMap.solveA(2));
 
 
