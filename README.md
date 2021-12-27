@@ -20,11 +20,14 @@
 - [Day 15: Chiton](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day15)
 - [Day 16: Packet Decoder](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day16)
 - [Day 17: Trick Shot](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day17)
-- Day 18: Snailfish
+- [Day 18: Snailfish](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day18)
 - Day 19: Beacon Scanner
-- Day 20: Trench Map
+- [Day 20: Trench Map](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day20)
 - [Day 21: Dirac Dice](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day21)
 - Day 22: Reactor Reboot
+- Day 23: Amphipod
+- Day 24: Arithmetic Logic Unit
+- Day 25: Sea Cucumber
 
 ## About
 
