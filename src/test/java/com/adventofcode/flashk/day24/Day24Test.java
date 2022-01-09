@@ -55,6 +55,8 @@ public class Day24Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
+		MonadProgram program = new MonadProgram(inputs);
+		program.solveA();
 	}
 	
 	@Test

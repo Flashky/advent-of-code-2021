@@ -1,11 +1,11 @@
 package com.adventofcode.flashk.day24;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class ArithmeticLogicUnit {
 
@@ -14,13 +14,19 @@ public class ArithmeticLogicUnit {
 	private static final String MODULE_OPERAND_A_ERROR = "Module first operand must be greater than zero";
 	private static final String MODULE_OPERAND_B_ERROR = "Module second operand must be greater or equal than zero";
 	
-	private int x, y, z, w = 0;
-	
-	public ArithmeticLogicUnit(List<String> inputs) {
+	private long x, y, z, w = 0;
+
+	public void inp(Variable a, long value) {
+		switch(a) {
+			case X: x = value; break;
+			case Y: y = value; break;
+			case Z: z = value; break;
+			case W: w = value; break;
 		
+		}
 	}
 	
-	public void add(Variable a, int b) {
+	public void add(Variable a, long b) {
 		
 		switch(a) {
 			case X: x += b; break;
@@ -31,11 +37,18 @@ public class ArithmeticLogicUnit {
 		}
 	}
 	
+	public void reset() {
+		x = 0;
+		y = 0;
+		z = 0;
+		w = 0;
+	}
+	
 	public void add(Variable a, Variable b) {
 		add(a, getVariableValue(b));
 	}
 	
-	public void mul(Variable a, int b) {
+	public void mul(Variable a, long b) {
 		
 		switch(a) {
 			case X: x *= b; break;
@@ -50,7 +63,7 @@ public class ArithmeticLogicUnit {
 		mul(a, getVariableValue(b));
 	}
 
-	public void div(Variable a, int b) {
+	public void div(Variable a, long b) {
 		
 		if(b == 0) {
 			throw new InvalidOperandValueException(DIVISION_BY_ZERO_ERROR);
@@ -69,7 +82,7 @@ public class ArithmeticLogicUnit {
 		div(a, getVariableValue(b));
 	}
 	
-	public void mod(Variable a, int b) {
+	public void mod(Variable a, long b) {
 		
 		if(getVariableValue(a) < 0) {
 			throw new InvalidOperandValueException(MODULE_OPERAND_A_ERROR);
@@ -92,7 +105,7 @@ public class ArithmeticLogicUnit {
 		mod(a, getVariableValue(b));
 	}
 	
-	public void eql(Variable a, int b) {
+	public void eql(Variable a, long b) {
 		
 		switch(a) {
 			case X: x = equal(x, b); break;
@@ -106,11 +119,11 @@ public class ArithmeticLogicUnit {
 		eql(a, getVariableValue(b));
 	}
 	
-	private int equal(int a, int b) {
+	private int equal(long a, long b) {
 		return (a == b) ? 1 : 0;
 	}
 	
-	private int getVariableValue(Variable variable) {
+	private long getVariableValue(Variable variable) {
 	
 		switch(variable) {
 			case X: return x;
