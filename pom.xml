@@ -5,6 +5,8 @@
 	<groupId>com.adventofcode.flashk</groupId>
 	<artifactId>adventofcode2021</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>advent-of-code-2022</name>
+	
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
