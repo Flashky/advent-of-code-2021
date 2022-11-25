@@ -5,7 +5,7 @@
 	<groupId>com.adventofcode.flashk</groupId>
 	<artifactId>adventofcode2021</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>advent-of-code-2022</name>
+	<name>advent-of-code-2021</name>
 	
 
 	<properties>
