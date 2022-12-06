@@ -59,15 +59,11 @@ public class SeaCucumber {
 		return movements;
 	}
 
-	private char[] getCol(int colIndex) {
-		
-		char[] col = new char[rows];
-		for(int rowIndex = 0; rowIndex < rows; rowIndex++) {
-			col[rowIndex] = cucumbersMap[rowIndex][colIndex];
-		}
-		return col;
-	}
 
+	/*==============================================================================*/
+	/* EAST																		*/
+	/*==============================================================================*/
+	
 	private int moveEast(char[] row, int rowIndex) {
 
 		Queue<Integer> stagedCucumbers = new LinkedList<>();
@@ -119,6 +115,7 @@ public class SeaCucumber {
 	/*==============================================================================*/
 	/* SOUTH																		*/
 	/*==============================================================================*/
+	
 	private int moveSouth(char[] col, int colIndex) {
 		Queue<Integer> stagedCucumbers = new LinkedList<>();
 		
@@ -164,4 +161,13 @@ public class SeaCucumber {
 		return stagedCucumbers.size();
 	}
 
+	
+	private char[] getCol(int colIndex) {
+		
+		char[] col = new char[rows];
+		for(int rowIndex = 0; rowIndex < rows; rowIndex++) {
+			col[rowIndex] = cucumbersMap[rowIndex][colIndex];
+		}
+		return col;
+	}
 }
