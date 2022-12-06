@@ -16,5 +16,6 @@ public final class TestFolder {
 	public final static String DAY_08 = "day_08";
 	public final static String DAY_09 = "day_09";
 	public final static String DAY_10 = "day_10";
+	public final static String DAY_25 = "day_25";
 	
 }
