@@ -1,10 +1,10 @@
 package com.adventofcode.flashk.day22;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.adventofcode.flashk.common.Vector3;
@@ -24,8 +24,7 @@ public class ReactorReboot {
 	//private int minX, minY, minZ = Integer.MAX_VALUE;
 	//private int maxX, maxY, maxZ = Integer.MIN_VALUE;
 	
-	private Map<Vector3, Boolean> cubes = new HashMap<>(2000000);
-	private long onCubes = 0;
+	private Set<Vector3> cubes = new HashSet<>(2000000);
 	
 	public ReactorReboot(List<String> inputs) {
 		
@@ -38,8 +37,15 @@ public class ReactorReboot {
 	public long solveA() {
 		
 		instructions.stream().limit(20).forEach(this::performAction);
+		return cubes.size();
 		
-		return onCubes;
+	}
+	
+	public long solveB() {
+		
+		instructions.stream().forEach(this::performAction);
+		return cubes.size();
+		
 	}
 	
 	public void performAction(RebootInstruction instruction) {
@@ -59,30 +65,13 @@ public class ReactorReboot {
 					// - Decrementar contador si el cubo estaba encendido y pasa a estar apagado.
 					// - Actualizar el estado del cubo
 					
-					if(!cubes.containsKey(cube)) {
-						cubes.put(cube, instruction.isOn());
-						if(instruction.isOn()) {
-							onCubes++;
-						}
+					if(instruction.isOn()) {
+						cubes.add(cube);
 					} else {
-						boolean currentlyOn = cubes.get(cube);
-						if(instruction.isOn() && !currentlyOn) {
-							onCubes++;
-						} else if (!instruction.isOn() && currentlyOn){
-							onCubes--;
-						}
-						
-						cubes.put(cube, instruction.isOn());
+						cubes.remove(cube);
 					}
-					if(cubes.containsKey(cube)) {
-						
-						if(instruction.isOn()) {
-							
-						} else {
-							
-						}
-						cubes.put(cube, instruction.isOn());
-					}
+					
+					
 				}
 			}
 		}

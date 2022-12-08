@@ -64,6 +64,7 @@ public class Day22Test extends PuzzleTest {
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		ReactorReboot reactorReboot = new ReactorReboot(inputs);
 		System.out.println(reactorReboot.solveA());
+		assertEquals(583641, reactorReboot.solveA());
 	}
 	
 	@Test
