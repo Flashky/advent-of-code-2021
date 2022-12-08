@@ -22,7 +22,6 @@ import com.adventofcode.flashk.common.test.utils.Util;
 
 @DisplayName(TestDisplayName.DAY_22)
 @TestMethodOrder(OrderAnnotation.class)
-@Disabled
 public class Day22Test extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day_22";
@@ -63,7 +62,8 @@ public class Day22Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		
+		ReactorReboot reactorReboot = new ReactorReboot(inputs);
+		System.out.println(reactorReboot.solveA());
 	}
 	
 	@Test
