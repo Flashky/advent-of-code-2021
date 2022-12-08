@@ -62,8 +62,8 @@ public class Day22Test extends PuzzleTest {
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		
 		ReactorReboot reactorReboot = new ReactorReboot(inputs);
-		System.out.println(reactorReboot.solveA());
 		assertEquals(583641, reactorReboot.solveA());
 	}
 	
@@ -72,12 +72,16 @@ public class Day22Test extends PuzzleTest {
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.SAMPLE)
 	@DisplayName(TestDisplayName.PART_TWO_SAMPLE)
+	@Disabled
 	public void testSolvePart2Sample() {
 		
 		System.out.print("2 | sample | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		
+		ReactorReboot reactorReboot = new ReactorReboot(inputs);
+		assertEquals(2758514936282235L, reactorReboot.solveB());
 		
 	}
 	
@@ -86,13 +90,16 @@ public class Day22Test extends PuzzleTest {
 	@Tag(TestTag.PART_TWO)
 	@Tag(TestTag.INPUT)
 	@DisplayName(TestDisplayName.PART_TWO_INPUT)
+	@Disabled
 	public void testSolvePart2Input() {
 		
 		System.out.print("2 | input  | ");
 		
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
-		
+		ReactorReboot reactorReboot = new ReactorReboot(inputs);
+		long result = reactorReboot.solveB();
+		System.out.println(result);
 	}
 
 }

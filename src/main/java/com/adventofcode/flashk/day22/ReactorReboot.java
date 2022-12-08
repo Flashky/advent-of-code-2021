@@ -43,6 +43,11 @@ public class ReactorReboot {
 	
 	public long solveB() {
 		
+		// https://www.reddit.com/r/adventofcode/comments/rlxhmg/2021_day_22_solutions/
+		
+		// Quizá deba rehacer la solución para trabajar con intersecciones de cuboides.
+		// Ejemplo: https://github.com/nilanshu96/Advent-Of-Code/blob/main/2021/22/Part2.java
+		
 		instructions.stream().forEach(this::performAction);
 		return cubes.size();
 		
