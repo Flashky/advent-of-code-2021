@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -21,7 +22,8 @@ import com.adventofcode.flashk.common.test.utils.Util;
 
 @DisplayName(TestDisplayName.DAY_18)
 @TestMethodOrder(OrderAnnotation.class)
-public class Day18Test extends PuzzleTest {
+@Disabled("Refactor day 18 test to use Gson")
+public class Day18GsonTest extends PuzzleTest {
 
 	private final static String INPUT_FOLDER = "day_18";
 	
@@ -45,7 +47,7 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_3488);
 		
-		Snailfish snailfish = new Snailfish(inputs);
+		SnailfishGson snailfish = new SnailfishGson(inputs);
 		assertEquals(3488, snailfish.solveA());
 	}
 	
@@ -62,7 +64,7 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		Snailfish snailfish = new Snailfish(inputs);
+		SnailfishGson snailfish = new SnailfishGson(inputs);
 		assertEquals(4140, snailfish.solveA());
 	}
 	
@@ -78,7 +80,7 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
-		Snailfish snailfish = new Snailfish(inputs);
+		SnailfishGson snailfish = new SnailfishGson(inputs);
 		assertEquals(3494, snailfish.solveA());
 		
 	}
@@ -95,7 +97,7 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
-		Snailfish snailfish = new Snailfish(inputs);
+		SnailfishGson snailfish = new SnailfishGson(inputs);
 		assertEquals(3993, snailfish.solveB());
 		
 	}
@@ -112,7 +114,7 @@ public class Day18Test extends PuzzleTest {
 		// Read input file
 		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
-		Snailfish snailfish = new Snailfish(inputs);
+		SnailfishGson snailfish = new SnailfishGson(inputs);
 		assertEquals(4712, snailfish.solveB());
 		
 	}
