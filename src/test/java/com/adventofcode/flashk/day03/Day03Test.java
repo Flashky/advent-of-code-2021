@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_03)
 @TestMethodOrder(OrderAnnotation.class)
@@ -40,7 +40,7 @@ public class Day03Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
@@ -59,7 +59,7 @@ public class Day03Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
@@ -79,7 +79,7 @@ public class Day03Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		
@@ -98,7 +98,7 @@ public class Day03Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		BinaryDiagnostic binaryDiagnostic = new BinaryDiagnostic();
 		

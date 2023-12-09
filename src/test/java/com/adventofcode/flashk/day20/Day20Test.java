@@ -16,7 +16,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_20)
 @TestMethodOrder(OrderAnnotation.class)
@@ -42,7 +42,7 @@ public class Day20Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(35, trenchMap.solveA(2));
@@ -59,7 +59,7 @@ public class Day20Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(4964, trenchMap.solveA(2));
@@ -77,7 +77,7 @@ public class Day20Test extends PuzzleTest {
 		System.out.print("1 | debug  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_5326);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_5326);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(5326, trenchMap.solveA(2));
@@ -96,7 +96,7 @@ public class Day20Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(3351, trenchMap.solveA(50));
@@ -113,7 +113,7 @@ public class Day20Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		TrenchMap trenchMap = new TrenchMap(inputs);
 		assertEquals(13202, trenchMap.solveA(50));

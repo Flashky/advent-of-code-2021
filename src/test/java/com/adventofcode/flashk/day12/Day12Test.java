@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_12)
 @TestMethodOrder(OrderAnnotation.class)
@@ -43,7 +43,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
 		assertEquals(10, passagePathing.solve(false));
@@ -59,7 +59,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_MEDIUM_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_MEDIUM_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
 		assertEquals(19, passagePathing.solve(false));
@@ -76,7 +76,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_LARGE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_LARGE_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
 		assertEquals(226, passagePathing.solve(false));
@@ -93,7 +93,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
 		assertEquals(3761, passagePathing.solve(false));
@@ -109,7 +109,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		
 		assertEquals(36, passagePathing.solve(true));
@@ -126,7 +126,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("2 | sample medium | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_MEDIUM_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_MEDIUM_SAMPLE);
 		
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		assertEquals(103, passagePathing.solve(true));
@@ -144,7 +144,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("2 | sample large | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_LARGE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_LARGE_SAMPLE);
 		
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		assertEquals(3509, passagePathing.solve(true));
@@ -161,7 +161,7 @@ public class Day12Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		PassagePathing passagePathing = new PassagePathing(inputs);
 		assertEquals(99138, passagePathing.solve(true));

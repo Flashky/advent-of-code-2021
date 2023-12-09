@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName(TestDisplayName.DAY_01)
@@ -40,7 +40,7 @@ public class Day01Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<Integer> input = Util.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<Integer> input = Input.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		SonarSweep sonarSweep = new SonarSweep();
 		
@@ -60,7 +60,7 @@ public class Day01Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<Integer> input = Util.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<Integer> input = Input.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		SonarSweep sonarSweep = new SonarSweep();
 		
@@ -80,7 +80,7 @@ public class Day01Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<Integer> input =  Util.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<Integer> input =  Input.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		SonarSweep sonarSweep = new SonarSweep();
 		
@@ -100,7 +100,7 @@ public class Day01Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<Integer> input = Util.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<Integer> input = Input.readIntegerLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		SonarSweep sonarSweep = new SonarSweep();
 		

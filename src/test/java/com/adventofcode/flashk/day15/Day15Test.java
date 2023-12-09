@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_15)
 @TestMethodOrder(OrderAnnotation.class)
@@ -43,7 +43,7 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Chiton chiton = new Chiton(inputs);
 		assertEquals(40, chiton.solve());
@@ -60,7 +60,7 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("1 | debug  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_SPECIAL);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_SAMPLE_SPECIAL);
 		
 		Chiton chiton = new Chiton(inputs);
 		assertEquals(7, chiton.solve());
@@ -76,7 +76,7 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Chiton chiton = new Chiton(inputs);
 		assertEquals(423,chiton.solve());
@@ -92,7 +92,7 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Chiton chiton = new Chiton(inputs, 5);
 		assertEquals(315, chiton.solve());
@@ -110,7 +110,7 @@ public class Day15Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Chiton chiton = new Chiton(inputs, 5);
 		assertEquals(2778, chiton.solve());

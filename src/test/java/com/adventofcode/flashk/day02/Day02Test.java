@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_02)
 @TestMethodOrder(OrderAnnotation.class)
@@ -40,7 +40,7 @@ public class Day02Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Submarine submarine = new Submarine(new BasicMovementStrategy());
 		int result = submarine.solve(input);
@@ -59,7 +59,7 @@ public class Day02Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Submarine submarine = new Submarine(new BasicMovementStrategy());
 		int result = submarine.solve(input);
@@ -78,7 +78,7 @@ public class Day02Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Submarine submarine = new Submarine(new AimMovementStrategy());
 		int result = submarine.solve(input);
@@ -97,7 +97,7 @@ public class Day02Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> input = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> input = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Submarine submarine = new Submarine(new AimMovementStrategy());
 		int result = submarine.solve(input);

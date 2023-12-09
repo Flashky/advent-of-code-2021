@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_18)
 @TestMethodOrder(OrderAnnotation.class)
@@ -43,7 +43,7 @@ public class Day18Test extends PuzzleTest {
 		System.out.print("1 | debug | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_3488);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_3488);
 		
 		Snailfish snailfish = new Snailfish(inputs);
 		assertEquals(3488, snailfish.solveA());
@@ -60,7 +60,7 @@ public class Day18Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Snailfish snailfish = new Snailfish(inputs);
 		assertEquals(4140, snailfish.solveA());
@@ -76,7 +76,7 @@ public class Day18Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Snailfish snailfish = new Snailfish(inputs);
 		assertEquals(3494, snailfish.solveA());
@@ -93,7 +93,7 @@ public class Day18Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		Snailfish snailfish = new Snailfish(inputs);
 		assertEquals(3993, snailfish.solveB());
@@ -110,7 +110,7 @@ public class Day18Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		Snailfish snailfish = new Snailfish(inputs);
 		assertEquals(4712, snailfish.solveB());

@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_13)
 @TestMethodOrder(OrderAnnotation.class)
@@ -41,7 +41,7 @@ public class Day13Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
 		assertEquals(17, transparentOrigami.foldOnce());
@@ -58,7 +58,7 @@ public class Day13Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
 		assertEquals(788, transparentOrigami.foldOnce());
@@ -75,7 +75,7 @@ public class Day13Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
 		assertEquals(16, transparentOrigami.foldAll(false));
@@ -92,7 +92,7 @@ public class Day13Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
 		assertEquals(102,transparentOrigami.foldAll(false));
@@ -109,7 +109,7 @@ public class Day13Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
 		assertEquals(102,transparentOrigami.foldAll(true));
@@ -126,7 +126,7 @@ public class Day13Test extends PuzzleTest {
 		System.out.print("2 | debug  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, "data2.input");
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, "data2.input");
 		
 		TransparentOrigami transparentOrigami = new TransparentOrigami(inputs);
 		assertEquals(95,transparentOrigami.foldAll(false));

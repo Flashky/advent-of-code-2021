@@ -17,7 +17,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_14)
 @TestMethodOrder(OrderAnnotation.class)
@@ -41,7 +41,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
 		assertEquals(1588, polymerization.solveA(10));
@@ -58,7 +58,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("1 | debug 1 | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
 		assertEquals(1L, polymerization.solveA(1));
@@ -75,7 +75,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("1 | debug 2 | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
 		assertEquals(5L, polymerization.solveA(2));
@@ -92,7 +92,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("1 | debug 3 | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
 		assertEquals(7L, polymerization.solveA(3));
@@ -109,7 +109,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("1 | debug 4 | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
 		assertEquals(18L, polymerization.solveA(4));
@@ -126,7 +126,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		
 		assertEquals(3009L, polymerization.solveA(10));
@@ -142,7 +142,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("2 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		assertEquals(2188189693529L, polymerization.solveA(40));
 	}
@@ -157,7 +157,7 @@ public class Day14Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		ExtendedPolymerization polymerization = new ExtendedPolymerization(inputs);
 		assertEquals(3459822539451L, polymerization.solveA(40));

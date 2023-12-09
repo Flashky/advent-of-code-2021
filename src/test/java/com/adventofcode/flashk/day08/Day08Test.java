@@ -16,7 +16,7 @@ import com.adventofcode.flashk.common.test.constants.TestFilename;
 import com.adventofcode.flashk.common.test.constants.TestTag;
 import com.adventofcode.flashk.common.test.utils.PuzzleTest;
 import com.adventofcode.flashk.common.test.utils.Timer;
-import com.adventofcode.flashk.common.test.utils.Util;
+import com.adventofcode.flashk.common.test.utils.Input;
 
 @DisplayName(TestDisplayName.DAY_08)
 @TestMethodOrder(OrderAnnotation.class)
@@ -43,7 +43,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("1 | sample | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveA();
@@ -61,7 +61,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("1 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveA();
@@ -80,7 +80,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("2 | single | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SINGLE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SINGLE_SAMPLE);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveB();
@@ -98,7 +98,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("2 | single | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_1625);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_1625);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveB();
@@ -116,7 +116,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("2 | single | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_4315);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_4315);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveB();
@@ -134,7 +134,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("2 | single | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_4548);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, INPUT_FILE_DEBUG_4548);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveB();
@@ -152,7 +152,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE_SAMPLE);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveB();
@@ -171,7 +171,7 @@ public class Day08Test extends PuzzleTest {
 		System.out.print("2 | input  | ");
 		
 		// Read input file
-		List<String> inputs = Util.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
+		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		
 		SevenSegmentSearch segmentSearch = new SevenSegmentSearch(inputs);
 		int result = segmentSearch.solveB();
