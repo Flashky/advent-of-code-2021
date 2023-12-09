@@ -15,7 +15,7 @@ public final class SnailfishGsonMath {
 	private static final String CLOSE_BRACKET = "]";
     private static final String SEPARATOR = ",";
 
-    public SnailfishGsonMath() {}
+    private SnailfishGsonMath() {}
 
     public static String sum(String a , String b) {
 		return new StringBuilder()

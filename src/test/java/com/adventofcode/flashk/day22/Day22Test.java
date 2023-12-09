@@ -99,7 +99,7 @@ public class Day22Test extends PuzzleTest {
 		List<String> inputs = Input.readStringLines(INPUT_FOLDER, TestFilename.INPUT_FILE);
 		ReactorReboot reactorReboot = new ReactorReboot(inputs);
 		long result = reactorReboot.solveB();
-		System.out.println(result);
+		System.out.println("R: "+result);
 	}
 
 }
