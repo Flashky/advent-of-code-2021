@@ -77,10 +77,7 @@ public class Codec {
 
 
 			} else {
-				
-				// En el 6 no cabe ningún otro número
 				decodedNumbers.put(unknownSixSegmentPattern, 6);
-				
 			}
 		}
 		
@@ -94,8 +91,8 @@ public class Codec {
 			} else {
 				Set<Character> charactersPattern5 = stringToCharacterSet(unknownFiveSegmentPattern);
 				
-				// Operación inversa a las de arriba, sabemos que en el 9 cabe un 5, 
-				// pero no sabemos cual de los dos números que quedan es un 5, así que probamos cual
+				// Operaciï¿½n inversa a las de arriba, sabemos que en el 9 cabe un 5, 
+				// pero no sabemos cual de los dos nï¿½meros que quedan es un 5, asï¿½ que probamos cual
 				// de los dos entra.
 				
 				if(hasAllCharacters(encoded9Pattern, charactersPattern5)) {

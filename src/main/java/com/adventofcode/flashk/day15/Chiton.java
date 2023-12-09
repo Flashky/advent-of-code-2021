@@ -67,7 +67,7 @@ public class Chiton {
 	 * @return The cost to reach the destination
 	 * @see 
 	 * <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Dijkstra">Algoritmo de Dijkstra (Wikipedia)</a><br>
-	 * <a href="https://www.youtube.com/watch?v=EFg3u_E6eHU">Cómo funciona el Algoritmo de Dijkstra (Youtube)</a>
+	 * <a href="https://www.youtube.com/watch?v=EFg3u_E6eHU">Como funciona el Algoritmo de Dijkstra (Youtube)</a>
 	 */
 	public int solve() {
 	
