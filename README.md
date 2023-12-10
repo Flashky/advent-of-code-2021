@@ -24,7 +24,7 @@
 - [Day 22 - Reactor Reboot](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day22)
 - [Day 23 - Amphipod](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day23)
 - [Day 24 - Arithmetic Logic Unit](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day24)
-- [Day 25](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day25)
+- [Day 25 - Sea Cucumber](https://github.com/Flashky/advent-of-code-2021/tree/master/src/main/java/com/adventofcode/flashk/day25)
 
 ## Cloning this repository
 
